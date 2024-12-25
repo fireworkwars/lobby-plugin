@@ -1,0 +1,28 @@
+{
+    "worldName": "lobby",
+    "spawnLocation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "yaw": 0,
+        "pitch": 0
+    },
+    "npcs": [
+        {
+            "name": "npc1",
+            "location": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "yaw": 0,
+                "pitch": 0
+            },
+            "skin": {
+                "id": "",
+                "name": "",
+                "value": "",
+                "signature": ""
+            }
+        }
+    ]
+}

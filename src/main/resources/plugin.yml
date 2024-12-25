@@ -1,0 +1,4 @@
+name: firework-wars-lobby-plugin
+version: '1.0-SNAPSHOT'
+main: foundation.esoteric.fireworkwarslobbyplugin.FireworkWarsLobbyPlugin
+api-version: '1.21'
