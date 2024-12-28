@@ -10,7 +10,12 @@
     "npcs": [
         {
             "name": "npc1",
+            "menu": {
+                "title": "",
+                "mapType": "barracks"
+            },
             "location": {
+                "world": "lobby",
                 "x": 0,
                 "y": 0,
                 "z": 0,
