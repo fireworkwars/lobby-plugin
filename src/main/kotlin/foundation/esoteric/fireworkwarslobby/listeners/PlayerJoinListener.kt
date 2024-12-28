@@ -20,6 +20,8 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Listener
             return
         }
 
+        plugin.npcManager.npcList.forEach { it.sendInitPackets(player) }
+
         //todo: language manager pls
 
         lobbyWorld.players.forEach {
