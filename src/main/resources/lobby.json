@@ -1,32 +1,30 @@
 {
     "worldName": "lobby",
     "spawnLocation": {
-        "x": 0,
-        "y": 0,
-        "z": 0,
-        "yaw": 0,
+        "x": -233,
+        "y": 73,
+        "z": -64,
+        "yaw": 90,
         "pitch": 0
     },
     "npcs": [
         {
-            "name": "npc1",
+            "name": "<bold><red>Firework Wars</red></bold>",
             "menu": {
-                "title": "",
+                "title": "Join a Game",
                 "mapType": "barracks"
             },
             "location": {
                 "world": "lobby",
-                "x": 0,
-                "y": 0,
-                "z": 0,
+                "x": -244,
+                "y": 73,
+                "z": -65,
                 "yaw": 0,
                 "pitch": 0
             },
             "skin": {
-                "id": "",
-                "name": "",
-                "value": "",
-                "signature": ""
+                "value": "ewogICJ0aW1lc3RhbXAiIDogMTczNTQxMzU2NjI2OCwKICAicHJvZmlsZUlkIiA6ICIyYThjZTE5ZWY3Mjg0NTBjYjY2YmEyNzNhNzVmNjI1MSIsCiAgInByb2ZpbGVOYW1lIiA6ICJYRDROVDNfNjY2IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2YyZTM5MDYyY2I0ZGQ1YTk3NzlhZjYzYjI1MjliM2UxMDQ5NWU0MTkxOTllMDllZDJmMTQyMTA2ZGU4OGU5MDQiCiAgICB9CiAgfQp9",
+                "signature": "iIz3FA5O/YpLkURhu19ex+cdH2fRg5wi5X+03NH/SN/FHZynR4B5kAJUQGAclNgjEtBo7V0fiWMJjUuMoJ6F8cC2rd2PEwZtZC8yvjQq1U8+npD6GFDQHOORmQDodVZAsv5fIYuuLYpcXxPOO1sOIJC9poCOI8k1XxsmUiWtD/Xuu77GMHNiry5Y5wCsfYJH+ievXNEMel2Ht54AAN6UKwa3tfiQHcm1KAsf2EX30oi9g4+LiZRuEHRbUNEl5kZVPSreNw1ZNVwpoJpe/TBF89krrdww/1SenDjZDThtlfLFZclJfOME+l6b2zfX8rOyfw4/GlMcqloNMrHQDW6LzxFmZ7lJlH9LWzBEMikQhhmcz9wUVGDMpi8RJjCBeDaWLqOggkvb7AUQjs5P43G4lC5tW0u1s1odgf1izxLJAz/hxBXHDN+Ro+9YPm4PIeLFadA0qxwqE8w43D9XJHH9CqvCwQSEnkMC/iiS45rh6m4hoxqCOWHiCJqpbw+xGtsrnP52BnbjXwgJHvYbtwcmdTMZk+HuT7Ibfzm8IyOm5CKp5jDpyUc+A2dbmAnvuqoTUJsos22PlcVhZsglHWSVrghKFaasm70HLdBL90dC/dCJznmY5p1z9TISvZdkPEQChd7S7gr582d8TKZryyFcAYkar5fexas4hz+P8ZzGZH0="
             }
         }
     ]
