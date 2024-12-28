@@ -1,6 +1,6 @@
-package foundation.esoteric.fireworkwarslobbyplugin.listeners
+package foundation.esoteric.fireworkwarslobby.listeners
 
-import foundation.esoteric.fireworkwarslobbyplugin.FireworkWarsLobbyPlugin
+import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent

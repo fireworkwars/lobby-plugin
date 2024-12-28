@@ -1,8 +1,8 @@
-package foundation.esoteric.fireworkwarslobbyplugin.config
+package foundation.esoteric.fireworkwarslobby.config
 
 import com.google.gson.GsonBuilder
-import foundation.esoteric.fireworkwarslobbyplugin.FireworkWarsLobbyPlugin
-import foundation.esoteric.fireworkwarslobbyplugin.config.structure.LobbyData
+import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
+import foundation.esoteric.fireworkwarslobby.config.structure.LobbyData
 import java.io.File
 import java.io.FileReader
 import java.io.IOException

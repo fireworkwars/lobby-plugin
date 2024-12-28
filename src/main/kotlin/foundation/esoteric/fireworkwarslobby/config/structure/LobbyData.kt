@@ -1,4 +1,4 @@
-package foundation.esoteric.fireworkwarslobbyplugin.config.structure
+package foundation.esoteric.fireworkwarslobby.config.structure
 
 import org.bukkit.Bukkit
 import org.bukkit.World

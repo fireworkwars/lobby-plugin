@@ -1,4 +1,16 @@
-package foundation.esoteric.fireworkwarslobbyplugin
+package foundation.esoteric.fireworkwarslobby
+
+import foundation.esoteric.fireworkwarscore.BasePlugin
+import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
+import foundation.esoteric.fireworkwarscore.language.LanguageManager
+import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
+import foundation.esoteric.fireworkwarslobby.communication.LobbyPluginDataHolder
+import foundation.esoteric.fireworkwarslobby.config.ConfigManager
+import foundation.esoteric.fireworkwarslobby.listeners.NPCInteractListener
+import foundation.esoteric.fireworkwarslobby.listeners.PlayerJoinListener
+import foundation.esoteric.fireworkwarslobby.npc.NPCManager
+import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.event.Listener
 
 import foundation.esoteric.fireworkwarslobbyplugin.config.ConfigManager
 import foundation.esoteric.fireworkwarslobbyplugin.listeners.PlayerJoinListener
