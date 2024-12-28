@@ -7,7 +7,7 @@ import net.minecraft.network.protocol.PacketFlow
 import java.io.Serial
 import java.net.SocketAddress
 
-class EmptyConnection(flag: PacketFlow?) : Connection(flag!!) {
+class EmptyConnection(flag: PacketFlow?) : Connection(flag) {
     init {
         this.channel = EmptyChannel(null)
         this.address = object : SocketAddress() {
