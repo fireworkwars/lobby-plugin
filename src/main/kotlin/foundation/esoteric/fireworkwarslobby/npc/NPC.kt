@@ -2,10 +2,10 @@ package foundation.esoteric.fireworkwarslobby.npc
 
 import com.destroystokyo.paper.profile.CraftPlayerProfile
 import com.destroystokyo.paper.profile.ProfileProperty
+import foundation.esoteric.fireworkwarscore.util.NMSUtil
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.NPCData
 import foundation.esoteric.fireworkwarslobby.npc.connection.EmptyConnection
-import foundation.esoteric.fireworkwarslobby.util.NMSUtil
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.core.BlockPos
 import net.minecraft.network.protocol.game.*
@@ -96,7 +96,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         }
     }
 
-    fun updateRotationPackets(player: Player, yaw: Float, pitch: Float) {
+    private fun updateRotationPackets(player: Player, yaw: Float, pitch: Float) {
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
 
         connection.send(ClientboundRotateHeadPacket(handle, yaw.toInt().toByte()))
