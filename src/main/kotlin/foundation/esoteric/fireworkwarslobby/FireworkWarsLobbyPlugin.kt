@@ -74,6 +74,14 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= All systems operational  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
     }
 
+    fun isDebugging(): Boolean {
+        return core.isDebugging
+    }
+
+    fun isBuildModeEnabled(): Boolean {
+        return core.isBuildModeEnabled
+    }
+
     fun runTaskLater(task: Runnable, delay: Long) {
         server.scheduler.runTaskLater(this, task, delay)
     }
