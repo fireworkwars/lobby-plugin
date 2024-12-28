@@ -15,8 +15,15 @@ import org.bukkit.event.Listener
 class FireworkWarsLobbyPlugin : BasePlugin() {
     lateinit var core: FireworkWarsCorePlugin
 
-class FireworkWarsLobbyPlugin : JavaPlugin() {
+    override lateinit var playerDataManager: PlayerDataManager
+    override lateinit var languageManager: LanguageManager
+
     lateinit var configManager: ConfigManager
+    lateinit var npcManager: NPCManager
+
+    val miniMessage: MiniMessage = MiniMessage.miniMessage()
+
+    private val listeners = mutableListOf<Listener>()
 
     @Suppress("UnstableApiUsage")
     override fun onLoad() {
@@ -28,8 +35,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("Enabling Firework Wars Lobby Systems...")
         logger.info("Reading configuration files...")
 
-        configManager = ConfigManager(this)
-        configManager.loadLobbyFromConfig()
+        this.configManager = ConfigManager(this).apply { loadLobbyFromConfig() }
 
         logger.info("Successfully loaded configuration files.")
         logger.info("Connecting to Firework Wars Core...")
@@ -56,7 +62,8 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("Successfully deployed NPCs.")
         logger.info("Registering event listeners...")
 
-        PlayerJoinListener(this).register()
+        listeners.add(PlayerJoinListener(this).apply { register() })
+        listeners.add(NPCInteractListener(this).apply { register() })
 
         logger.info("Completed registration of event listeners.")
         logger.info("Listening to ${listeners.size} events.")
