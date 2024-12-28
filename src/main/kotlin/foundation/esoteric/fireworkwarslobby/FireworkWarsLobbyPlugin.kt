@@ -9,6 +9,7 @@ import foundation.esoteric.fireworkwarslobby.config.ConfigManager
 import foundation.esoteric.fireworkwarslobby.listeners.HouseKeepingListener
 import foundation.esoteric.fireworkwarslobby.listeners.NPCInteractListener
 import foundation.esoteric.fireworkwarslobby.listeners.PlayerJoinListener
+import foundation.esoteric.fireworkwarslobby.listeners.PlayerWorldChangeListener
 import foundation.esoteric.fireworkwarslobby.npc.NPCManager
 import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.minimessage.MiniMessage
@@ -67,6 +68,7 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
         listeners.add(PlayerJoinListener(this).apply { register() })
         listeners.add(NPCInteractListener(this).apply { register() })
         listeners.add(HouseKeepingListener(this).apply { register() })
+        listeners.add(PlayerWorldChangeListener(this).apply { register() })
 
         logger.info("Completed registration of event listeners.")
         logger.info("Listening to ${listeners.size} events.")
