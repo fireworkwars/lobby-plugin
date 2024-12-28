@@ -1,4 +1,6 @@
-package foundation.esoteric.fireworkwarslobbyplugin.config.structure
+package foundation.esoteric.fireworkwarslobby.config.structure
+
+import org.bukkit.Bukkit
 
 data class EntityLocation(
     val world: String,
@@ -13,8 +15,14 @@ data class EntityLocation(
 
 data class NPCData(
     val name: String,
+    val menu: NPCMenu,
     val location: EntityLocation,
     val skin: NPCSkin
+)
+
+data class NPCMenu(
+    val title: String,
+    val mapType: String
 )
 
 data class NPCSkin(
