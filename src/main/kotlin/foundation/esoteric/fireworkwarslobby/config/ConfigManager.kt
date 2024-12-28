@@ -8,7 +8,7 @@ import java.io.FileReader
 import java.io.IOException
 
 class ConfigManager(private val plugin: FireworkWarsLobbyPlugin) {
-    private val configFile = "arenas.json"
+    private val configFile = "lobby.json"
     lateinit var lobbyConfig: LobbyData
 
     fun loadLobbyFromConfig() {
