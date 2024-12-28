@@ -40,6 +40,10 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
         this.configManager = ConfigManager(this).apply { loadLobbyFromConfig() }
 
         logger.info("Successfully loaded configuration files.")
+    }
+
+    override fun onEnable() {
+        logger.info("Starting Lobby initialisation sequence...")
         logger.info("Connecting to Firework Wars Core...")
 
         this.core = server.pluginManager.getPlugin("FireworkWarsCore") as FireworkWarsCorePlugin
@@ -53,10 +57,6 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
         core.lobbyPluginData = LobbyPluginDataHolder(configManager.lobbyConfig)
 
         logger.info("Finished writing data to core.")
-    }
-
-    override fun onEnable() {
-        logger.info("Starting Lobby initialisation sequence...")
         logger.info("Initialising NPC Manager...")
 
         this.npcManager = NPCManager(this).apply { spawnNPCs() }
