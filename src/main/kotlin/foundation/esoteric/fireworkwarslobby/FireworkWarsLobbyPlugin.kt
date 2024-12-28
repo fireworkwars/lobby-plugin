@@ -21,10 +21,10 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
 
     @Suppress("UnstableApiUsage")
     override fun onLoad() {
-        logger.info("=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Lobby Plugin =-=-=-=-=-=-=-=-=-=-=-=-=-=")
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Lobby Plugin =-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("This is the start of Firework Wars Lobby Plugin logs.")
         logger.info("Info: v" + pluginMeta.version + " by " + pluginMeta.website)
-        logger.info("=-=-=-=-=-=-=-=-=-=-=-=-= End of Plugin Info =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= End of Plugin Info =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
         logger.info("Enabling Firework Wars Lobby Systems...")
         logger.info("Reading configuration files...")
@@ -36,13 +36,20 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
     }
 
     override fun onEnable() {
+        logger.info("Starting Lobby initialisation sequence...")
+        logger.info("Initialising NPC Manager...")
+
+        this.npcManager = NPCManager(this).apply { spawnNPCs() }
+
+        logger.info("Successfully deployed NPCs.")
         logger.info("Registering event listeners...")
 
         PlayerJoinListener(this).register()
 
         logger.info("Completed registration of event listeners.")
+        logger.info("Listening to ${listeners.size} events.")
 
-        logger.info("=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Lobby Plugin =-=-=-=-=-=-=-=-=-=-=-=-=-=")
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Lobby Plugin =-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("End of logs for Firework Wars Lobby Plugin.")
         logger.info("Finished Firework Wars Lobby initialisation sequence.")
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-= All systems operational  =-=-=-=-=-=-=-=-=-=-=-=-=")
