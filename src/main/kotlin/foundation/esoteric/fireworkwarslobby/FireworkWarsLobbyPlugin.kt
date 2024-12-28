@@ -23,7 +23,7 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
     lateinit var configManager: ConfigManager
     lateinit var npcManager: NPCManager
 
-    val miniMessage: MiniMessage = MiniMessage.miniMessage()
+    val mm: MiniMessage = MiniMessage.miniMessage()
 
     private val listeners = mutableListOf<Listener>()
 
