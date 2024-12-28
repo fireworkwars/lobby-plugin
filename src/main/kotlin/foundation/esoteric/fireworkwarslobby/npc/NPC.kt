@@ -64,7 +64,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         display.billboard = Display.Billboard.VERTICAL
         display.transformation.translation.let {
             it.x = 0.0F
-            it.y = 0.2F
+            it.y = 0.35F
             it.z = 0.0F
         }
 
