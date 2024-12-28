@@ -71,6 +71,14 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Lobby Plugin =-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("End of logs for Firework Wars Lobby Plugin.")
         logger.info("Finished Firework Wars Lobby initialisation sequence.")
-        logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-= All systems operational  =-=-=-=-=-=-=-=-=-=-=-=-=")
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= All systems operational  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+    }
+
+    fun runTaskLater(task: Runnable, delay: Long) {
+        server.scheduler.runTaskLater(this, task, delay)
+    }
+
+    fun runTaskTimer(task: Runnable, delay: Long, period: Long) {
+        server.scheduler.runTaskTimer(this, task, delay, period)
     }
 }
