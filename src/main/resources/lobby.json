@@ -1,6 +1,7 @@
 {
-    "worldName": "lobby",
+    "worldName": "world",
     "spawnLocation": {
+        "world": "world",
         "x": -233,
         "y": 73,
         "z": -64,
@@ -15,7 +16,7 @@
                 "mapType": "barracks"
             },
             "location": {
-                "world": "lobby",
+                "world": "world",
                 "x": -244,
                 "y": 73,
                 "z": -65,
