@@ -1,8 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+import xyz.jpenilla.resourcefactory.bukkit.bukkitPluginYaml
+import xyz.jpenilla.resourcefactory.paper.PaperPluginYaml
 
 plugins {
     kotlin("jvm") version "2.1.0"
     id("com.gradleup.shadow") version "8.3.5"
+    id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
     id("io.papermc.paperweight.userdev") version "1.7.3"
 }
 
@@ -69,4 +73,22 @@ tasks {
     processResources {
         filteringCharset = Charsets.UTF_8.name()
     }
+}
+
+paperPluginYaml {
+    name = "FireworkWarsLobby"
+    authors = listOf("rolyPolyVole")
+    website = "https://github.com/EsotericFoundation/firework-wars-lobby-plugin"
+
+    main = "foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin"
+    apiVersion = "1.21.3"
+    description = project.description
+
+    dependencies {
+        server("FireworkWarsCore", PaperPluginYaml.Load.BEFORE, required = true, joinClasspath = true)
+    }
+}
+
+bukkitPluginYaml {
+    load = BukkitPluginYaml.PluginLoadOrder.POSTWORLD
 }
