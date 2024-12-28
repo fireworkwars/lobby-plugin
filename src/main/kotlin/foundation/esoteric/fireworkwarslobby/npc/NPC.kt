@@ -90,15 +90,13 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         handle.lookAt(
             EntityAnchorArgument.Anchor.EYES, NMSUtil.toNMSEntity(nearest), EntityAnchorArgument.Anchor.EYES)
 
-        world.players.forEach {
-            updateRotationPackets(it, handle.yHeadRot, handle.xRot)
-        }
+        world.players.forEach { updateRotationPackets(it) }
     }
 
-    private fun updateRotationPackets(player: Player, yaw: Float, pitch: Float) {
+    private fun updateRotationPackets(player: Player) {
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
 
-        connection.send(ClientboundRotateHeadPacket(handle, yaw.toInt().toByte()))
+        connection.send(ClientboundRotateHeadPacket(handle, handle.yHeadRot.toInt().toByte()))
         connection.send(ClientboundMoveEntityPacket.Rot(
             id,
             (handle.yRot * 256 / 360).toInt().toByte(),
