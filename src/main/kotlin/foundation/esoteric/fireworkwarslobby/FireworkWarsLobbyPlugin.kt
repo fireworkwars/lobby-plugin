@@ -81,4 +81,12 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
     fun runTaskTimer(task: Runnable, delay: Long, period: Long) {
         server.scheduler.runTaskTimer(this, task, delay, period)
     }
+
+    fun logLoudly(message: String, force: Boolean = false) {
+        if (isDebugging() && force) {
+            logger.info("[DEBUG] $message")
+        } else {
+            logger.info(message)
+        }
+    }
 }
