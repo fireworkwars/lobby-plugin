@@ -59,7 +59,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     private fun createNameTag(): TextDisplay {
         val display = world.spawn(location, TextDisplay::class.java)
 
-        display.text(plugin.miniMessage.deserialize(data.name))
+        display.text(plugin.mm.deserialize(data.name))
         display.alignment = TextDisplay.TextAlignment.CENTER
         display.billboard = Display.Billboard.VERTICAL
         display.transformation.translation.let {
