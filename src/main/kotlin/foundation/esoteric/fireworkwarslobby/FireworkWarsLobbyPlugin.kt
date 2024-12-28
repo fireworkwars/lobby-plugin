@@ -12,9 +12,8 @@ import foundation.esoteric.fireworkwarslobby.npc.NPCManager
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.event.Listener
 
-import foundation.esoteric.fireworkwarslobbyplugin.config.ConfigManager
-import foundation.esoteric.fireworkwarslobbyplugin.listeners.PlayerJoinListener
-import org.bukkit.plugin.java.JavaPlugin
+class FireworkWarsLobbyPlugin : BasePlugin() {
+    lateinit var core: FireworkWarsCorePlugin
 
 class FireworkWarsLobbyPlugin : JavaPlugin() {
     lateinit var configManager: ConfigManager
@@ -33,6 +32,19 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         configManager.loadLobbyFromConfig()
 
         logger.info("Successfully loaded configuration files.")
+        logger.info("Connecting to Firework Wars Core...")
+
+        this.core = server.pluginManager.getPlugin("FireworkWarsCore") as FireworkWarsCorePlugin
+
+        this.playerDataManager = core.playerDataManager
+        this.languageManager = core.languageManager
+
+        logger.info("Successfully connected to Firework Wars Core.")
+        logger.info("Writing data to core...")
+
+        core.lobbyPluginData = LobbyPluginDataHolder(configManager.lobbyConfig)
+
+        logger.info("Finished writing data to core.")
     }
 
     override fun onEnable() {
