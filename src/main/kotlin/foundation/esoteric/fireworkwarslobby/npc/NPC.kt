@@ -85,14 +85,13 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     }
 
     fun runLookAtTask() {
+        val nearest = world.players.minByOrNull { it.location.distanceSquared(location) } ?: return
+
+        handle.lookAt(
+            EntityAnchorArgument.Anchor.EYES, NMSUtil.toNMSEntity(nearest), EntityAnchorArgument.Anchor.EYES)
+
         world.players.forEach {
-            val player = NMSUtil.toNMSEntity<ServerPlayer>(it)
-
-            handle.lookAt(EntityAnchorArgument.Anchor.EYES, player, EntityAnchorArgument.Anchor.EYES)
-            updateRotationPackets(it, handle.yRot, handle.xRot)
-
-            handle.yRot = 0.0F
-            handle.xRot = 0.0F
+            updateRotationPackets(it, handle.yHeadRot, handle.xRot)
         }
     }
 
@@ -102,8 +101,8 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         connection.send(ClientboundRotateHeadPacket(handle, yaw.toInt().toByte()))
         connection.send(ClientboundMoveEntityPacket.Rot(
             id,
-            yaw.toInt().toByte(),
-            pitch.toInt().toByte(),
+            (handle.yRot * 256 / 360).toInt().toByte(),
+            (handle.xRot * 256 / 360).toInt().toByte(),
             handle.onGround()
         ))
     }
