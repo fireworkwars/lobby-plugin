@@ -6,9 +6,11 @@ import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import foundation.esoteric.fireworkwarslobby.communication.LobbyPluginDataHolder
 import foundation.esoteric.fireworkwarslobby.config.ConfigManager
+import foundation.esoteric.fireworkwarslobby.listeners.HouseKeepingListener
 import foundation.esoteric.fireworkwarslobby.listeners.NPCInteractListener
 import foundation.esoteric.fireworkwarslobby.listeners.PlayerJoinListener
 import foundation.esoteric.fireworkwarslobby.npc.NPCManager
+import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.event.Listener
 
@@ -64,6 +66,7 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
 
         listeners.add(PlayerJoinListener(this).apply { register() })
         listeners.add(NPCInteractListener(this).apply { register() })
+        listeners.add(HouseKeepingListener(this).apply { register() })
 
         logger.info("Completed registration of event listeners.")
         logger.info("Listening to ${listeners.size} events.")
@@ -92,9 +95,9 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
 
     fun logLoudly(message: String, force: Boolean = false) {
         if (isDebugging() && force) {
-            logger.info("[DEBUG] $message")
+            server.broadcast(text(message))
         } else {
-            logger.info(message)
+            server.broadcast(text(message))
         }
     }
 }
