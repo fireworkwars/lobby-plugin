@@ -3,17 +3,17 @@ package foundation.esoteric.fireworkwarslobby.listeners
 import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent
 import dev.triumphteam.gui.builder.item.ItemBuilder
 import dev.triumphteam.gui.guis.Gui
+import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.inventory.EquipmentSlot
 
-class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Listener {
-    fun register() {
+class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
+    override fun register() {
         plugin.server.pluginManager.registerEvents(this, plugin)
     }
 

@@ -1,14 +1,14 @@
 package foundation.esoteric.fireworkwarslobby.listeners
 
+import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 
-class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Listener {
+class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val lobbyWorld = plugin.configManager.lobbyConfig.getWorld()
 
-    fun register() {
+    override fun register() {
         plugin.server.pluginManager.registerEvents(this, plugin)
     }
 
