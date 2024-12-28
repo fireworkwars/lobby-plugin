@@ -33,18 +33,13 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
         val menuData = npc.data.menu
 
         val gui = Gui.gui()
-            .title(plugin.miniMessage.deserialize(menuData.title))
+            .title(plugin.mm.deserialize(menuData.title))
             .rows(3)
             .create()
 
         gui.setOpenGuiAction {
             val player = it.player as Player
             player.playSound(player, Sound.ITEM_CROSSBOW_LOADING_START, 1.0F, 1.0F)
-        }
-
-        gui.setCloseGuiAction {
-            val player = it.player as Player
-            player.playSound(player, Sound.ITEM_CROSSBOW_SHOOT, 1.0F, 1.0F)
         }
 
         gui.setDefaultClickAction {
@@ -62,12 +57,20 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
         }
 
         arenas.forEachIndexed { index, arena ->
+            val playerCount = plugin.mm.deserialize(
+                "<!i><dark_gray>${arena.getCurrentPlayers()}/${arena.getMaxPlayers()}</dark_gray>")
+
             val item = ItemBuilder.from(Material.PAPER)
-                .name(plugin.miniMessage.deserialize(arena.getName()))
-                .lore(plugin.miniMessage.deserialize(arena.getDescription()))
+                .name(plugin.mm.deserialize(arena.getName()))
+                .lore(plugin.mm.deserialize(arena.getDescription()), playerCount)
                 .asGuiItem {
-                    fireworkWarsData.getArenaJoinCommand().executeJoinForPlayer(
-                        it.whoClicked as Player, arena.getArenaNumber())
+                    val player = it.whoClicked as Player
+
+                    player.playSound(player, Sound.ITEM_CROSSBOW_SHOOT, 1.0F, 1.0F)
+                    player.playSound(player, Sound.ENTITY_FIREWORK_ROCKET_SHOOT, 1.0F, 1.0F)
+
+                    fireworkWarsData.getArenaJoinCommand()
+                        .executeJoinForPlayer(player, arena.getArenaNumber())
                 }
 
             gui.setItem(index, item)
