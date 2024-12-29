@@ -38,12 +38,12 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
         if (profile.ranked) {
             config.randomFireworkLocations().forEach {
-                lobbyWorld.spawn(it, Firework::class.java, { fw ->
+                lobbyWorld.spawn(it, Firework::class.java) { fw ->
                     val randomFirework = FireworkCreator.randomSupplyDropFirework()
 
                     fw.fireworkMeta = randomFirework.itemMeta as FireworkMeta
                     fw.setNoPhysics(true)
-                })
+                }
             }
         }
 
