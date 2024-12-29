@@ -15,10 +15,9 @@ data class LobbyData (
     }
 
     fun randomFireworkLocations(): List<Location> {
-        val fireworkLocs = fireworkLocations.map { it.toBukkit() }
-        val spawnLoc = spawnLocation.toBukkit()
-
-        val randomFireworks = fireworkLocs.shuffled().take(3)
-        return randomFireworks + spawnLoc
+        return fireworkLocations
+            .map(EntityLocation::toBukkit)
+            .shuffled()
+            .take(4)
     }
 }
