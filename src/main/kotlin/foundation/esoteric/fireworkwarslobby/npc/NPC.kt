@@ -96,7 +96,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     private fun updateRotationPackets(player: Player) {
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
 
-        connection.send(ClientboundRotateHeadPacket(handle, (handle.yHeadRot * 256 / 360).toInt().toByte()))
+        connection.send(ClientboundRotateHeadPacket(handle, (handle.yRot * 256 / 360).toInt().toByte()))
         connection.send(ClientboundMoveEntityPacket.Rot(
             id,
             (handle.yRot * 256 / 360).toInt().toByte(),
