@@ -48,7 +48,7 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
                     fw.fireworkMeta = randomFirework.itemMeta as FireworkMeta
 
                     fw.setNoPhysics(true)
-                    fw.ticksToDetonate = (12..18).random()
+                    fw.ticksToDetonate = (8..12).random()
                 }
             }
         }
