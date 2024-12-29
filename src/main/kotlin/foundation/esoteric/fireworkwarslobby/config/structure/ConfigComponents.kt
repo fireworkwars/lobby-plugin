@@ -22,8 +22,13 @@ data class NPCData(
 
 data class NPCMenu(
     val title: String,
-    val mapType: String
+    val mapType: MapType
 )
+
+enum class MapType {
+    BARRACKS,
+    TOWN
+}
 
 data class NPCSkin(
     val value: String,

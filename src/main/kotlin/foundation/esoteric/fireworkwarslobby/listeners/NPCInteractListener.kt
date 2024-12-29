@@ -5,6 +5,7 @@ import dev.triumphteam.gui.builder.item.ItemBuilder
 import dev.triumphteam.gui.guis.Gui
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
+import foundation.esoteric.fireworkwarslobby.config.structure.MapType
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -51,9 +52,8 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
         }
 
         val arenas = when (menuData.mapType) {
-            "barracks" -> fireworkWarsData.getBarracksArenas()
-            "town" -> fireworkWarsData.getTownArenas()
-            else -> emptyList()
+            MapType.BARRACKS -> fireworkWarsData.getBarracksArenas()
+            MapType.TOWN -> fireworkWarsData.getTownArenas()
         }
 
         arenas.forEachIndexed { index, arena ->
