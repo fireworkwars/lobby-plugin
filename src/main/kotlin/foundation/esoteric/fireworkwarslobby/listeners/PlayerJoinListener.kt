@@ -31,6 +31,8 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
             return
         }
 
+        player.teleport(config.spawnLocation.toBukkit())
+
         val profile = plugin.playerDataManager.getPlayerProfile(player, true)!!
 
         lobbyWorld.players.forEach {
