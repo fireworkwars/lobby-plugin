@@ -91,12 +91,13 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         world.players.forEach {
             plugin.logLoudly("look at task running for ${it.name}")
             val playerLocation = it.eyeLocation
+            val npcLocation = handle.bukkitEntity.eyeLocation
 
             val playerX = playerLocation.x
             val playerZ = playerLocation.z
 
-            val npcX = location.x
-            val npcZ = location.z
+            val npcX = npcLocation.x
+            val npcZ = npcLocation.z
 
             val dx = playerX - npcX
             val dz = playerZ - npcZ
@@ -104,7 +105,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
             val horizontalDistance = sqrt((dx).pow(2.0) + (dz).pow(2.0))
 
             val yaw = 90.0 - Math.toDegrees(atan2(dz, npcX - playerX))
-            val pitch = -Math.toDegrees(atan2(playerLocation.y - location.y, horizontalDistance))
+            val pitch = -Math.toDegrees(atan2(playerLocation.y - npcLocation.y, horizontalDistance))
 
             val nmsPlayer = NMSUtil.toNMSEntity<ServerPlayer>(it)
 
