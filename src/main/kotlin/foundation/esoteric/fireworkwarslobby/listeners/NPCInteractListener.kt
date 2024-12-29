@@ -75,8 +75,8 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
                 .asGuiItem {
                     val player = it.whoClicked as Player
 
-                    player.playSound(Sound.ITEM_CROSSBOW_SHOOT)
                     player.playSound(Sound.ENTITY_FIREWORK_ROCKET_LAUNCH)
+                    player.playSound(Sound.ITEM_CROSSBOW_SHOOT)
 
                     plugin.runTaskLater({
                         fireworkWarsData
