@@ -92,8 +92,6 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
             val playerLocation = it.eyeLocation
             val npcLocation = location.clone().add(0.0, 1.62, 0.0)
 
-            plugin.logLoudly("look at task comparing location $location and $npcLocation")
-
             val playerX = playerLocation.x
             val playerZ = playerLocation.z
 
