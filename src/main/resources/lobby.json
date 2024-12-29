@@ -2,12 +2,31 @@
     "worldName": "world",
     "spawnLocation": {
         "world": "world",
-        "x": -233,
-        "y": 73,
-        "z": -64,
-        "yaw": 90,
-        "pitch": 0
+        "x": -233, "y": 73, "z": -64,
+        "yaw": 90, "pitch": 0
     },
+    "fireworkLocations": [
+        {
+            "world": "world",
+            "x": -233, "y": 73, "z": -64,
+            "yaw": 90, "pitch": 0
+        },
+        {
+            "world": "world",
+            "x": -233, "y": 73, "z": -64,
+            "yaw": 90, "pitch": 0
+        },
+        {
+            "world": "world",
+            "x": -233, "y": 73, "z": -64,
+            "yaw": 90, "pitch": 0
+        },
+        {
+            "world": "world",
+            "x": -233, "y": 73, "z": -64,
+            "yaw": 90, "pitch": 0
+        }
+    ],
     "npcs": [
         {
             "name": "<bold><red>Firework Wars</red></bold>",
@@ -17,11 +36,8 @@
             },
             "location": {
                 "world": "world",
-                "x": -244,
-                "y": 73,
-                "z": -65,
-                "yaw": 0,
-                "pitch": 0
+                "x": -244, "y": 73, "z": -65,
+                "yaw": 0, "pitch": 0
             },
             "skin": {
                 "value": "ewogICJ0aW1lc3RhbXAiIDogMTczNTQxMzU2NjI2OCwKICAicHJvZmlsZUlkIiA6ICIyYThjZTE5ZWY3Mjg0NTBjYjY2YmEyNzNhNzVmNjI1MSIsCiAgInByb2ZpbGVOYW1lIiA6ICJYRDROVDNfNjY2IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2YyZTM5MDYyY2I0ZGQ1YTk3NzlhZjYzYjI1MjliM2UxMDQ5NWU0MTkxOTllMDllZDJmMTQyMTA2ZGU4OGU5MDQiCiAgICB9CiAgfQp9",
@@ -36,11 +52,8 @@
             },
             "location": {
                 "world": "world",
-                "x": -244,
-                "y": 73,
-                "z": -63,
-                "yaw": 0,
-                "pitch": 0
+                "x": -244, "y": 73, "z": -63,
+                "yaw": 0, "pitch": 0
             },
             "skin": {
                 "value": "ewogICJ0aW1lc3RhbXAiIDogMTYxODIwNzQ4MzA1MywKICAicHJvZmlsZUlkIiA6ICI3MzgyZGRmYmU0ODU0NTVjODI1ZjkwMGY4OGZkMzJmOCIsCiAgInByb2ZpbGVOYW1lIiA6ICJCdUlJZXQiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjRlZDQyNzEzNTQ0MTVjZTUwZmI4MDJjMmM3NGEyNWMzODQ0ZTVlMWNjMTcxNjFhNGQxMWI1OTA2MzZhZWJmMyIKICAgIH0KICB9Cn0=",
