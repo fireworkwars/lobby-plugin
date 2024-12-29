@@ -89,9 +89,10 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
 
     fun runLookAtTask() {
         world.players.forEach {
-            plugin.logLoudly("look at task running for ${it.name}")
             val playerLocation = it.eyeLocation
-            val npcLocation = location.add(0.0, 1.6, 0.0)
+            val npcLocation = location.clone().add(0.0, 1.62, 0.0)
+
+            plugin.logLoudly("look at task comparing location $location and $npcLocation")
 
             val playerX = playerLocation.x
             val playerZ = playerLocation.z
