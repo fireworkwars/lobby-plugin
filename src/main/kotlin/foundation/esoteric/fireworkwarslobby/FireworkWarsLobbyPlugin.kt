@@ -26,6 +26,7 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
 
     val mm: MiniMessage = MiniMessage.miniMessage()
 
+    lateinit var playerJoinListener: PlayerJoinListener
     private val listeners = mutableListOf<Listener>()
 
     @Suppress("UnstableApiUsage")
@@ -65,7 +66,9 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
         logger.info("Successfully deployed NPCs.")
         logger.info("Registering event listeners...")
 
-        listeners.add(PlayerJoinListener(this).apply { register() })
+        this.playerJoinListener = PlayerJoinListener(this).apply { register() }
+
+        listeners.add(playerJoinListener)
         listeners.add(NPCInteractListener(this).apply { register() })
         listeners.add(HouseKeepingListener(this).apply { register() })
         listeners.add(PlayerWorldChangeListener(this).apply { register() })

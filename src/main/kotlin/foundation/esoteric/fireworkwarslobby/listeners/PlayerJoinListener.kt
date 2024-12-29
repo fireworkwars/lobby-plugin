@@ -6,6 +6,7 @@ import foundation.esoteric.fireworkwarscore.util.FireworkCreator
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import org.bukkit.entity.Firework
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.meta.FireworkMeta
@@ -20,8 +21,12 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
-        val player = event.player
+        handlePlayerJoinLobby(event.player)
 
+        event.joinMessage(null)
+    }
+
+    fun handlePlayerJoinLobby(player: Player) {
         if (player.world.uid != lobbyWorld.uid) {
             return
         }
@@ -54,7 +59,5 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
         }
 
         plugin.npcManager.npcList.forEach { it.sendInitPackets(player) }
-
-        event.joinMessage(null)
     }
 }

@@ -12,10 +12,6 @@ class PlayerWorldChangeListener(private val plugin: FireworkWarsLobbyPlugin) : E
 
     @EventHandler
     fun onPlayerWorldChange(event: PlayerChangedWorldEvent) {
-        if (event.player.world != plugin.configManager.lobbyConfig.getWorld()) {
-            return
-        }
-
-        plugin.npcManager.npcList.forEach { it.sendInitPackets(event.player) }
+        plugin.playerJoinListener.handlePlayerJoinLobby(event.player)
     }
 }
