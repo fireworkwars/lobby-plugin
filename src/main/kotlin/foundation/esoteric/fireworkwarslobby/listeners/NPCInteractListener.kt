@@ -78,8 +78,11 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
                     player.playSound(Sound.ITEM_CROSSBOW_SHOOT)
                     player.playSound(Sound.ENTITY_FIREWORK_ROCKET_LAUNCH)
 
-                    fireworkWarsData.getArenaJoinCommand()
-                        .executeJoinForPlayer(player, arena.getArenaNumber())
+                    plugin.runTaskLater({
+                        fireworkWarsData
+                            .getArenaJoinCommand()
+                            .executeJoinForPlayer(player, arena.getArenaNumber())
+                    }, 1L)
                 }
 
             gui.setItem(index, item)
