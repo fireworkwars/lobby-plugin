@@ -31,5 +31,7 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
                 it.sendMessage("Welcome to Firework Wars!")
             }
         }
+
+        event.joinMessage(null)
     }
 }
