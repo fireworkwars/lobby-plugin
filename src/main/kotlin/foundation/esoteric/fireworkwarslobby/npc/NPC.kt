@@ -91,7 +91,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         world.players.forEach {
             plugin.logLoudly("look at task running for ${it.name}")
             val playerLocation = it.eyeLocation
-            val npcLocation = handle.bukkitEntity.eyeLocation
+            val npcLocation = location.add(0.0, 1.6, 0.0)
 
             val playerX = playerLocation.x
             val playerZ = playerLocation.z
