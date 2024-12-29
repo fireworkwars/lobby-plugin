@@ -2,13 +2,17 @@ package foundation.esoteric.fireworkwarslobby.listeners
 
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.Message
+import foundation.esoteric.fireworkwarscore.util.FireworkCreator
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
+import org.bukkit.entity.Firework
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.inventory.meta.FireworkMeta
 
 class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
-    private val lobbyWorld = plugin.configManager.lobbyConfig.getWorld()
+    private val config = plugin.configManager.lobbyConfig
+    private val lobbyWorld = config.getWorld()
 
     override fun register() {
         plugin.server.pluginManager.registerEvents(this, plugin)
@@ -29,6 +33,17 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
                 it.sendMessage(Message.RANKED_PLAYER_JOINED_LOBBY, it.name())
             } else {
                 it.sendMessage(Message.PLAYER_JOINED_LOBBY, it.name())
+            }
+        }
+
+        if (profile.ranked) {
+            config.randomFireworkLocations().forEach {
+                lobbyWorld.spawn(it, Firework::class.java, { fw ->
+                    val randomFirework = FireworkCreator.randomSupplyDropFirework()
+
+                    fw.fireworkMeta = randomFirework.itemMeta as FireworkMeta
+                    fw.setNoPhysics(true)
+                })
             }
         }
 
