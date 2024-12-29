@@ -13,10 +13,10 @@
             "name": "<bold><red>Firework Wars</red></bold>",
             "menu": {
                 "title": "Join a Game",
-                "mapType": "barracks"
+                "mapType": "BARRACKS"
             },
             "location": {
-                "world": "BARRACKS",
+                "world": "world",
                 "x": -244,
                 "y": 73,
                 "z": -65,
