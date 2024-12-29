@@ -16,8 +16,6 @@ class PlayerWorldChangeListener(private val plugin: FireworkWarsLobbyPlugin) : E
             return
         }
 
-        plugin.logLoudly("player joined lobby world!", true)
-
         plugin.npcManager.npcList.forEach { it.sendInitPackets(event.player) }
     }
 }
