@@ -60,9 +60,16 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
             val playerCount = plugin.mm.deserialize(
                 "<!i><dark_gray>${arena.getCurrentPlayers()}/${arena.getMaxPlayers()}</dark_gray>")
 
+            val lore = arena.getDescription()
+                .split("\n")
+                .map { plugin.mm.deserialize(it) }
+                .toMutableList()
+                .apply { add(playerCount) }
+                .toList()
+
             val item = ItemBuilder.from(Material.PAPER)
                 .name(plugin.mm.deserialize(arena.getName()))
-                .lore(plugin.mm.deserialize(arena.getDescription()), playerCount)
+                .lore(lore)
                 .asGuiItem {
                     val player = it.whoClicked as Player
 
