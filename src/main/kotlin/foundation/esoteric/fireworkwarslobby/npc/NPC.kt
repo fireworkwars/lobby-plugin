@@ -27,8 +27,8 @@ import kotlin.math.sqrt
 
 
 class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
-    private val location = data.location.toBukkit()
-    private val world = location.world
+    private val npcLocation = data.location.toBukkit()
+    private val world = npcLocation.world
 
     private val nmsWorld = NMSUtil.toNMSWorld(world)
     private val handle: ServerPlayer
@@ -60,18 +60,18 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     }
 
     private fun createNameTag(): TextDisplay {
-        val display = world.spawn(location, TextDisplay::class.java)
+        val display = world.spawn(npcLocation, TextDisplay::class.java)
 
         display.text(plugin.mm.deserialize(data.name))
         display.alignment = TextDisplay.TextAlignment.CENTER
         display.billboard = Display.Billboard.VERTICAL
-        display.transformation.translation.let {
-            it.x = 0.0F
-            it.y = 0.5F
-            it.z = 0.0F
+
+        display.location.let {
+            it.x = npcLocation.x
+            it.y = npcLocation.y + 2.0F
+            it.z = npcLocation.z
         }
 
-        handle.bukkitEntity.addPassenger(display)
         return display
     }
 
@@ -79,7 +79,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
 
         connection.send(ClientboundPlayerInfoUpdatePacket(Action.ADD_PLAYER, handle))
-        connection.send(ClientboundAddEntityPacket(handle, 0, BlockPos(location.blockX, location.blockY, location.blockZ)))
+        connection.send(ClientboundAddEntityPacket(handle, 0, BlockPos(npcLocation.blockX, npcLocation.blockY, npcLocation.blockZ)))
         connection.send(ClientboundSetEntityDataPacket(id, handle.entityData.packAll()!!))
 
         plugin.runTaskLater({
@@ -90,7 +90,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     fun runLookAtTask() {
         world.players.forEach {
             val playerLocation = it.eyeLocation
-            val npcLocation = location.clone().add(0.0, 1.62, 0.0)
+            val npcLocation = npcLocation.clone().add(0.0, 1.62, 0.0)
 
             val playerX = playerLocation.x
             val playerZ = playerLocation.z
