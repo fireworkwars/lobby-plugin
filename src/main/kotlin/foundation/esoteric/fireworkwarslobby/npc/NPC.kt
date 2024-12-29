@@ -17,6 +17,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.server.network.CommonListenerCookie
 import net.minecraft.server.network.ServerGamePacketListenerImpl
+import net.minecraft.world.entity.Entity
 import org.bukkit.entity.Display
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
@@ -66,11 +67,8 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         display.alignment = TextDisplay.TextAlignment.CENTER
         display.billboard = Display.Billboard.VERTICAL
 
-        display.location.let {
-            it.x = npcLocation.x
-            it.y = npcLocation.y + 2.0F
-            it.z = npcLocation.z
-        }
+        NMSUtil.toNMSEntity<Entity>(display).setPos(
+            npcLocation.x, npcLocation.y + 2.0F, npcLocation.z)
 
         return display
     }
