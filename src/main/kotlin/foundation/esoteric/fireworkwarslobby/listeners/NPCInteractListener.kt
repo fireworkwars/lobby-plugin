@@ -4,6 +4,7 @@ import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent
 import dev.triumphteam.gui.builder.item.ItemBuilder
 import dev.triumphteam.gui.guis.Gui
 import foundation.esoteric.fireworkwarscore.interfaces.Event
+import foundation.esoteric.fireworkwarscore.util.playSound
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.MapType
 import org.bukkit.Material
@@ -40,14 +41,15 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
         gui.setOpenGuiAction {
             val player = it.player as Player
-            player.playSound(player, Sound.ITEM_CROSSBOW_LOADING_START, 1.0F, 1.0F)
+
+            plugin.runTaskLater({ player.playSound(Sound.ITEM_CROSSBOW_QUICK_CHARGE_3) }, 2L)
+            plugin.runTaskLater({ player.playSound(Sound.ITEM_CROSSBOW_LOADING_END) }, 10L)
         }
 
         gui.setDefaultClickAction {
             it.isCancelled = true
 
             val player = it.whoClicked as Player
-            player.playSound(player, Sound.UI_BUTTON_CLICK, 1.0F, 1.0F)
             player.closeInventory(InventoryCloseEvent.Reason.PLUGIN)
         }
 
@@ -73,8 +75,8 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
                 .asGuiItem {
                     val player = it.whoClicked as Player
 
-                    player.playSound(player, Sound.ITEM_CROSSBOW_SHOOT, 1.0F, 1.0F)
-                    player.playSound(player, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1.0F, 1.0F)
+                    player.playSound(Sound.ITEM_CROSSBOW_SHOOT)
+                    player.playSound(Sound.ENTITY_FIREWORK_ROCKET_LAUNCH)
 
                     fireworkWarsData.getArenaJoinCommand()
                         .executeJoinForPlayer(player, arena.getArenaNumber())
