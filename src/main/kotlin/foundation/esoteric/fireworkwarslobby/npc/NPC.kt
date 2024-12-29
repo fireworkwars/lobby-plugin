@@ -89,6 +89,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
 
     fun runLookAtTask() {
         world.players.forEach {
+            plugin.logLoudly("look at task running for ${it.name}")
             val playerLocation = it.eyeLocation
 
             val playerX = playerLocation.x
@@ -108,11 +109,11 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
             val nmsPlayer = NMSUtil.toNMSEntity<ServerPlayer>(it)
 
             nmsPlayer.connection.send(ClientboundRotateHeadPacket(
-                nmsPlayer,
+                handle,
                 (yaw * 256.0 / 360.0).toInt().toByte()))
 
             nmsPlayer.connection.send(ClientboundMoveEntityPacket.Rot(
-                nmsPlayer.id,
+                handle.id,
                 (yaw * 256.0 / 360.0).toInt().toByte(),
                 (pitch * 256.0 / 360.0).toInt().toByte(),
                 true))
