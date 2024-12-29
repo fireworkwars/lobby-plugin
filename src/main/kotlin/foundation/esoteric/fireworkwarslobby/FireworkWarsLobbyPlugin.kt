@@ -1,7 +1,7 @@
 package foundation.esoteric.fireworkwarslobby
 
-import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
+import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import foundation.esoteric.fireworkwarslobby.communication.LobbyPluginDataHolder
@@ -96,9 +96,7 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
     }
 
     fun logLoudly(message: String, force: Boolean = false) {
-        if (isDebugging() && force) {
-            server.broadcast(text(message))
-        } else {
+        if (isDebugging() || force) {
             server.broadcast(text(message))
         }
     }
