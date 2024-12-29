@@ -101,7 +101,6 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
             id,
             (handle.yRot * 256 / 360).toInt().toByte(),
             (handle.xRot * 256 / 360).toInt().toByte(),
-            handle.onGround()
-        ))
+            handle.onGround()))
     }
 }
