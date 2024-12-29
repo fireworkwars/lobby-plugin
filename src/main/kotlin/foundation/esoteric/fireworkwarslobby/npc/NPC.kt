@@ -6,7 +6,6 @@ import foundation.esoteric.fireworkwarscore.util.NMSUtil
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.NPCData
 import foundation.esoteric.fireworkwarslobby.npc.connection.EmptyConnection
-import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.core.BlockPos
 import net.minecraft.network.protocol.game.*
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket.Action
@@ -22,6 +21,10 @@ import org.bukkit.entity.Display
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
 import java.util.*
+import kotlin.math.atan2
+import kotlin.math.pow
+import kotlin.math.sqrt
+
 
 class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     private val location = data.location.toBukkit()
@@ -85,22 +88,34 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     }
 
     fun runLookAtTask() {
-        val nearest = world.players.minByOrNull { it.location.distanceSquared(location) } ?: return
+        world.players.forEach {
+            val playerLocation = it.eyeLocation
 
-        handle.lookAt(
-            EntityAnchorArgument.Anchor.EYES, NMSUtil.toNMSEntity(nearest), EntityAnchorArgument.Anchor.EYES)
+            val playerX = playerLocation.x
+            val playerZ = playerLocation.z
 
-        world.players.forEach { updateRotationPackets(it) }
-    }
+            val npcX = location.x
+            val npcZ = location.z
 
-    private fun updateRotationPackets(player: Player) {
-        val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
+            val dx = playerX - npcX
+            val dz = playerZ - npcZ
 
-        connection.send(ClientboundRotateHeadPacket(handle, (handle.yRot * 256 / 360).toInt().toByte()))
-        connection.send(ClientboundMoveEntityPacket.Rot(
-            id,
-            (handle.yRot * 256 / 360).toInt().toByte(),
-            (handle.xRot * 256 / 360).toInt().toByte(),
-            handle.onGround()))
+            val horizontalDistance = sqrt((dx).pow(2.0) + (dz).pow(2.0))
+
+            val yaw = 90.0 - Math.toDegrees(atan2(dz, npcX - playerX))
+            val pitch = -Math.toDegrees(atan2(playerLocation.y - location.y, horizontalDistance))
+
+            val nmsPlayer = NMSUtil.toNMSEntity<ServerPlayer>(it)
+
+            nmsPlayer.connection.send(ClientboundRotateHeadPacket(
+                nmsPlayer,
+                (yaw * 256.0 / 360.0).toInt().toByte()))
+
+            nmsPlayer.connection.send(ClientboundMoveEntityPacket.Rot(
+                nmsPlayer.id,
+                (yaw * 256.0 / 360.0).toInt().toByte(),
+                (pitch * 256.0 / 360.0).toInt().toByte(),
+                true))
+        }
     }
 }
