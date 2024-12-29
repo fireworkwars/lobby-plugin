@@ -1,6 +1,6 @@
 package foundation.esoteric.fireworkwarslobby
 
-import foundation.esoteric.fireworkwarscore.BasePlugin
+import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
