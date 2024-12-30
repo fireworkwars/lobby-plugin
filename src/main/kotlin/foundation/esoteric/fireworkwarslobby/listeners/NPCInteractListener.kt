@@ -4,10 +4,13 @@ import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent
 import dev.triumphteam.gui.builder.item.ItemBuilder
 import dev.triumphteam.gui.guis.Gui
 import foundation.esoteric.fireworkwarscore.interfaces.Event
+import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.util.format
 import foundation.esoteric.fireworkwarscore.util.playSound
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.MapType
+import foundation.esoteric.fireworkwarslobby.util.lore
+import foundation.esoteric.fireworkwarslobby.util.name
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -59,15 +62,27 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
             MapType.TOWN -> fireworkWarsData.getTownArenas()
         }
 
-        arenas.filter { !it.isFull() }.forEachIndexed { index, arena ->
+        val filtered = arenas.filter { !it.isFull() }
+
+        if (filtered.isEmpty()) {
+            val item = ItemBuilder.from(Material.GUNPOWDER)
+                .name(Message.NO_ARENAS_AVAILABLE)
+                .lore(Message.NO_ARENAS_AVAILABLE_LORE)
+                .asGuiItem()
+
+            gui.setItem(0, item)
+        }
+
+        filtered.forEachIndexed { index, arena ->
             val current = arena.getCurrentPlayers()
             val max = arena.getMaxPlayers()
 
-            val playerCount = "<!i><dark_gray>$current/$max players</dark_gray>".format()
+            val playerCount = plugin.languageManager
+                .getDefaultMessage(Message.CURRENT_PLAYERS, current, max)
 
             val lore = arena.getDescription()
                 .split("\n")
-                .map { it.format() }
+                .map(String::format)
                 .toMutableList()
                 .apply { add(playerCount) }
                 .toList()
