@@ -16,8 +16,10 @@
 - Updated NPC spawn locations and repositioning logic
 - Removed full arenas from being listed in NPC menus
 - Improved arena player count message in menu items
+- Swapped locations of the two NPCs
 
 ## Fixed
 - Removed vanilla join/leave messages for a cleaner user experience
 - Resolved issue where a firework would spawn at the spawn location
 - Fixed NPC locations being half a block off
+- Remove sound effects that didn't work
