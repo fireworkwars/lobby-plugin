@@ -21,6 +21,7 @@ import net.minecraft.world.entity.Entity
 import org.bukkit.entity.Display
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
+import org.bukkit.scoreboard.Team
 import java.util.*
 import kotlin.math.atan2
 import kotlin.math.pow
@@ -57,6 +58,8 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         npc.connection = ServerGamePacketListenerImpl(
             npc.server, EmptyConnection(null), npc, CommonListenerCookie.createInitial(npc.getGameProfile(), false))
 
+        hideDisplayName()
+
         return npc
     }
 
@@ -85,6 +88,14 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         plugin.runTaskLater({
             connection.send(ClientboundPlayerInfoRemovePacket(listOf(handle.uuid)))
         }, 20L)
+    }
+
+    private fun hideDisplayName() {
+        val scoreboard = plugin.server.scoreboardManager.newScoreboard
+        val scoreboardTeam = scoreboard.registerNewTeam(handle.scoreboardName)
+
+        scoreboardTeam.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.FOR_OTHER_TEAMS)
+        scoreboardTeam.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER)
     }
 
     fun runLookAtTask() {
