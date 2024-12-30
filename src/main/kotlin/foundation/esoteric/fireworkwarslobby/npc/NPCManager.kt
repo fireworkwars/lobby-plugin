@@ -3,7 +3,7 @@ package foundation.esoteric.fireworkwarslobby.npc
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 
 class NPCManager(private val plugin: FireworkWarsLobbyPlugin) {
-    val npcs = mutableMapOf<Int, NPC>()
+    private val npcs = mutableMapOf<Int, NPC>()
     val npcList = mutableListOf<NPC>()
 
     fun spawnNPCs() {
