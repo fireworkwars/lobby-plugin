@@ -19,7 +19,7 @@
                 "title": "Join a Game",
                 "mapType": "BARRACKS"
             },
-            "location": { "world": "world", "x": -244, "y": 73, "z": -65, "yaw": 0, "pitch": 0 },
+            "location": { "world": "world", "x": -243.5, "y": 73, "z": -66.5, "yaw": 0, "pitch": 0 },
             "skin": {
                 "value": "ewogICJ0aW1lc3RhbXAiIDogMTczNTQxMzU2NjI2OCwKICAicHJvZmlsZUlkIiA6ICIyYThjZTE5ZWY3Mjg0NTBjYjY2YmEyNzNhNzVmNjI1MSIsCiAgInByb2ZpbGVOYW1lIiA6ICJYRDROVDNfNjY2IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2YyZTM5MDYyY2I0ZGQ1YTk3NzlhZjYzYjI1MjliM2UxMDQ5NWU0MTkxOTllMDllZDJmMTQyMTA2ZGU4OGU5MDQiCiAgICB9CiAgfQp9",
                 "signature": "iIz3FA5O/YpLkURhu19ex+cdH2fRg5wi5X+03NH/SN/FHZynR4B5kAJUQGAclNgjEtBo7V0fiWMJjUuMoJ6F8cC2rd2PEwZtZC8yvjQq1U8+npD6GFDQHOORmQDodVZAsv5fIYuuLYpcXxPOO1sOIJC9poCOI8k1XxsmUiWtD/Xuu77GMHNiry5Y5wCsfYJH+ievXNEMel2Ht54AAN6UKwa3tfiQHcm1KAsf2EX30oi9g4+LiZRuEHRbUNEl5kZVPSreNw1ZNVwpoJpe/TBF89krrdww/1SenDjZDThtlfLFZclJfOME+l6b2zfX8rOyfw4/GlMcqloNMrHQDW6LzxFmZ7lJlH9LWzBEMikQhhmcz9wUVGDMpi8RJjCBeDaWLqOggkvb7AUQjs5P43G4lC5tW0u1s1odgf1izxLJAz/hxBXHDN+Ro+9YPm4PIeLFadA0qxwqE8w43D9XJHH9CqvCwQSEnkMC/iiS45rh6m4hoxqCOWHiCJqpbw+xGtsrnP52BnbjXwgJHvYbtwcmdTMZk+HuT7Ibfzm8IyOm5CKp5jDpyUc+A2dbmAnvuqoTUJsos22PlcVhZsglHWSVrghKFaasm70HLdBL90dC/dCJznmY5p1z9TISvZdkPEQChd7S7gr582d8TKZryyFcAYkar5fexas4hz+P8ZzGZH0="
@@ -31,7 +31,7 @@
                 "title": "Join a Game",
                 "mapType": "TOWN"
             },
-            "location": { "world": "world", "x": -244, "y": 73, "z": -62, "yaw": 0, "pitch": 0 },
+            "location": { "world": "world", "x": -243.5, "y": 73, "z": -62.5, "yaw": 0, "pitch": 0 },
             "skin": {
                 "value": "ewogICJ0aW1lc3RhbXAiIDogMTYxODIwNzQ4MzA1MywKICAicHJvZmlsZUlkIiA6ICI3MzgyZGRmYmU0ODU0NTVjODI1ZjkwMGY4OGZkMzJmOCIsCiAgInByb2ZpbGVOYW1lIiA6ICJCdUlJZXQiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjRlZDQyNzEzNTQ0MTVjZTUwZmI4MDJjMmM3NGEyNWMzODQ0ZTVlMWNjMTcxNjFhNGQxMWI1OTA2MzZhZWJmMyIKICAgIH0KICB9Cn0=",
                 "signature": "DcF/1TtUspZqmTikpWvtxRDiSdJh36qqanepo3kfvR4zwswuJTRqLCvwGwkwhWkBbS7fjwAwu0X6oI9+ZAZ724k+nYNCTKhgJFn9klBcs0aZSlB0XcdQ9iRsEyYxrmzYhBHF0jlRs7NaPCVfQ5Obf3D77Jg8k3UxWT2JAZyOHrHyMILDMqgGtYwWlKBspZtkYpD/+oHcSMx8+5Tmtem8FsUTcathUdGs8hBIAvygpL76Dvw7HCK0nhICSEBqB1hqWHQCRt6edErWqeKfPy8ZSwF2Qq9doTBIOURp4xpeXqaZt7DqRgFIyOdC5qerm3vGcd5dJSAKe0TywoSWz+Va+D0bvbqFjvLLw4Ig+PAEMiNsuqTO8aBBkWwesfMGGV56pcOL2qP0RYyB4afXLcp+AU8upeAW2GyiVL08nmCPTni7tUeayIGON1ZWKqGtUboszHaGl+V2lphZiOsbboo79rDw+nBgryZY4zh1GE9d2RR1oRzk0QoHTK/NXF5hwZnbzdhJHb4h+xwWKM54e5Cz38z0ASNvqG5hXWsrOOJ2uC9mD+U+B/JUESY6TJBIfIprtC+4y+0pQ2kofpSMYypASkK9EauP1T/t8QtwFoCeTS4fB/HowgItjkyC6h1+OU9Nxd4791hiRvcYKZNWgoDnEEdgXfbMFoNdw1LJTX0xFow="
