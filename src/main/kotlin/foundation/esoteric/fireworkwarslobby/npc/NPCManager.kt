@@ -9,7 +9,7 @@ class NPCManager(private val plugin: FireworkWarsLobbyPlugin) {
     fun spawnNPCs() {
         plugin.configManager.lobbyConfig.npcs.forEach {
             val npc = NPC(plugin, it)
-            plugin.runTaskTimer(npc::runLookAtTask, 0L, 1L)
+            plugin.runTaskTimer(npc::lookAtEachPlayer, 0L, 1L)
 
             registerNPC(npc)
         }
