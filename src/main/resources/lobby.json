@@ -15,7 +15,7 @@
     "npcs": [
         {
             "name": "<bold><red>Firework Wars</red></bold>",
-            "subtitle": "<gray>2v2</gray>",
+            "subtitle": "<!b><gray>2v2</gray>",
             "menu": {
                 "title": "Join a Game",
                 "mapType": "BARRACKS"
@@ -28,7 +28,7 @@
         },
         {
             "name": "<bold><red>Firework Wars</red></bold>",
-            "subtitle": "<gray>10v10</gray>",
+            "subtitle": "<!b><gray>10v10</gray>",
             "menu": {
                 "title": "Join a Game",
                 "mapType": "TOWN"
