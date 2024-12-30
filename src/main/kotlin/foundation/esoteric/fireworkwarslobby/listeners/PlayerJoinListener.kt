@@ -37,9 +37,9 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
         lobbyWorld.players.forEach {
             if (profile.ranked) {
-                it.sendMessage(Message.RANKED_PLAYER_JOINED_LOBBY, it.name())
+                it.sendMessage(Message.RANKED_PLAYER_JOINED_LOBBY, player.name())
             } else {
-                it.sendMessage(Message.PLAYER_JOINED_LOBBY, it.name())
+                it.sendMessage(Message.PLAYER_JOINED_LOBBY, player.name())
             }
         }
 
@@ -50,7 +50,7 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
                     fw.fireworkMeta = randomFirework.itemMeta as FireworkMeta
 
                     fw.setNoPhysics(true)
-                    fw.ticksToDetonate = (8..12).random()
+                    fw.ticksToDetonate = (20..30).random()
                 }
             }
         }
