@@ -6,7 +6,7 @@ import foundation.esoteric.fireworkwarscore.util.NMSUtil
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.NPCData
 import foundation.esoteric.fireworkwarslobby.npc.connection.EmptyConnection
-import net.minecraft.core.BlockPos
+import foundation.esoteric.fireworkwarslobby.util.PacketUtil
 import net.minecraft.network.protocol.game.*
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket.Action
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -76,20 +76,11 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     fun sendInitPackets(player: Player) {
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
 
+        handle.setPos(npcLocation.x, npcLocation.y, npcLocation.z)
+
         connection.send(ClientboundPlayerInfoUpdatePacket(Action.ADD_PLAYER, handle))
-        connection.send(ClientboundAddEntityPacket(handle, 0, BlockPos(npcLocation.blockX, npcLocation.blockY, npcLocation.blockZ)))
+        connection.send(PacketUtil.getEntityAddPacket(handle))
         connection.send(ClientboundSetEntityDataPacket(id, handle.entityData.packAll()!!))
-
-        val dx = npcLocation.x - npcLocation.blockX
-        val dz = npcLocation.z - npcLocation.blockZ
-
-        connection.send(ClientboundMoveEntityPacket.Pos(
-            handle.id,
-            (dx * 256.0 / 360.0).toInt().toShort(),
-            0,
-            (dz * 256.0 / 360.0).toInt().toShort(),
-            true
-        ))
 
         plugin.runTaskLater({
             connection.send(ClientboundPlayerInfoRemovePacket(listOf(handle.uuid)))
