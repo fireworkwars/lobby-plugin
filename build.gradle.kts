@@ -45,6 +45,8 @@ tasks {
         }
 
         relocate("dev.triumphteam.gui", "foundation.esoteric.fireworkwarslobby.gui")
+
+        destinationDirectory.set(file("../firework-wars-plugin/run/plugins"))
     }
 
     build {
