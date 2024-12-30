@@ -8,6 +8,7 @@
 - Added multiple firework spawn locations
 - Spawn fireworks when a ranked player joins the game lobby
 - Added proper join messaging based on player rank and first-time entry
+- Add another line of text under NPC names
 
 ## Changed
 - Tweaked sounds in the NPC menu
@@ -23,3 +24,8 @@
 - Resolved issue where a firework would spawn at the spawn location
 - Fixed NPC locations being half a block off
 - Remove sound effects that didn't work
+
+## Future Ideas
+- Add custom tablist
+- Add custom scoreboard
+- Add parties
