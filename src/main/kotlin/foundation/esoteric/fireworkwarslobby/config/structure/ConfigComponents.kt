@@ -15,6 +15,7 @@ data class EntityLocation(
 
 data class NPCData(
     val name: String,
+    val subtitle: String,
     val menu: NPCMenu,
     val location: EntityLocation,
     val skin: NPCSkin
