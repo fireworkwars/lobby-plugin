@@ -7,14 +7,17 @@
 - Added housekeeping events to protect the lobby world
 - Added multiple firework spawn locations
 - Spawn fireworks when a ranked player joins the game lobby
-- Improved join messaging based on player rank and first-time entry
+- Added proper join messaging based on player rank and first-time entry
 
 ## Changed
 - Tweaked sounds in the NPC menu
 - Increased firework flight duration in multiple updates
 - Changed player teleportation to spawn location upon entry
 - Updated NPC spawn locations and repositioning logic
+- Removed full arenas from being listed in NPC menus
+- Improved arena player count message in menu items
 
 ## Fixed
 - Removed vanilla join/leave messages for a cleaner user experience
 - Resolved issue where a firework would spawn at the spawn location
+- Fixed NPC locations being half a block off
