@@ -80,6 +80,17 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         connection.send(ClientboundAddEntityPacket(handle, 0, BlockPos(npcLocation.blockX, npcLocation.blockY, npcLocation.blockZ)))
         connection.send(ClientboundSetEntityDataPacket(id, handle.entityData.packAll()!!))
 
+        val dx = npcLocation.x - npcLocation.blockX
+        val dz = npcLocation.z - npcLocation.blockZ
+
+        connection.send(ClientboundMoveEntityPacket.Pos(
+            handle.id,
+            (dx * 256.0 / 360.0).toInt().toShort(),
+            0,
+            (dz * 256.0 / 360.0).toInt().toShort(),
+            true
+        ))
+
         plugin.runTaskLater({
             connection.send(ClientboundPlayerInfoRemovePacket(listOf(handle.uuid)))
         }, 20L)
