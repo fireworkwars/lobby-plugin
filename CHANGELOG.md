@@ -24,6 +24,7 @@
 - Resolved issue where a firework would spawn at the spawn location
 - Fixed NPC locations being half a block off
 - Remove sound effects that didn't work
+- Remove collision & name tag visibility from NPCs
 
 ## Future Ideas
 - Add custom tablist
