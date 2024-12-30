@@ -76,14 +76,9 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
                 .name(plugin.mm.deserialize(arena.getName()))
                 .lore(lore)
                 .asGuiItem {
-                    val player = it.whoClicked as Player
-
-                    player.playSound(Sound.ENTITY_FIREWORK_ROCKET_LAUNCH)
-                    player.playSound(Sound.ITEM_CROSSBOW_SHOOT)
-
                     fireworkWarsData
                         .getArenaJoinCommand()
-                        .executeJoinForPlayer(player, arena.getArenaNumber())
+                        .executeJoinForPlayer(it.whoClicked as Player, arena.getArenaNumber())
                 }
 
             gui.setItem(index, item)
