@@ -42,6 +42,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     init {
         this.handle = createServerPlayer()
         this.id = handle.id
+        this.hideDisplayName()
         this.nameTag = createNameTag()
     }
 
@@ -58,8 +59,6 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
 
         npc.connection = ServerGamePacketListenerImpl(
             npc.server, EmptyConnection(null), npc, CommonListenerCookie.createInitial(npc.getGameProfile(), false))
-
-        hideDisplayName()
 
         return npc
     }
