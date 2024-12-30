@@ -10,55 +10,68 @@ import foundation.esoteric.fireworkwarslobby.npc.connection.EmptyConnection
 import foundation.esoteric.fireworkwarslobby.util.PacketUtil
 import net.minecraft.network.protocol.game.*
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket.Action
+import net.minecraft.network.protocol.game.ClientboundSetPlayerTeamPacket.createAddOrModifyPacket
+import net.minecraft.network.protocol.game.ClientboundSetPlayerTeamPacket.createPlayerPacket
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ClientInformation
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.server.network.CommonListenerCookie
 import net.minecraft.server.network.ServerGamePacketListenerImpl
-import net.minecraft.world.entity.Entity
+import net.minecraft.world.scores.Scoreboard
+import net.minecraft.world.scores.Team
+import org.bukkit.Location
 import org.bukkit.entity.Display
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
-import org.bukkit.scoreboard.Team
 import java.util.*
 import kotlin.math.atan2
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-
 class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     private val npcLocation = data.location.toBukkit()
-    private val world = npcLocation.world
 
+    private val world = npcLocation.world
     private val nmsWorld = NMSUtil.toNMSWorld(world)
+
     private val handle: ServerPlayer
     val id: Int
 
     private val nameTag: TextDisplay
 
+    private val scoreboard = Scoreboard()
+    private val team = scoreboard.addPlayerTeam("lobby_npc_${UUID.randomUUID()}")
+
     init {
         this.handle = createServerPlayer()
         this.id = handle.id
-        this.hideDisplayName()
         this.nameTag = createNameTag()
     }
 
     private fun createServerPlayer(): ServerPlayer {
-        val profile: CraftPlayerProfile = plugin.server.createProfile(UUID.randomUUID()) as CraftPlayerProfile
-        profile.properties.add(
-            ProfileProperty("textures", data.skin.value, data.skin.signature))
+        val profile = plugin.server.createProfile(UUID.randomUUID()) as CraftPlayerProfile
+        val texturesProperty = ProfileProperty("textures", data.skin.value, data.skin.signature)
 
-        val npc = ServerPlayer(nmsWorld.server!!, nmsWorld as ServerLevel, profile.gameProfile, ClientInformation.createDefault())
-        val entityData: SynchedEntityData = npc.entityData
+        profile.properties.add(texturesProperty)
 
+        val npc = ServerPlayer(
+            nmsWorld.server!!,
+            nmsWorld as ServerLevel,
+            profile.gameProfile,
+            ClientInformation.createDefault())
+
+        val entityData = npc.entityData
         val bitmask = (0x01 or 0x04 or 0x08 or 0x10 or 0x20 or 0x40).toByte()
+
         entityData.set(EntityDataAccessor(17, EntityDataSerializers.BYTE), bitmask)
 
         npc.connection = ServerGamePacketListenerImpl(
-            npc.server, EmptyConnection(null), npc, CommonListenerCookie.createInitial(npc.getGameProfile(), false))
+            npc.server,
+            EmptyConnection(null),
+            npc,
+            CommonListenerCookie.createInitial(npc.getGameProfile(), false))
 
         return npc
     }
@@ -70,8 +83,8 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         display.alignment = TextDisplay.TextAlignment.CENTER
         display.billboard = Display.Billboard.VERTICAL
 
-        NMSUtil.toNMSEntity<Entity>(display).setPos(
-            npcLocation.x, npcLocation.y + 2.0F, npcLocation.z)
+        val location = Location(world, npcLocation.x, npcLocation.y + 2.0F, npcLocation.z)
+        display.teleport(location)
 
         return display
     }
@@ -79,26 +92,30 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     fun sendInitPackets(player: Player) {
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
 
+        this.updateScoreboardTeamSettings()
+
         handle.setPos(npcLocation.x, npcLocation.y, npcLocation.z)
 
         connection.send(ClientboundPlayerInfoUpdatePacket(Action.ADD_PLAYER, handle))
         connection.send(PacketUtil.getEntityAddPacket(handle))
         connection.send(ClientboundSetEntityDataPacket(id, handle.entityData.packAll()!!))
 
+        connection.send(createAddOrModifyPacket(team, true))
+        connection.send(createPlayerPacket(team, handle.scoreboardName, ClientboundSetPlayerTeamPacket.Action.ADD))
+
         plugin.runTaskLater({
             connection.send(ClientboundPlayerInfoRemovePacket(listOf(handle.uuid)))
         }, 20L)
     }
 
-    private fun hideDisplayName() {
-        val scoreboard = plugin.server.scoreboardManager.newScoreboard
-        val scoreboardTeam = scoreboard.registerNewTeam(handle.scoreboardName)
+    private fun updateScoreboardTeamSettings() {
+        scoreboard.addPlayerToTeam(handle.scoreboardName, team)
 
-        scoreboardTeam.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.FOR_OTHER_TEAMS)
-        scoreboardTeam.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER)
+        team.nameTagVisibility = Team.Visibility.NEVER
+        team.collisionRule = Team.CollisionRule.NEVER
     }
 
-    fun runLookAtTask() {
+    fun lookAtEachPlayer() {
         world.players.forEach {
             val playerLocation = it.eyeLocation
             val npcLocation = npcLocation.clone().add(0.0, 1.62, 0.0)
