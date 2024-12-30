@@ -12,7 +12,6 @@ import foundation.esoteric.fireworkwarslobby.listeners.PlayerConnectionListener
 import foundation.esoteric.fireworkwarslobby.listeners.PlayerWorldChangeListener
 import foundation.esoteric.fireworkwarslobby.npc.NPCManager
 import net.kyori.adventure.text.Component.text
-import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.event.Listener
 
 class FireworkWarsLobbyPlugin : BasePlugin() {
@@ -23,8 +22,6 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
 
     lateinit var configManager: ConfigManager
     lateinit var npcManager: NPCManager
-
-    val mm: MiniMessage = MiniMessage.miniMessage()
 
     lateinit var playerConnectionListener: PlayerConnectionListener
     private val listeners = mutableListOf<Listener>()
