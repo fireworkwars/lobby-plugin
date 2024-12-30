@@ -1,6 +1,6 @@
 {
     "worldName": "world",
-    "spawnLocation": { "world": "world", "x": -233, "y": 73, "z": -64, "yaw": 90, "pitch": 0 },
+    "spawnLocation": { "world": "world", "x": -232.5, "y": 73, "z": -64.5, "yaw": 90, "pitch": 0 },
     "fireworkLocations": [
         { "world": "world", "x": -233, "y": 88, "z": -64, "yaw": 90, "pitch": 0 },
         { "world": "world", "x": -241, "y": 87, "z": -61, "yaw": 0, "pitch": 0 },
