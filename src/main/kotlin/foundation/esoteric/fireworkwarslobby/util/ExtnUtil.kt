@@ -6,10 +6,10 @@ import foundation.esoteric.fireworkwarscore.language.Message
 
 fun ItemBuilder.name(message: Message, vararg args: Any?): ItemBuilder {
     return this.name(
-        LanguageManager.globalInstance!!.getDefaultMessage(message, *args))
+        LanguageManager.globalInstance.getDefaultMessage(message, *args))
 }
 
 fun ItemBuilder.lore(message: Message, vararg args: Any?): ItemBuilder {
     return this.lore(
-        LanguageManager.globalInstance!!.getDefaultMessage(message, *args))
+        LanguageManager.globalInstance.getDefaultMessage(message, *args))
 }
