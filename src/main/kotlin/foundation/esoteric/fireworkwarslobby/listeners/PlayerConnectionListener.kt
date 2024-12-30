@@ -9,9 +9,10 @@ import org.bukkit.entity.Firework
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.meta.FireworkMeta
 
-class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
+class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val config = plugin.configManager.lobbyConfig
     private val lobbyWorld = config.getWorld()
 
@@ -24,6 +25,11 @@ class PlayerJoinListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
         handlePlayerJoinLobby(event.player)
 
         event.joinMessage(null)
+    }
+
+    @EventHandler
+    fun onPlayerLeave(event: PlayerQuitEvent) {
+        event.quitMessage(null)
     }
 
     fun handlePlayerJoinLobby(player: Player) {
