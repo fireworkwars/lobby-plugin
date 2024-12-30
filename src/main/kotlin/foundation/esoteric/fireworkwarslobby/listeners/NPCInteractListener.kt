@@ -63,7 +63,7 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
             val current = arena.getCurrentPlayers()
             val max = arena.getMaxPlayers()
 
-            val playerCount = "<!i><dark_gray>$current/$max</dark_gray> <dark_aqua>current players</dark_aqua>".format()
+            val playerCount = "<!i><dark_gray>$current/$max</dark_gray> <dark_aqua>currently playing</dark_aqua>".format()
 
             val lore = arena.getDescription()
                 .split("\n")
