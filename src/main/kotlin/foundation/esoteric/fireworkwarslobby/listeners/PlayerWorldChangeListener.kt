@@ -12,6 +12,6 @@ class PlayerWorldChangeListener(private val plugin: FireworkWarsLobbyPlugin) : E
 
     @EventHandler
     fun onPlayerWorldChange(event: PlayerChangedWorldEvent) {
-        plugin.playerJoinListener.handlePlayerJoinLobby(event.player)
+        plugin.playerConnectionListener.handlePlayerJoinLobby(event.player)
     }
 }

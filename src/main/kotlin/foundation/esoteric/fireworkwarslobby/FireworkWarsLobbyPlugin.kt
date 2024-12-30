@@ -8,7 +8,7 @@ import foundation.esoteric.fireworkwarslobby.communication.LobbyPluginDataHolder
 import foundation.esoteric.fireworkwarslobby.config.ConfigManager
 import foundation.esoteric.fireworkwarslobby.listeners.HouseKeepingListener
 import foundation.esoteric.fireworkwarslobby.listeners.NPCInteractListener
-import foundation.esoteric.fireworkwarslobby.listeners.PlayerJoinListener
+import foundation.esoteric.fireworkwarslobby.listeners.PlayerConnectionListener
 import foundation.esoteric.fireworkwarslobby.listeners.PlayerWorldChangeListener
 import foundation.esoteric.fireworkwarslobby.npc.NPCManager
 import net.kyori.adventure.text.Component.text
@@ -26,7 +26,7 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
 
     val mm: MiniMessage = MiniMessage.miniMessage()
 
-    lateinit var playerJoinListener: PlayerJoinListener
+    lateinit var playerConnectionListener: PlayerConnectionListener
     private val listeners = mutableListOf<Listener>()
 
     @Suppress("UnstableApiUsage")
@@ -66,9 +66,9 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
         logger.info("Successfully deployed NPCs.")
         logger.info("Registering event listeners...")
 
-        this.playerJoinListener = PlayerJoinListener(this).apply { register() }
+        this.playerConnectionListener = PlayerConnectionListener(this).apply { register() }
 
-        listeners.add(playerJoinListener)
+        listeners.add(playerConnectionListener)
         listeners.add(NPCInteractListener(this).apply { register() })
         listeners.add(HouseKeepingListener(this).apply { register() })
         listeners.add(PlayerWorldChangeListener(this).apply { register() })
