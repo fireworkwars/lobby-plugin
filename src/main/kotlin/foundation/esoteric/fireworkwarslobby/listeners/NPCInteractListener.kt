@@ -4,6 +4,7 @@ import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent
 import dev.triumphteam.gui.builder.item.ItemBuilder
 import dev.triumphteam.gui.guis.Gui
 import foundation.esoteric.fireworkwarscore.interfaces.Event
+import foundation.esoteric.fireworkwarscore.util.format
 import foundation.esoteric.fireworkwarscore.util.playSound
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.MapType
@@ -35,7 +36,7 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
         val menuData = npc.data.menu
 
         val gui = Gui.gui()
-            .title(plugin.mm.deserialize(menuData.title))
+            .title(menuData.title.format())
             .rows(3)
             .create()
 
@@ -62,18 +63,17 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
             val current = arena.getCurrentPlayers()
             val max = arena.getMaxPlayers()
 
-            val playerCount = plugin.mm.deserialize(
-                "<!i><dark_gray>$current/$max</dark_gray> <dark_aqua>current players</dark_aqua>")
+            val playerCount = "<!i><dark_gray>$current/$max</dark_gray> <dark_aqua>current players</dark_aqua>".format()
 
             val lore = arena.getDescription()
                 .split("\n")
-                .map(plugin.mm::deserialize)
+                .map { it.format() }
                 .toMutableList()
                 .apply { add(playerCount) }
                 .toList()
 
             val item = ItemBuilder.from(Material.PAPER)
-                .name(plugin.mm.deserialize(arena.getName()))
+                .name(arena.getName().format())
                 .lore(lore)
                 .asGuiItem {
                     fireworkWarsData
