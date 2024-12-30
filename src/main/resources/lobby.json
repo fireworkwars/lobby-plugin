@@ -31,7 +31,7 @@
                 "title": "Join a Game",
                 "mapType": "TOWN"
             },
-            "location": { "world": "world", "x": -244, "y": 73, "z": -63, "yaw": 0, "pitch": 0 },
+            "location": { "world": "world", "x": -244, "y": 73, "z": -62, "yaw": 0, "pitch": 0 },
             "skin": {
                 "value": "ewogICJ0aW1lc3RhbXAiIDogMTYxODIwNzQ4MzA1MywKICAicHJvZmlsZUlkIiA6ICI3MzgyZGRmYmU0ODU0NTVjODI1ZjkwMGY4OGZkMzJmOCIsCiAgInByb2ZpbGVOYW1lIiA6ICJCdUlJZXQiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjRlZDQyNzEzNTQ0MTVjZTUwZmI4MDJjMmM3NGEyNWMzODQ0ZTVlMWNjMTcxNjFhNGQxMWI1OTA2MzZhZWJmMyIKICAgIH0KICB9Cn0=",
                 "signature": "DcF/1TtUspZqmTikpWvtxRDiSdJh36qqanepo3kfvR4zwswuJTRqLCvwGwkwhWkBbS7fjwAwu0X6oI9+ZAZ724k+nYNCTKhgJFn9klBcs0aZSlB0XcdQ9iRsEyYxrmzYhBHF0jlRs7NaPCVfQ5Obf3D77Jg8k3UxWT2JAZyOHrHyMILDMqgGtYwWlKBspZtkYpD/+oHcSMx8+5Tmtem8FsUTcathUdGs8hBIAvygpL76Dvw7HCK0nhICSEBqB1hqWHQCRt6edErWqeKfPy8ZSwF2Qq9doTBIOURp4xpeXqaZt7DqRgFIyOdC5qerm3vGcd5dJSAKe0TywoSWz+Va+D0bvbqFjvLLw4Ig+PAEMiNsuqTO8aBBkWwesfMGGV56pcOL2qP0RYyB4afXLcp+AU8upeAW2GyiVL08nmCPTni7tUeayIGON1ZWKqGtUboszHaGl+V2lphZiOsbboo79rDw+nBgryZY4zh1GE9d2RR1oRzk0QoHTK/NXF5hwZnbzdhJHb4h+xwWKM54e5Cz38z0ASNvqG5hXWsrOOJ2uC9mD+U+B/JUESY6TJBIfIprtC+4y+0pQ2kofpSMYypASkK9EauP1T/t8QtwFoCeTS4fB/HowgItjkyC6h1+OU9Nxd4791hiRvcYKZNWgoDnEEdgXfbMFoNdw1LJTX0xFow="
