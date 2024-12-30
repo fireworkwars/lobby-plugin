@@ -58,9 +58,12 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
             MapType.TOWN -> fireworkWarsData.getTownArenas()
         }
 
-        arenas.forEachIndexed { index, arena ->
+        arenas.filter { !it.isFull() }.forEachIndexed { index, arena ->
+            val current = arena.getCurrentPlayers()
+            val max = arena.getMaxPlayers()
+
             val playerCount = plugin.mm.deserialize(
-                "<!i><yellow>${arena.getCurrentPlayers()}/${arena.getMaxPlayers()}</yellow>")
+                "<!i><dark_gray>$current/$max</dark_gray> <dark_aqua>current players</dark_aqua>")
 
             val lore = arena.getDescription()
                 .split("\n")
