@@ -3,6 +3,7 @@ package foundation.esoteric.fireworkwarslobby.npc
 import com.destroystokyo.paper.profile.CraftPlayerProfile
 import com.destroystokyo.paper.profile.ProfileProperty
 import foundation.esoteric.fireworkwarscore.util.NMSUtil
+import foundation.esoteric.fireworkwarscore.util.format
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.NPCData
 import foundation.esoteric.fireworkwarslobby.npc.connection.EmptyConnection
@@ -66,7 +67,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
     private fun createNameTag(): TextDisplay {
         val display = world.spawn(npcLocation, TextDisplay::class.java)
 
-        display.text(plugin.mm.deserialize(data.name))
+        display.text(data.name.format().appendNewline().append(data.subtitle.format()))
         display.alignment = TextDisplay.TextAlignment.CENTER
         display.billboard = Display.Billboard.VERTICAL
 
