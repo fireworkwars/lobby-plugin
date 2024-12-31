@@ -78,11 +78,11 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
             val max = arena.getMaxPlayers()
 
             val playerCount = plugin.languageManager
-                .getDefaultMessage(Message.CURRENT_PLAYERS, current, max)
+                .getMessage(Message.CURRENT_PLAYERS, event.player, current, max)
 
             val lore = arena.getDescription()
                 .split("\n")
-                .map(String::format)
+                .map { it.format() }
                 .toMutableList()
                 .apply { add(playerCount) }
                 .toList()
