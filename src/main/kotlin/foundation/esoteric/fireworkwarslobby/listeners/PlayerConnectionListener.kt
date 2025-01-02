@@ -60,7 +60,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         plugin.logLoudly("$formattedName", true)
 
         lobbyWorld.players.forEach {
-            if (profile.rank == Rank.PLAYER) {
+            if (profile.rank == Rank.NONE) {
                 it.sendMessage(Message.PLAYER_JOINED_LOBBY, formattedName)
             } else {
                 it.sendMessage(Message.RANKED_PLAYER_JOINED_LOBBY, formattedName)
