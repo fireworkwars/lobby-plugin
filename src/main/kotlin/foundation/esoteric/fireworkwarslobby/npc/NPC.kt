@@ -89,6 +89,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         return display
     }
 
+    // Send every time the player enters a world, e.g. `PlayerWorldChangeEvent` and of course `PlayerJoinEvent`
     fun sendInitPackets(player: Player) {
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
 
