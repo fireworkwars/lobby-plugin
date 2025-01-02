@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.FireworkMeta
 
 class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val config = plugin.configManager.lobbyConfig
+    private val coreConfig = plugin.core.pluginConfig
     private val lobbyWorld = config.getWorld()
 
     override fun register() {
@@ -30,7 +31,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         player.sendPlayerListHeaderAndFooter(
             plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()),
-            plugin.languageManager.getMessage(Message.TABLIST_FOOTER, player, *emptyArray()))
+            plugin.languageManager.getMessage(Message.TABLIST_FOOTER, player, coreConfig.serverIp, coreConfig.discordInvite))
 
         profile.rank.updateTablist(player)
 
