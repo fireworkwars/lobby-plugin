@@ -2,6 +2,7 @@ package foundation.esoteric.fireworkwarslobby.listeners
 
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.Message
+import foundation.esoteric.fireworkwarscore.profiles.Rank
 import foundation.esoteric.fireworkwarscore.util.FireworkCreator
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
@@ -22,7 +23,17 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
-        handlePlayerJoinLobby(event.player)
+        val player = event.player
+        val profile = plugin.playerDataManager.getPlayerProfile(player, true)!!
+
+        handlePlayerJoinLobby(player)
+
+        player.sendPlayerListHeaderAndFooter(
+            plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()),
+            plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()))
+
+        player.playerListName(profile.rank.formatPlayerName(player))
+        player.playerListOrder = profile.rank.listOrder
 
         event.joinMessage(null)
     }
@@ -39,17 +50,18 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         player.teleport(config.spawnLocation.toBukkit())
 
-        val profile = plugin.playerDataManager.getPlayerProfile(player, true)!!
+        val profile = plugin.playerDataManager.getPlayerProfile(player)
+        val formattedName = profile.rank.formatPlayerName(player)
 
         lobbyWorld.players.forEach {
-            if (profile.ranked) {
-                it.sendMessage(Message.RANKED_PLAYER_JOINED_LOBBY, player.name())
+            if (profile.rank == Rank.PLAYER) {
+                it.sendMessage(Message.PLAYER_JOINED_LOBBY, formattedName)
             } else {
-                it.sendMessage(Message.PLAYER_JOINED_LOBBY, player.name())
+                it.sendMessage(Message.RANKED_PLAYER_JOINED_LOBBY, formattedName)
             }
         }
 
-        if (profile.ranked) {
+        if (profile.rank == Rank.GOLD) {
             config.randomFireworkLocations().forEach {
                 lobbyWorld.spawn(it, Firework::class.java) { fw ->
                     val randomFirework = FireworkCreator.randomSupplyDropFirework()
@@ -63,7 +75,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         if (profile.firstJoin) {
             profile.firstJoin = false
-            player.sendMessage(Message.WELCOME, player.name())
+            player.sendMessage(Message.WELCOME, formattedName)
         }
 
         plugin.npcManager.npcList.forEach { it.sendInitPackets(player) }
