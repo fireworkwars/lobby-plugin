@@ -20,9 +20,10 @@ class LobbyScoreboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     }
 
     private fun createScoreboard(player: Player) {
+        val version = plugin.core.fireworkWarsPluginData.getVersionString()
+
         val board = FastBoard(player).apply {
-            @Suppress("UnstableApiUsage")
-            updateTitle(languageManager.getMessage(Message.LOBBY_SB_TITLE, player, plugin.pluginMeta.version))
+            updateTitle(languageManager.getMessage(Message.LOBBY_SB_TITLE, player, version))
         }
 
         scoreboards[player.uniqueId] = board
