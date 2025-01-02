@@ -57,6 +57,8 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         val profile = plugin.playerDataManager.getPlayerProfile(player)
         val formattedName = profile.rank.formatPlayerName(player)
 
+        plugin.logLoudly("$formattedName", true)
+
         lobbyWorld.players.forEach {
             if (profile.rank == Rank.PLAYER) {
                 it.sendMessage(Message.PLAYER_JOINED_LOBBY, formattedName)
