@@ -16,7 +16,10 @@ import org.bukkit.inventory.meta.FireworkMeta
 class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val config = plugin.configManager.lobbyConfig
     private val coreConfig = plugin.core.pluginConfig
+
     private val lobbyWorld = config.getWorld()
+
+    private val scoreboardManager = plugin.lobbyScoreboardManager
 
     override fun register() {
         plugin.server.pluginManager.registerEvents(this, plugin)
@@ -27,7 +30,9 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         val player = event.player
         val profile = plugin.playerDataManager.getPlayerProfile(player, true)!!
 
-        handlePlayerJoinLobby(player)
+        if (player.world.uid == lobbyWorld.uid) {
+            handlePlayerJoinLobby(player)
+        }
 
         player.sendPlayerListHeaderAndFooter(
             plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()),
@@ -40,14 +45,13 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
     @EventHandler
     fun onPlayerLeave(event: PlayerQuitEvent) {
+        scoreboardManager.deleteScoreboard(event.player)
+        scoreboardManager.refreshAllScoreboards()
+
         event.quitMessage(null)
     }
 
     fun handlePlayerJoinLobby(player: Player) {
-        if (player.world.uid != lobbyWorld.uid) {
-            return
-        }
-
         player.teleport(config.spawnLocation.toBukkit())
 
         val profile = plugin.playerDataManager.getPlayerProfile(player)
@@ -79,5 +83,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         }
 
         plugin.npcManager.npcList.forEach { it.sendInitPackets(player) }
+        scoreboardManager.createOrUpdateScoreboard(player)
+        scoreboardManager.refreshAllScoreboards()
     }
 }
