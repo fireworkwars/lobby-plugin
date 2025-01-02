@@ -11,6 +11,7 @@ import foundation.esoteric.fireworkwarslobby.listeners.NPCInteractListener
 import foundation.esoteric.fireworkwarslobby.listeners.PlayerConnectionListener
 import foundation.esoteric.fireworkwarslobby.listeners.PlayerWorldChangeListener
 import foundation.esoteric.fireworkwarslobby.npc.NPCManager
+import foundation.esoteric.fireworkwarslobby.scoreboards.LobbyScoreboardManager
 import net.kyori.adventure.text.Component.text
 import org.bukkit.event.Listener
 
@@ -22,6 +23,7 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
 
     lateinit var configManager: ConfigManager
     lateinit var npcManager: NPCManager
+    lateinit var lobbyScoreboardManager: LobbyScoreboardManager
 
     lateinit var playerConnectionListener: PlayerConnectionListener
     private val listeners = mutableListOf<Listener>()
@@ -61,6 +63,11 @@ class FireworkWarsLobbyPlugin : BasePlugin() {
         this.npcManager = NPCManager(this).apply { spawnNPCs() }
 
         logger.info("Successfully deployed NPCs.")
+        logger.info("Initialising Scoreboard Manager...")
+
+        this.lobbyScoreboardManager = LobbyScoreboardManager(this)
+
+        logger.info("Successfully initialised Scoreboard Manager.")
         logger.info("Registering event listeners...")
 
         this.playerConnectionListener = PlayerConnectionListener(this).apply { register() }
