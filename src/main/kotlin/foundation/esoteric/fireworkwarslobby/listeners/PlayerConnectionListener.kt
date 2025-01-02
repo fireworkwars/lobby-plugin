@@ -30,7 +30,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         player.sendPlayerListHeaderAndFooter(
             plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()),
-            plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()))
+            plugin.languageManager.getMessage(Message.TABLIST_FOOTER, player, *emptyArray()))
 
         player.playerListName(profile.rank.formatPlayerName(player))
         player.playerListOrder = profile.rank.listOrder
