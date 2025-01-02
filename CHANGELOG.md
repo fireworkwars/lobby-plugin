@@ -25,8 +25,11 @@
 - Fixed NPC locations being half a block off
 - Remove sound effects that didn't work
 - Remove collision & name tag visibility from NPCs
+- Center spawn location to the exact middle of the block
 
 ## Future Ideas
-- Add custom tablist
+- Add custom tab-list
 - Add custom scoreboard
 - Add parties
+- Add messaging system
+- Add friends system
