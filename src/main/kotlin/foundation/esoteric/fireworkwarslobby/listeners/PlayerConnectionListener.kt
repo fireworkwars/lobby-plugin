@@ -38,7 +38,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
             plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()),
             plugin.languageManager.getMessage(Message.TABLIST_FOOTER, player, coreConfig.serverIp, coreConfig.discordInvite))
 
-        profile.rank.updateTablist(player)
+        profile.rank.updateTablist(player, plugin)
 
         event.joinMessage(null)
     }
