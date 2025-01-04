@@ -41,7 +41,9 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         profile.rank.updateTablist(player, plugin)
 
         // this is needed for NPCs to work
-        player.addAttachment(plugin, "minecraft.commands.arena", true)
+        if (!player.hasPermission("minecraft.commands.arena")) {
+            player.addAttachment(plugin, "minecraft.commands.arena", true)
+        }
 
         event.joinMessage(null)
     }
