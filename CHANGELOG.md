@@ -31,7 +31,8 @@
 
 ## Future Ideas
 - Add parties
-- Add messaging system & /shout
+- Add message channels system & good prefixing
+- Add private messaging system & /shout
 - Add friends system
 
 ## Known Issues
