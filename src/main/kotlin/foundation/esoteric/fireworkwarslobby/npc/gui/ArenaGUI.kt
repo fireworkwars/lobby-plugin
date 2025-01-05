@@ -51,9 +51,7 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
             MapType.TOWN -> fireworkWarsData.getTownArenas()
         }
 
-        val filtered = arenas.filter {
-            !it.isFull()
-        }
+        val filtered = arenas.filter(Arena::isAvailable)
 
         if (filtered.isEmpty()) {
             return setNoArenasItem()
