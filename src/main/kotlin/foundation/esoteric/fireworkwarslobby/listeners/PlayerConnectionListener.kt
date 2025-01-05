@@ -83,7 +83,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
             player.sendMessage(Message.WELCOME, formattedName)
         }
 
-        profile.rank.updateTablist(player, plugin)
+        profile.updateOwnTablist()
 
         plugin.npcManager.npcList.forEach { it.sendInitPackets(player) }
 
