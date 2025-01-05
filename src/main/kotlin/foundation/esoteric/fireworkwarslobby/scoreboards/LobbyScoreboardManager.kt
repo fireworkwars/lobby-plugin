@@ -43,7 +43,7 @@ class LobbyScoreboardManager(private val plugin: FireworkWarsLobbyPlugin) {
             languageManager.getMessage(Message.LOBBY_SB_ACHIEVEMENTS, player, 0, 15),
             Component.empty(),
             languageManager.getMessage(Message.LOBBY_SB_PLAYERS, player, plugin.server.onlinePlayers.size),
-            languageManager.getMessage(Message.LOBBY_SB_FRIENDS, player, 0),
+            languageManager.getMessage(Message.LOBBY_SB_FRIENDS, player, profile.getOnlineFriends().size),
             Component.empty(),
             languageManager.getMessage(Message.LOBBY_SB_IP, player, plugin.core.pluginConfig.serverIp),
             languageManager.getMessage(Message.SB_SEPARATOR, player, *emptyArray())
