@@ -34,7 +34,6 @@
 ## Future Ideas
 - Add message channels system & good prefixing
 - Add private messaging system & /shout
-- Add /block
 
 ## Very Future Ideas
 - Add parties
