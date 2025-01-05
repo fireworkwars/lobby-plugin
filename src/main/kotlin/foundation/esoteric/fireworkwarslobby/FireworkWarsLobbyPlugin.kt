@@ -1,7 +1,6 @@
 package foundation.esoteric.fireworkwarslobby
 
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
-import foundation.esoteric.fireworkwarscore.communication.BasePlugin
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import foundation.esoteric.fireworkwarslobby.communication.LobbyPluginDataHolder
@@ -14,12 +13,13 @@ import foundation.esoteric.fireworkwarslobby.npc.NPCManager
 import foundation.esoteric.fireworkwarslobby.scoreboards.LobbyScoreboardManager
 import net.kyori.adventure.text.Component.text
 import org.bukkit.event.Listener
+import org.bukkit.plugin.java.JavaPlugin
 
-class FireworkWarsLobbyPlugin : BasePlugin() {
+class FireworkWarsLobbyPlugin : JavaPlugin() {
     lateinit var core: FireworkWarsCorePlugin
 
-    override lateinit var playerDataManager: PlayerDataManager
-    override lateinit var languageManager: LanguageManager
+    lateinit var playerDataManager: PlayerDataManager
+    lateinit var languageManager: LanguageManager
 
     lateinit var configManager: ConfigManager
     lateinit var npcManager: NPCManager
