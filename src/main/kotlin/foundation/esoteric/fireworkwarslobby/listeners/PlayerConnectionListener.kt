@@ -57,13 +57,11 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         val profile = plugin.playerDataManager.getPlayerProfile(player)
         profile.username = player.name
 
-        val formattedName = profile.rank.formatPlayerName(player)
-
         lobbyWorld.players.forEach {
             if (profile.rank == Rank.NONE) {
-                it.sendMessage(Message.PLAYER_JOINED_LOBBY, formattedName)
+                it.sendMessage(Message.PLAYER_JOINED_LOBBY, profile.formattedName())
             } else {
-                it.sendMessage(Message.RANKED_PLAYER_JOINED_LOBBY, formattedName)
+                it.sendMessage(Message.RANKED_PLAYER_JOINED_LOBBY, profile.formattedName())
             }
         }
 
@@ -81,7 +79,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         if (profile.firstJoin) {
             profile.firstJoin = false
-            player.sendMessage(Message.WELCOME, formattedName)
+            player.sendMessage(Message.WELCOME, profile.formattedName())
         }
 
         profile.updateOwnTablist()
