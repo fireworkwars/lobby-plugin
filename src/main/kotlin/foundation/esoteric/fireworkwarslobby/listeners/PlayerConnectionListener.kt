@@ -40,6 +40,11 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
             plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()),
             plugin.languageManager.getMessage(Message.TABLIST_FOOTER, player, ip, invite))
 
+        plugin.core.friendManager.getReceivingRequests(player).forEach {
+            val profile = plugin.playerDataManager.getPlayerProfile(it)
+            player.sendMessage(Message.FRIEND_REQUEST_FROM, profile.formattedName())
+        }
+
         event.joinMessage(null)
     }
 
