@@ -6,6 +6,7 @@ import foundation.esoteric.fireworkwarscore.profiles.Rank
 import foundation.esoteric.fireworkwarscore.util.FireworkCreator
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
+import foundation.esoteric.fireworkwarslobby.util.matchLength
 import org.bukkit.entity.Firework
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -28,15 +29,17 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
-        val profile = plugin.playerDataManager.getPlayerProfile(player, true)!!
 
         if (player.world.uid == lobbyWorld.uid) {
             handlePlayerJoinLobby(player)
         }
 
+        val ip = coreConfig.serverIp.matchLength(coreConfig.discordInvite)
+        val invite = coreConfig.discordInvite.matchLength(coreConfig.serverIp)
+
         player.sendPlayerListHeaderAndFooter(
             plugin.languageManager.getMessage(Message.TABLIST_HEADER, player, *emptyArray()),
-            plugin.languageManager.getMessage(Message.TABLIST_FOOTER, player, coreConfig.serverIp, coreConfig.discordInvite))
+            plugin.languageManager.getMessage(Message.TABLIST_FOOTER, player, ip, invite))
 
         event.joinMessage(null)
     }
