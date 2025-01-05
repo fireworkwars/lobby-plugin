@@ -55,6 +55,8 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         player.teleport(config.spawnLocation.toBukkit())
 
         val profile = plugin.playerDataManager.getPlayerProfile(player)
+        profile.username = player.name
+
         val formattedName = profile.rank.formatPlayerName(player)
 
         lobbyWorld.players.forEach {
