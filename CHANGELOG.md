@@ -8,7 +8,7 @@
 - Added multiple firework spawn locations
 - Spawn fireworks when a ranked player joins the game lobby
 - Added proper join messaging based on player rank and first-time entry
-- Add another line of text under NPC names
+- Added another line of text under NPC names
 - Added custom tablist with correct display of ranked & unranked players
 - Added custom scoreboard with dynamic and variable info
 
@@ -27,14 +27,16 @@
 - Fixed NPC locations being half a block off
 - Remove sound effects that didn't work
 - Remove collision & name tag visibility from NPCs
-- Center spawn location to the exact middle of the block
+- Centered spawn location to the exact middle of the block
+- Fixed tablist order being reversed (nons higher than gold rank players)
 
 ## Future Ideas
-- Add parties
 - Add message channels system & good prefixing
 - Add private messaging system & /shout
 - Add friends system
+- Add /block
+
+## Very Future Ideas
+- Add parties
 
 ## Known Issues
-- Tablist order not updated correctly (different for each player???)
-- Tablist not correct mid-game
