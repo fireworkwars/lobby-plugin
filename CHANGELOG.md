@@ -11,6 +11,7 @@
 - Added another line of text under NPC names
 - Added custom tablist with correct display of ranked & unranked players
 - Added custom scoreboard with dynamic and variable info
+- Added fully functional friend system through commands
 
 ## Changed
 - Tweaked sounds in the NPC menu
@@ -33,7 +34,6 @@
 ## Future Ideas
 - Add message channels system & good prefixing
 - Add private messaging system & /shout
-- Add friends system
 - Add /block
 
 ## Very Future Ideas
