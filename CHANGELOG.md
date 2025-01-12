@@ -34,8 +34,10 @@
 ## Future Ideas
 - Add message channels system & good prefixing
 - Add private messaging system & /shout
+- Add custom name tags
 
 ## Very Future Ideas
 - Add parties
 
 ## Known Issues
+None
