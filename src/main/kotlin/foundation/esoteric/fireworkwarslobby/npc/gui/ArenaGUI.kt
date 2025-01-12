@@ -62,8 +62,8 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
 
     private fun setNoArenasItem() {
         val item = ItemBuilder.from(Material.GUNPOWDER)
-            .name(languageManager.getMessage(Message.NO_ARENAS_AVAILABLE, player, *emptyArray()))
-            .lore(languageManager.getMessage(Message.NO_ARENAS_AVAILABLE_LORE, player, *emptyArray()))
+            .name(languageManager.getMessage(Message.NO_ARENAS_AVAILABLE, player))
+            .lore(*languageManager.getMessages(Message.NO_ARENAS_AVAILABLE_LORE, player))
             .asGuiItem()
 
         gui.setItem(0, item)
