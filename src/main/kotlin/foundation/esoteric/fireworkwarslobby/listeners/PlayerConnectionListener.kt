@@ -6,12 +6,11 @@ import foundation.esoteric.fireworkwarscore.profiles.Rank
 import foundation.esoteric.fireworkwarscore.util.FireworkCreator
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
-import org.bukkit.entity.Firework
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
-import org.bukkit.inventory.meta.FireworkMeta
 
 class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val config = plugin.configManager.lobbyConfig
@@ -25,7 +24,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         plugin.server.pluginManager.registerEvents(this, plugin)
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
 
@@ -72,13 +71,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         if (profile.rank == Rank.GOLD) {
             config.randomFireworkLocations().forEach {
-                lobbyWorld.spawn(it, Firework::class.java) { fw ->
-                    val randomFirework = FireworkCreator.randomSupplyDropFirework()
-                    fw.fireworkMeta = randomFirework.itemMeta as FireworkMeta
-
-                    fw.setNoPhysics(true)
-                    fw.ticksToDetonate = (20..30).random()
-                }
+                FireworkCreator.sendSupplyDropFirework(it, (20..30).random())
             }
         }
 
