@@ -98,6 +98,10 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         server.scheduler.runTaskLater(this, task, delay)
     }
 
+    fun runTaskOneTickLater(task: Runnable) {
+        this.runTaskLater(task, 1L)
+    }
+
     fun runTaskTimer(task: Runnable, delay: Long, period: Long) {
         server.scheduler.runTaskTimer(this, task, delay, period)
     }
