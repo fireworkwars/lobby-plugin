@@ -51,6 +51,7 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private fun removeNameTag(player: Player) {
         val display = nameTags[player.uniqueId] ?: return
 
+        display.vehicle?.eject()
         display.remove()
         nameTags.remove(player.uniqueId)
     }
