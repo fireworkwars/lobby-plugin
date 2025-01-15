@@ -49,7 +49,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
             val offlinePlayer = plugin.server.getOfflinePlayer(it)
 
             if (offlinePlayer.isOnline) {
-                offlinePlayer.player!!.sendMessage(Message.FRIEND_JOINED)
+                offlinePlayer.player!!.sendMessage(Message.FRIEND_JOINED, profile.formattedName())
             }
         }
 
@@ -67,7 +67,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
             val offlinePlayer = plugin.server.getOfflinePlayer(it)
 
             if (offlinePlayer.isOnline) {
-                offlinePlayer.player!!.sendMessage(Message.FRIEND_LEFT)
+                offlinePlayer.player!!.sendMessage(Message.FRIEND_LEFT, profile.formattedName())
             }
         }
 
