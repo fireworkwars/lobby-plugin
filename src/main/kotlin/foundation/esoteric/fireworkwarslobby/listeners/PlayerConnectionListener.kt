@@ -27,9 +27,10 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
     @EventHandler(priority = EventPriority.LOWEST)
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
+        val profile = plugin.playerDataManager.getPlayerProfile(player, true)!!
 
         if (player.world.uid == lobbyWorld.uid) {
-            handlePlayerJoinLobby(player)
+            this.handlePlayerJoinLobby(player)
         }
 
         val ip = coreConfig.serverIp
@@ -40,8 +41,16 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
             plugin.languageManager.getMessage(Message.TABLIST_FOOTER, player, ip, invite))
 
         plugin.core.friendManager.getReceivingRequestUUIDs(player).forEach {
-            val profile = plugin.playerDataManager.getPlayerProfile(it)
-            player.sendMessage(Message.FRIEND_REQUEST_FROM, profile.formattedName(), profile.username)
+            val otherProfile = plugin.playerDataManager.getPlayerProfile(it)
+            player.sendMessage(Message.FRIEND_REQUEST_FROM, otherProfile.formattedName(), otherProfile.username)
+        }
+
+        profile.friends.forEach {
+            val offlinePlayer = plugin.server.getOfflinePlayer(it)
+
+            if (offlinePlayer.isOnline) {
+                offlinePlayer.player!!.sendMessage(Message.FRIEND_JOINED)
+            }
         }
 
         event.joinMessage(null)
@@ -51,6 +60,16 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
     fun onPlayerLeave(event: PlayerQuitEvent) {
         scoreboardManager.deleteScoreboard(event.player)
         scoreboardManager.refreshAllScoreboards()
+
+        val profile = plugin.playerDataManager.getPlayerProfile(event.player)
+
+        profile.friends.forEach {
+            val offlinePlayer = plugin.server.getOfflinePlayer(it)
+
+            if (offlinePlayer.isOnline) {
+                offlinePlayer.player!!.sendMessage(Message.FRIEND_LEFT)
+            }
+        }
 
         event.quitMessage(null)
     }
