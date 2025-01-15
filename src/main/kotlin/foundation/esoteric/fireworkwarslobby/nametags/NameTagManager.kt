@@ -2,17 +2,16 @@ package foundation.esoteric.fireworkwarslobby.nametags
 
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
-import org.bukkit.Location
 import org.bukkit.entity.Display
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.entity.PlayerDeathEvent
-import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.player.PlayerRespawnEvent
+import org.bukkit.event.player.PlayerTeleportEvent
 import java.util.*
 
 class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
@@ -22,12 +21,6 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
     override fun register() {
         plugin.server.pluginManager.registerEvents(this, plugin)
-    }
-
-    fun teleportPlayer(player: Player, location: Location) {
-        this.removeNameTag(player)
-        player.teleport(location)
-        this.createNameTag(player)
     }
 
     private fun createNameTag(player: Player) {
@@ -56,49 +49,29 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         nameTags.remove(player.uniqueId)
     }
 
-    private fun onJoin(player: Player) {
-        this.createNameTag(player)
-    }
-
-    private fun onQuit(player: Player) {
-        this.removeNameTag(player)
-    }
-
-    private fun onDeath(player: Player) {
-        this.removeNameTag(player)
-    }
-
-    private fun onRespawn(player: Player) {
-        this.createNameTag(player)
-    }
-
-    private fun onWorldChange(player: Player) {
-        this.removeNameTag(player)
-        this.createNameTag(player)
-    }
-
     @EventHandler(priority = EventPriority.MONITOR)
     fun onPlayerJoin(event: PlayerJoinEvent) {
-        this.onJoin(event.player)
+        this.createNameTag(event.player)
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     fun onPlayerQuit(event: PlayerQuitEvent) {
-        this.onQuit(event.player)
+        this.removeNameTag(event.player)
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerDeath(event: PlayerDeathEvent) {
-        this.onDeath(event.entity)
+        this.removeNameTag(event.entity)
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     fun onPlayerRespawn(event: PlayerRespawnEvent) {
-        this.onRespawn(event.player)
+        this.createNameTag(event.player)
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    fun onPlayerWorldChange(event: PlayerChangedWorldEvent) {
-        this.onWorldChange(event.player)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onPlayerTeleport(event: PlayerTeleportEvent) {
+        this.removeNameTag(event.player)
+        plugin.runTaskOneTickLater { this.createNameTag(event.player) }
     }
 }
