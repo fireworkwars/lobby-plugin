@@ -9,6 +9,7 @@ import foundation.esoteric.fireworkwarslobby.listeners.HouseKeepingListener
 import foundation.esoteric.fireworkwarslobby.listeners.NPCInteractListener
 import foundation.esoteric.fireworkwarslobby.listeners.PlayerConnectionListener
 import foundation.esoteric.fireworkwarslobby.listeners.PlayerWorldChangeListener
+import foundation.esoteric.fireworkwarslobby.nametags.NameTagManager
 import foundation.esoteric.fireworkwarslobby.npc.NPCManager
 import foundation.esoteric.fireworkwarslobby.scoreboards.LobbyScoreboardManager
 import net.kyori.adventure.text.Component.text
@@ -24,6 +25,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
     lateinit var configManager: ConfigManager
     lateinit var npcManager: NPCManager
     lateinit var lobbyScoreboardManager: LobbyScoreboardManager
+    lateinit var nameTagManager: NameTagManager
 
     lateinit var playerConnectionListener: PlayerConnectionListener
     private val listeners = mutableListOf<Listener>()
@@ -68,6 +70,11 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         this.lobbyScoreboardManager = LobbyScoreboardManager(this)
 
         logger.info("Successfully initialised Scoreboard Manager.")
+        logger.info("Initialising Nametag Manager...")
+
+        this.nameTagManager = NameTagManager(this).apply { register() }
+
+        logger.info("Successfully initialised Nametag Manager.")
         logger.info("Registering event listeners...")
 
         this.playerConnectionListener = PlayerConnectionListener(this).apply { register() }
