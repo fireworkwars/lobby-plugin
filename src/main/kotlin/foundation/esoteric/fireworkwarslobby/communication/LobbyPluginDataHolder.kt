@@ -4,7 +4,6 @@ import foundation.esoteric.fireworkwarscore.communication.LobbyPluginData
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import org.bukkit.Location
 import org.bukkit.World
-import org.bukkit.entity.Player
 
 class LobbyPluginDataHolder(private val plugin: FireworkWarsLobbyPlugin) : LobbyPluginData {
     private val config = plugin.configManager.lobbyConfig
@@ -19,9 +18,5 @@ class LobbyPluginDataHolder(private val plugin: FireworkWarsLobbyPlugin) : Lobby
 
     override fun updateScoreboards() {
         plugin.lobbyScoreboardManager.refreshAllScoreboards()
-    }
-
-    override fun teleportPlayerAndNameTag(player: Player, location: Location) {
-        plugin.nameTagManager.teleportPlayer(player, location)
     }
 }
