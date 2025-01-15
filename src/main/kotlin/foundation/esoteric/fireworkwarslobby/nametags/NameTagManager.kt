@@ -41,7 +41,7 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         display.alignment = TextDisplay.TextAlignment.CENTER
         display.billboard = Display.Billboard.VERTICAL
         display.transformation = display.transformation.apply {
-            translation.set(0.0, 0.4, 0.0)
+            translation.set(0.0, 0.2, 0.0)
         }
 
         player.addPassenger(display)
