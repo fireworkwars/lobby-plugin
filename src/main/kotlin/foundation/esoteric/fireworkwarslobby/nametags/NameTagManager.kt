@@ -3,6 +3,7 @@ package foundation.esoteric.fireworkwarslobby.nametags
 import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import org.bukkit.entity.Display
+import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
 import org.bukkit.event.EventHandler
@@ -37,6 +38,7 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
             translation.set(0.0, 0.2, 0.0)
         }
 
+        player.passengers.forEach(Entity::remove)
         player.addPassenger(display)
         nameTags[player.uniqueId] = display
     }
