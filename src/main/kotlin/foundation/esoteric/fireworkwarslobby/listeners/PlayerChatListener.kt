@@ -8,6 +8,7 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 
 class PlayerChatListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val lobbyWorld = plugin.configManager.lobbyConfig.getWorld()
@@ -16,12 +17,8 @@ class PlayerChatListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
         plugin.registerEvent(this)
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     fun onPlayerChat(event: AsyncChatEvent) {
-        if (event.player.world.uid != lobbyWorld.uid) {
-            return
-        }
-
         event.renderer(ChatRenderer.viewerUnaware { _, _, message -> message })
         event.viewers().removeIf { !lobbyWorld.players.contains(it as Player) }
         event.message(this.formatMessage(event.player, event.originalMessage()))
