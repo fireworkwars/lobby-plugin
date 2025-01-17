@@ -23,7 +23,7 @@ class PlayerChatListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
         }
 
         event.renderer(ChatRenderer.viewerUnaware { _, _, message -> message })
-        event.viewers().removeIf(lobbyWorld.players::contains)
+        event.viewers().removeIf { !lobbyWorld.players.contains(it as Player) }
         event.message(this.formatMessage(event.player, event.originalMessage()))
     }
 
