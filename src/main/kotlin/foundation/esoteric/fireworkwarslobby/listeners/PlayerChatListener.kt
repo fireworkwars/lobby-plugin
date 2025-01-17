@@ -10,17 +10,20 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 
 class PlayerChatListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
+    private val lobbyWorld = plugin.configManager.lobbyConfig.getWorld()
+
     override fun register() {
         plugin.registerEvent(this)
     }
 
     @EventHandler
     fun onPlayerChat(event: AsyncChatEvent) {
-        if (event.player.world.uid != plugin.configManager.lobbyConfig.getWorld().uid) {
+        if (event.player.world.uid != lobbyWorld.uid) {
             return
         }
 
         event.renderer(ChatRenderer.viewerUnaware { _, _, message -> message })
+        event.viewers().removeIf(lobbyWorld.players::contains)
         event.message(this.formatMessage(event.player, event.originalMessage()))
     }
 
