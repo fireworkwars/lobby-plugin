@@ -29,6 +29,6 @@ class PlayerChatListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
     private fun formatMessage(player: Player, message: Component): Component {
         val profile = plugin.playerDataManager.getPlayerProfile(player)
-        return profile.formattedName().append(Component.text(": ").color(NamedTextColor.WHITE)).append(message)
+        return profile.formattedName().append(Component.text(": ").append(message).color(NamedTextColor.WHITE))
     }
 }
