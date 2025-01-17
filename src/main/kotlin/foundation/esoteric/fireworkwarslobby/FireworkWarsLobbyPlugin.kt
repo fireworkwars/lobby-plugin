@@ -5,10 +5,7 @@ import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import foundation.esoteric.fireworkwarslobby.communication.LobbyPluginDataHolder
 import foundation.esoteric.fireworkwarslobby.config.ConfigManager
-import foundation.esoteric.fireworkwarslobby.listeners.HouseKeepingListener
-import foundation.esoteric.fireworkwarslobby.listeners.NPCInteractListener
-import foundation.esoteric.fireworkwarslobby.listeners.PlayerConnectionListener
-import foundation.esoteric.fireworkwarslobby.listeners.PlayerWorldChangeListener
+import foundation.esoteric.fireworkwarslobby.listeners.*
 import foundation.esoteric.fireworkwarslobby.nametags.NameTagManager
 import foundation.esoteric.fireworkwarslobby.npc.NPCManager
 import foundation.esoteric.fireworkwarslobby.scoreboards.LobbyScoreboardManager
@@ -83,6 +80,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         listeners.add(NPCInteractListener(this).apply { register() })
         listeners.add(HouseKeepingListener(this).apply { register() })
         listeners.add(PlayerWorldChangeListener(this).apply { register() })
+        listeners.add(PlayerChatListener(this).apply { register() })
 
         logger.info("Completed registration of event listeners.")
         logger.info("Listening to ${listeners.size} events.")
@@ -91,6 +89,10 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("End of logs for Firework Wars Lobby Plugin.")
         logger.info("Finished Firework Wars Lobby initialisation sequence.")
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= All systems operational  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+    }
+
+    fun registerEvent(event: Listener) {
+        server.pluginManager.registerEvents(event, this)
     }
 
     fun isDebugging(): Boolean {
