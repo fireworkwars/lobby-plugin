@@ -13,9 +13,9 @@ class LobbyScoreboardManager(private val plugin: FireworkWarsLobbyPlugin) {
 
     fun createOrUpdateScoreboard(player: Player) {
         if (scoreboards.containsKey(player.uniqueId)) {
-            updateScoreboard(player)
+            this.updateScoreboard(player)
         } else {
-            createScoreboard(player)
+            this.createScoreboard(player)
         }
     }
 
