@@ -21,7 +21,7 @@ class PlayerChatListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
     fun onPlayerChat(event: AsyncChatEvent) {
         event.renderer(ChatRenderer.viewerUnaware { _, _, message -> message })
 
-        event.viewers().clear()
+        event.viewers().removeIf { it is Player }
         event.viewers().addAll(lobbyWorld.players)
 
         event.message(this.formatMessage(event.player, event.originalMessage()))
