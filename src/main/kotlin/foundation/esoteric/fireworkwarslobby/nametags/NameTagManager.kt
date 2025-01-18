@@ -19,9 +19,15 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val playerDataManager = plugin.playerDataManager
 
     private val nameTags: MutableMap<UUID, TextDisplay> = mutableMapOf()
+    private val nameTagVisibility: MutableMap<UUID, Boolean> = mutableMapOf()
 
     override fun register() {
         plugin.server.pluginManager.registerEvents(this, plugin)
+    }
+
+    fun setNameTagVisible(player: Player, visible: Boolean) {
+        nameTagVisibility[player.uniqueId] = visible
+        nameTags[player.uniqueId]?.isVisibleByDefault = visible
     }
 
     private fun createNameTag(player: Player) {
@@ -32,6 +38,8 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         val display = world.spawn(location, TextDisplay::class.java)
 
         display.text(profile.formattedName())
+        display.isVisibleByDefault = nameTagVisibility[player.uniqueId] ?: true
+
         display.alignment = TextDisplay.TextAlignment.CENTER
         display.billboard = Display.Billboard.VERTICAL
         display.transformation = display.transformation.apply {
@@ -40,7 +48,9 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
         player.passengers.forEach(Entity::remove)
         player.addPassenger(display)
+
         nameTags[player.uniqueId] = display
+        nameTagVisibility[player.uniqueId] = true
     }
 
     private fun removeNameTag(player: Player) {
@@ -48,7 +58,9 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
         display.vehicle?.eject()
         display.remove()
+
         nameTags.remove(player.uniqueId)
+        nameTagVisibility.remove(player.uniqueId)
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -74,6 +86,11 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerTeleport(event: PlayerTeleportEvent) {
         this.removeNameTag(event.player)
-        plugin.runTaskOneTickLater { this.createNameTag(event.player) }
+
+        plugin.runTaskOneTickLater {
+            if (event.player.isOnline) {
+                this.createNameTag(event.player)
+            }
+        }
     }
 }
