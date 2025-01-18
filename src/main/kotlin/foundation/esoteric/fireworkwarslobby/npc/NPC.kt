@@ -99,7 +99,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
 
         connection.send(ClientboundPlayerInfoUpdatePacket(Action.ADD_PLAYER, handle))
         connection.send(PacketUtil.getEntityAddPacket(handle))
-        connection.send(ClientboundSetEntityDataPacket(id, handle.entityData.packAll()!!))
+        connection.send(ClientboundSetEntityDataPacket(id, handle.entityData.packAll()))
 
         connection.send(createAddOrModifyPacket(team, true))
         connection.send(createPlayerPacket(team, handle.scoreboardName, ClientboundSetPlayerTeamPacket.Action.ADD))
