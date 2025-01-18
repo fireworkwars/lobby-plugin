@@ -7,12 +7,13 @@ plugins {
     kotlin("jvm") version "2.1.0"
     id("com.gradleup.shadow") version "8.3.5"
     id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
-    id("io.papermc.paperweight.userdev") version "1.7.3"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
 }
 
 group = "foundation.esoteric"
 version = "1.0-SNAPSHOT"
 
+val paperApiVersion = "1.21.4"
 val targetJavaVersion = 21
 
 kotlin {
@@ -31,9 +32,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("$paperApiVersion-R0.1-SNAPSHOT")
+
     compileOnly("foundation.esoteric:firework-wars-core-plugin:1.0-SNAPSHOT")
-    paperweight.paperDevBundle("1.21.3-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("dev.triumphteam:triumph-gui:3.1.11")
 }
@@ -83,7 +84,7 @@ paperPluginYaml {
     website = "https://github.com/EsotericFoundation/firework-wars-lobby-plugin"
 
     main = "foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin"
-    apiVersion = "1.21.3"
+    apiVersion = paperApiVersion
     description = project.description
 
     dependencies {
