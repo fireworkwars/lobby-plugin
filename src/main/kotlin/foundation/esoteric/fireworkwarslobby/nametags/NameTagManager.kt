@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.event.player.PlayerTeleportEvent
+import org.bukkit.scheduler.BukkitRunnable
 import java.util.*
 
 class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
@@ -23,9 +24,13 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
     override fun register() {
         plugin.server.pluginManager.registerEvents(this, plugin)
+
+        VisibilityUpdater(this).runTaskTimer(plugin, 0, 20)
     }
 
     fun setNameTagVisible(player: Player, visible: Boolean) {
+        plugin.logLoudly("Setting name tag visibility for ${player.name} to $visible")
+
         nameTagVisibility[player.uniqueId] = visible
         nameTags[player.uniqueId]?.isVisibleByDefault = visible
     }
@@ -38,6 +43,7 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         val display = world.spawn(location, TextDisplay::class.java)
 
         display.text(profile.formattedName())
+        plugin.logLoudly("creating name tag with visibility " + (nameTagVisibility[player.uniqueId] ?: true))
         display.isVisibleByDefault = nameTagVisibility[player.uniqueId] ?: true
 
         display.alignment = TextDisplay.TextAlignment.CENTER
@@ -90,6 +96,14 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         plugin.runTaskOneTickLater {
             if (event.player.isOnline) {
                 this.createNameTag(event.player)
+            }
+        }
+    }
+
+    private class VisibilityUpdater(private val nameTagManager: NameTagManager) : BukkitRunnable() {
+        override fun run() {
+            nameTagManager.nameTags.forEach { (uuid, display) ->
+                display.isVisibleByDefault = nameTagManager.nameTagVisibility[uuid] ?: true
             }
         }
     }
