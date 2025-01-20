@@ -42,8 +42,9 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
         val display = world.spawn(location, TextDisplay::class.java)
 
-        display.text(profile.formattedName())
         plugin.logLoudly("creating name tag with visibility " + (nameTagVisibility[player.uniqueId] ?: true))
+
+        display.text(profile.formattedName())
         display.isVisibleByDefault = nameTagVisibility[player.uniqueId] ?: true
 
         display.alignment = TextDisplay.TextAlignment.CENTER
@@ -52,11 +53,13 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
             translation.set(0.0, 0.2, 0.0)
         }
 
+        player.hideEntity(plugin, display)
+
         player.passengers.forEach(Entity::remove)
         player.addPassenger(display)
 
         nameTags[player.uniqueId] = display
-        nameTagVisibility[player.uniqueId] = true
+        nameTagVisibility[player.uniqueId] = display.isVisibleByDefault
     }
 
     private fun removeNameTag(player: Player) {
