@@ -13,7 +13,6 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.event.player.PlayerTeleportEvent
-import org.bukkit.scheduler.BukkitRunnable
 import java.util.*
 
 class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
@@ -24,8 +23,6 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
     override fun register() {
         plugin.server.pluginManager.registerEvents(this, plugin)
-
-        VisibilityUpdater(this).runTaskTimer(plugin, 0, 20)
     }
 
     fun setNameTagVisible(player: Player, visible: Boolean) {
@@ -99,14 +96,6 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         plugin.runTaskOneTickLater {
             if (event.player.isOnline) {
                 this.createNameTag(event.player)
-            }
-        }
-    }
-
-    private class VisibilityUpdater(private val nameTagManager: NameTagManager) : BukkitRunnable() {
-        override fun run() {
-            nameTagManager.nameTags.forEach { (uuid, display) ->
-                display.isVisibleByDefault = nameTagManager.nameTagVisibility[uuid] ?: true
             }
         }
     }
