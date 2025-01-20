@@ -66,6 +66,9 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         display.remove()
 
         nameTags.remove(player.uniqueId)
+    }
+
+    private fun removeVisibilityData(player: Player) {
         nameTagVisibility.remove(player.uniqueId)
     }
 
@@ -77,6 +80,7 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
     @EventHandler(priority = EventPriority.MONITOR)
     fun onPlayerQuit(event: PlayerQuitEvent) {
         this.removeNameTag(event.player)
+        this.removeVisibilityData(event.player)
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
