@@ -63,6 +63,8 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         val profile = plugin.playerDataManager.getPlayerProfile(event.player)
 
+        profile.lastSeenDate = System.currentTimeMillis()
+
         profile.friends.forEach {
             val offlinePlayer = plugin.server.getOfflinePlayer(it)
 
@@ -78,7 +80,9 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         player.teleport(config.spawnLocation.toBukkit())
 
         val profile = plugin.playerDataManager.getPlayerProfile(player)
+
         profile.username = player.name
+        profile.lastSeenDate = System.currentTimeMillis()
 
         lobbyWorld.players.forEach {
             if (profile.rank == Rank.NONE) {
@@ -96,6 +100,8 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         if (profile.firstJoin) {
             profile.firstJoin = false
+            profile.firstJoinDate = System.currentTimeMillis()
+
             player.sendMessage(Message.WELCOME, profile.formattedName())
         }
 
