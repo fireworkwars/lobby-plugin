@@ -1,9 +1,9 @@
 package foundation.esoteric.fireworkwarslobby.npc.gui
 
-import dev.triumphteam.gui.builder.item.ItemBuilder
-import dev.triumphteam.gui.guis.Gui
 import foundation.esoteric.fireworkwarscore.communication.Arena
 import foundation.esoteric.fireworkwarscore.language.Message
+import foundation.esoteric.fireworkwarscore.libs.gui.builder.item.ItemBuilder
+import foundation.esoteric.fireworkwarscore.libs.gui.guis.Gui
 import foundation.esoteric.fireworkwarscore.util.format
 import foundation.esoteric.fireworkwarscore.util.playSound
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
@@ -24,8 +24,8 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
         .create()
 
     init {
-        createForPlayer()
-        fillArenaJoinItems()
+        this.createForPlayer()
+        this.fillArenaJoinItems()
     }
 
     fun show() {
