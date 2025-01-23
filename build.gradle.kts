@@ -28,15 +28,15 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
-    mavenLocal()
+    maven("https://jitpack.io")
 }
 
 dependencies {
+    compileOnly("com.github.esotericfoundation:firework-wars-core-plugin:0.1.1")
+
     paperweight.paperDevBundle("$paperApiVersion-R0.1-SNAPSHOT")
 
-    compileOnly("foundation.esoteric:firework-wars-core-plugin:1.0-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("dev.triumphteam:triumph-gui:3.1.11")
 }
 
 tasks {
@@ -44,8 +44,6 @@ tasks {
         minimize {
             exclude(dependency("org.jetbrains.kotlin:kotlin-reflect"))
         }
-
-        relocate("dev.triumphteam.gui", "foundation.esoteric.fireworkwarslobby.gui")
 
         destinationDirectory.set(file("../firework-wars-plugin/run/plugins"))
     }
