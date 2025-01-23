@@ -22,6 +22,8 @@
 - Added friend join/leave messages
 - Added a `/fl` command as a convenient alias for `/friend list`
 - Added `/block list` command
+- Added `/profile` command
+- Added first join date and last seen date info tracking
 
 ## Changed
 - Tweaked sounds in the NPC menu
@@ -33,6 +35,8 @@
 - Swapped locations of the two NPCs
 - Update to mc-1.21.4
 - Redesign friend list and block list messages
+- Added a custom hover text to player names in chat
+- Added a custom click event to player names in chat
 
 ## Fixed
 - Removed vanilla join/leave messages for a cleaner user experience
@@ -47,6 +51,8 @@
 - Removed the vanilla `/msg` command
 - Update all scoreboards upon: player join, player leave, player rank change
 - Update all tablist upon: player rank change
+- Fixed `/msg` alias not working
+- Fixed updating scoreboards too early on player leave
 
 ## Future Ideas
 - None
