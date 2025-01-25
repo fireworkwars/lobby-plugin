@@ -36,6 +36,7 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
 
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.LEFT
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
+        bukkit.isSeeThrough = true
 
         return display
     }
@@ -58,7 +59,9 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
             val name = profile.formattedName()
             val value = valueFunction(profile)
 
-            text = text.append(owner.getMessage(Message.LEADERBOARD_ENTRY, place, name, value))
+            text = text
+                .append(owner.getMessage(Message.LEADERBOARD_ENTRY, place, name, value))
+                .appendNewline()
         }
 
         bukkit.text(text)
