@@ -24,7 +24,7 @@ class ConfigManager(private val plugin: FireworkWarsLobbyPlugin) {
                 this.lobbyConfig = gson.fromJson(reader, LobbyData::class.java)
             }
         } catch (exception: IOException) {
-            plugin.logger.severe("Failed to load arenas.json file: " + exception.message)
+            plugin.logger.severe("Failed to load lobby.json file: " + exception.message)
         }
     }
 }
