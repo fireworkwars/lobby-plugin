@@ -16,7 +16,6 @@ import org.bukkit.entity.Player
 
 class LeaderboardDisplay(private val location: EntityLocation) {
     private val handle: TextDisplay
-    val id: Int
 
     lateinit var title: Component
     lateinit var subtitle: Component
@@ -26,7 +25,6 @@ class LeaderboardDisplay(private val location: EntityLocation) {
 
     init {
         this.handle = this.createLeaderboard()
-        this.id = handle.id
     }
 
     private fun createLeaderboard(): TextDisplay {
@@ -39,6 +37,14 @@ class LeaderboardDisplay(private val location: EntityLocation) {
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
 
         return display
+    }
+
+    fun setTitle(title: Component) {
+        this.title = title
+    }
+
+    fun setSubtitle(subtitle: Component) {
+        this.subtitle = subtitle
     }
 
     private fun updateTextFor(player: Player) {
@@ -65,6 +71,6 @@ class LeaderboardDisplay(private val location: EntityLocation) {
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
 
         connection.send(PacketUtil.getEntityAddPacket(handle))
-        connection.send(ClientboundSetEntityDataPacket(id, handle.entityData.packAll()))
+        connection.send(ClientboundSetEntityDataPacket(handle.id, handle.entityData.packAll()))
     }
 }
