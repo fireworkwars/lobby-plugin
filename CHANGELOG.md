@@ -24,6 +24,7 @@
 - Added `/block list` command
 - Added `/profile` command
 - Added first join date and last seen date info tracking
+- Shift + right-clicking a player will show their profile
 
 ## Changed
 - Tweaked sounds in the NPC menu
