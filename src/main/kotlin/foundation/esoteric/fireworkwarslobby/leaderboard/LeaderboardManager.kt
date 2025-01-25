@@ -7,7 +7,7 @@ import org.bukkit.entity.Player
 import java.util.*
 
 class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
-    private val config = plugin.configManager.lobbyConfig
+    private val config = plugin.configManager.lobbyConfig.leaderboards
 
     private val allTimeKills = "All-Time Kills"
     private val allTimeWins = "All-Time Wins"
@@ -23,32 +23,23 @@ class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
 
     fun createOrUpdateLeaderboard(player: Player) {
         killLeaderboards.computeIfAbsent(player.uniqueId) {
-            LeaderboardDisplay(config.leaderboards.allTimeKillsLocation).apply {
+            LeaderboardDisplay(plugin, config.allTimeKillsLocation, player).apply {
                 this.setTitleText(player.getMessage(Message.LEADERBOARD_TITLE))
                 this.setSubtitleText(player.getMessage(Message.LEADERBOARD_TYPE, allTimeKills))
             }
-        }.let { this.updateLeaderboard(player, it) }
+        }.let(LeaderboardDisplay::updateAndSendPackets)
 
         winLeaderboards.computeIfAbsent(player.uniqueId) {
-            LeaderboardDisplay(config.leaderboards.allTimeWinsLocation).apply {
+            LeaderboardDisplay(plugin, config.allTimeWinsLocation, player).apply {
                 this.setTitleText(player.getMessage(Message.LEADERBOARD_TITLE))
                 this.setSubtitleText(player.getMessage(Message.LEADERBOARD_TYPE, allTimeWins))
             }
-        }.let { this.updateLeaderboard(player, it) }
-    }
-
-    private fun updateLeaderboard(player: Player, leaderboard: LeaderboardDisplay) {
-        leaderboard.updateAndSendPackets(player)
+        }.let(LeaderboardDisplay::updateAndSendPackets)
     }
 
     private fun updateAll() {
-        killLeaderboards.forEach { (uuid, leaderboard) ->
-            plugin.server.getPlayer(uuid)?.let { this.updateLeaderboard(it, leaderboard) }
-        }
-
-        winLeaderboards.forEach { (uuid, leaderboard) ->
-            plugin.server.getPlayer(uuid)?.let { this.updateLeaderboard(it, leaderboard) }
-        }
+        killLeaderboards.values.forEach(LeaderboardDisplay::updateAndSendPackets)
+        winLeaderboards.values.forEach(LeaderboardDisplay::updateAndSendPackets)
     }
 
     fun deleteLeaderboard(player: Player) {

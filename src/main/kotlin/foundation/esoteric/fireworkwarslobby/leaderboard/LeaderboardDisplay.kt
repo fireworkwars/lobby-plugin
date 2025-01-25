@@ -4,6 +4,7 @@ import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
 import foundation.esoteric.fireworkwarscore.util.NMSUtil
 import foundation.esoteric.fireworkwarscore.util.getMessage
+import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.EntityLocation
 import foundation.esoteric.fireworkwarslobby.util.PacketUtil
 import net.kyori.adventure.text.Component
@@ -14,12 +15,12 @@ import net.minecraft.world.entity.Display.TextDisplay
 import net.minecraft.world.entity.EntityType
 import org.bukkit.entity.Player
 
-class LeaderboardDisplay(private val location: EntityLocation) {
+class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private val location: EntityLocation, private val owner: Player) {
     private val handle: TextDisplay
 
-    lateinit var title: Component
-    lateinit var subtitle: Component
-    val entries = mutableListOf<PlayerProfile>()
+    private lateinit var title: Component
+    private lateinit var subtitle: Component
+    private val entries = mutableListOf<PlayerProfile>()
 
     lateinit var displayValue: (profile: PlayerProfile) -> Int
 
@@ -47,7 +48,7 @@ class LeaderboardDisplay(private val location: EntityLocation) {
         this.subtitle = subtitle
     }
 
-    private fun updateTextFor(player: Player) {
+    private fun updateText() {
         val bukkit = handle.bukkitEntity as org.bukkit.entity.TextDisplay
 
         val header = title
@@ -65,10 +66,12 @@ class LeaderboardDisplay(private val location: EntityLocation) {
         bukkit.text(text)
     }
 
-    fun updateAndSendPackets(player: Player) {
-        this.updateTextFor(player)
+    fun updateAndSendPackets() {
+        if (!owner.isOnline) return
 
-        val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(player).connection
+        this.updateText()
+
+        val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(owner).connection
 
         connection.send(PacketUtil.getEntityAddPacket(handle))
         connection.send(ClientboundSetEntityDataPacket(handle.id, handle.entityData.packAll()))
