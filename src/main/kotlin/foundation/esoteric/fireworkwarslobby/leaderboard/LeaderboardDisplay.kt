@@ -34,7 +34,7 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
 
         display.setPos(location.x, location.y, location.z)
 
-        bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.LEFT
+        bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.CENTER
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
         bukkit.isSeeThrough = true
 
@@ -45,8 +45,7 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
         val bukkit = handle.bukkitEntity as org.bukkit.entity.TextDisplay
 
         val header = title
-            .appendNewline().appendNewline()
-            .append(subtitle)
+            .appendNewline().append(subtitle)
             .appendNewline().appendNewline()
 
         var text = header
