@@ -35,3 +35,8 @@ data class NPCSkin(
     val value: String,
     val signature: String
 )
+
+data class LeaderboardData(
+    val allTimeWinsLocation: EntityLocation,
+    val allTimeKillsLocation: EntityLocation,
+)

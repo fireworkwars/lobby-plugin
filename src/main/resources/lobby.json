@@ -39,5 +39,9 @@
                 "signature": "DcF/1TtUspZqmTikpWvtxRDiSdJh36qqanepo3kfvR4zwswuJTRqLCvwGwkwhWkBbS7fjwAwu0X6oI9+ZAZ724k+nYNCTKhgJFn9klBcs0aZSlB0XcdQ9iRsEyYxrmzYhBHF0jlRs7NaPCVfQ5Obf3D77Jg8k3UxWT2JAZyOHrHyMILDMqgGtYwWlKBspZtkYpD/+oHcSMx8+5Tmtem8FsUTcathUdGs8hBIAvygpL76Dvw7HCK0nhICSEBqB1hqWHQCRt6edErWqeKfPy8ZSwF2Qq9doTBIOURp4xpeXqaZt7DqRgFIyOdC5qerm3vGcd5dJSAKe0TywoSWz+Va+D0bvbqFjvLLw4Ig+PAEMiNsuqTO8aBBkWwesfMGGV56pcOL2qP0RYyB4afXLcp+AU8upeAW2GyiVL08nmCPTni7tUeayIGON1ZWKqGtUboszHaGl+V2lphZiOsbboo79rDw+nBgryZY4zh1GE9d2RR1oRzk0QoHTK/NXF5hwZnbzdhJHb4h+xwWKM54e5Cz38z0ASNvqG5hXWsrOOJ2uC9mD+U+B/JUESY6TJBIfIprtC+4y+0pQ2kofpSMYypASkK9EauP1T/t8QtwFoCeTS4fB/HowgItjkyC6h1+OU9Nxd4791hiRvcYKZNWgoDnEEdgXfbMFoNdw1LJTX0xFow="
             }
         }
-    ]
+    ],
+    "leaderboards": {
+        "allTimeWinsLocation": { "world": "world", "x": -243.5, "y": 73, "z": -70.5, "yaw": 0, "pitch": 0 },
+        "allTimeKillsLocation": { "world": "world", "x": -243.5, "y": 73, "z": -74.5, "yaw": 0, "pitch": 0 }
+    }
 }
