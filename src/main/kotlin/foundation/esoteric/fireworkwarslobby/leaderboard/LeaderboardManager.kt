@@ -1,11 +1,16 @@
 package foundation.esoteric.fireworkwarslobby.leaderboard
 
+import foundation.esoteric.fireworkwarscore.language.Message
+import foundation.esoteric.fireworkwarscore.util.getMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import org.bukkit.entity.Player
 import java.util.*
 
 class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     private val config = plugin.configManager.lobbyConfig
+
+    private val allTimeKills = "All-Time Kills"
+    private val allTimeWins = "All-Time Wins"
 
     private val killLeaderboards = mutableMapOf<UUID, LeaderboardDisplay>()
     private val winLeaderboards = mutableMapOf<UUID, LeaderboardDisplay>()
@@ -18,11 +23,17 @@ class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
 
     fun createOrUpdateLeaderboard(player: Player) {
         killLeaderboards.computeIfAbsent(player.uniqueId) {
-            LeaderboardDisplay(config.leaderboards.allTimeKillsLocation)
+            LeaderboardDisplay(config.leaderboards.allTimeKillsLocation).apply {
+                this.setTitle(player.getMessage(Message.LEADERBOARD_TITLE))
+                this.setSubtitle(player.getMessage(Message.LEADERBOARD_TYPE, allTimeKills))
+            }
         }.let { this.updateLeaderboard(player, it) }
 
         winLeaderboards.computeIfAbsent(player.uniqueId) {
-            LeaderboardDisplay(config.leaderboards.allTimeWinsLocation)
+            LeaderboardDisplay(config.leaderboards.allTimeWinsLocation).apply {
+                this.setTitle(player.getMessage(Message.LEADERBOARD_TITLE))
+                this.setSubtitle(player.getMessage(Message.LEADERBOARD_TYPE, allTimeWins))
+            }
         }.let { this.updateLeaderboard(player, it) }
     }
 
