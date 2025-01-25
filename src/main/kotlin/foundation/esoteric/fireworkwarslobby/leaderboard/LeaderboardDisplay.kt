@@ -39,11 +39,11 @@ class LeaderboardDisplay(private val location: EntityLocation) {
         return display
     }
 
-    fun setTitle(title: Component) {
+    fun setTitleText(title: Component) {
         this.title = title
     }
 
-    fun setSubtitle(subtitle: Component) {
+    fun setSubtitleText(subtitle: Component) {
         this.subtitle = subtitle
     }
 
