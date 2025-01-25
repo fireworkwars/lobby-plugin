@@ -41,7 +41,7 @@
         }
     ],
     "leaderboards": {
-        "allTimeWinsLocation": { "world": "world", "x": -243.5, "y": 73, "z": -70.5, "yaw": 0, "pitch": 0 },
-        "allTimeKillsLocation": { "world": "world", "x": -243.5, "y": 73, "z": -74.5, "yaw": 0, "pitch": 0 }
+        "allTimeWinsLocation": { "world": "world", "x": -246.5, "y": 73, "z": -57.5, "yaw": 0, "pitch": 0 },
+        "allTimeKillsLocation": { "world": "world", "x": -246.5, "y": 73, "z": -71.5, "yaw": 0, "pitch": 0 }
     }
 }
