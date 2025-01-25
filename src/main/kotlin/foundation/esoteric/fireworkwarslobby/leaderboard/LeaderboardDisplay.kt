@@ -52,9 +52,9 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
         val bukkit = handle.bukkitEntity as org.bukkit.entity.TextDisplay
 
         val header = title
-            .appendNewline()
+            .appendNewline().appendNewline()
             .append(subtitle)
-            .appendNewline()
+            .appendNewline().appendNewline()
 
         var text = header
 
