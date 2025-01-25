@@ -8,6 +8,7 @@ import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.EntityLocation
 import foundation.esoteric.fireworkwarslobby.util.PacketUtil
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.minimessage.MiniMessage
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.server.network.ServerGamePacketListenerImpl
@@ -17,6 +18,8 @@ import org.bukkit.entity.Player
 
 class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private val location: EntityLocation, private val owner: Player) {
     private val handle: TextDisplay
+
+    private val strictMM = MiniMessage.builder().strict(true).build()
 
     lateinit var title: Component
     lateinit var subtitle: Component
@@ -44,9 +47,8 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
     private fun updateText() {
         val bukkit = handle.bukkitEntity as org.bukkit.entity.TextDisplay
 
-        val header = title
-            .appendNewline().append(subtitle)
-            .appendNewline().appendNewline()
+        val header = strictMM.deserialize(
+            "${strictMM.serialize(title)}<newline/>${strictMM.serialize(subtitle)}<newline/><newline/>")
 
         var text = header
 
