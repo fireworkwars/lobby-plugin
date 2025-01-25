@@ -9,11 +9,8 @@ import java.util.*
 class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     private val config = plugin.configManager.lobbyConfig.leaderboards
 
-    private val allTimeKills = "All-Time Kills"
-    private val allTimeWins = "All-Time Wins"
-
-    private val killLeaderboards = mutableMapOf<UUID, LeaderboardDisplay>()
     private val winLeaderboards = mutableMapOf<UUID, LeaderboardDisplay>()
+    private val killLeaderboards = mutableMapOf<UUID, LeaderboardDisplay>()
 
     init {
         plugin.runTaskTimer({
@@ -22,30 +19,30 @@ class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     }
 
     fun createOrUpdateLeaderboard(player: Player) {
-        killLeaderboards.computeIfAbsent(player.uniqueId) {
-            LeaderboardDisplay(plugin, config.allTimeKillsLocation, player).apply {
-                this.title = player.getMessage(Message.LEADERBOARD_TITLE)
-                this.subtitle = player.getMessage(Message.LEADERBOARD_TYPE, allTimeKills)
-                this.valueFunction = { it.stats.kills }
-            }
-        }.let(LeaderboardDisplay::updateAndSendPackets)
-
         winLeaderboards.computeIfAbsent(player.uniqueId) {
             LeaderboardDisplay(plugin, config.allTimeWinsLocation, player).apply {
                 this.title = player.getMessage(Message.LEADERBOARD_TITLE)
-                this.subtitle = player.getMessage(Message.LEADERBOARD_TYPE, allTimeWins)
+                this.subtitle = player.getMessage(Message.LEADERBOARD_TYPE_WINS)
                 this.valueFunction = { it.stats.wins }
+            }
+        }.let(LeaderboardDisplay::updateAndSendPackets)
+
+        killLeaderboards.computeIfAbsent(player.uniqueId) {
+            LeaderboardDisplay(plugin, config.allTimeKillsLocation, player).apply {
+                this.title = player.getMessage(Message.LEADERBOARD_TITLE)
+                this.subtitle = player.getMessage(Message.LEADERBOARD_TYPE_KILLS)
+                this.valueFunction = { it.stats.kills }
             }
         }.let(LeaderboardDisplay::updateAndSendPackets)
     }
 
     private fun updateAll() {
-        killLeaderboards.values.forEach(LeaderboardDisplay::updateAndSendPackets)
         winLeaderboards.values.forEach(LeaderboardDisplay::updateAndSendPackets)
+        killLeaderboards.values.forEach(LeaderboardDisplay::updateAndSendPackets)
     }
 
     fun deleteLeaderboard(player: Player) {
-        killLeaderboards.remove(player.uniqueId)
         winLeaderboards.remove(player.uniqueId)
+        killLeaderboards.remove(player.uniqueId)
     }
 }

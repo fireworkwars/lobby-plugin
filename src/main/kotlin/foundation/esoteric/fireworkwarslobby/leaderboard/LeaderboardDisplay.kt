@@ -51,11 +51,14 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
         var text = header
 
         entries.clear()
-        entries.addAll(plugin.server.onlinePlayers.map { plugin.playerDataManager.getPlayerProfile(it) })
+        entries.addAll(plugin.playerDataManager.getAllProfiles())
 
         entries.sortedByDescending { valueFunction(it) }.forEachIndexed { index, profile ->
-            text = text.append(owner.getMessage(
-                Message.LEADERBOARD_ENTRY, index + 1, profile.formattedName(), valueFunction(profile)))
+            val place = index + 1
+            val name = profile.formattedName()
+            val value = valueFunction(profile)
+
+            text = text.append(owner.getMessage(Message.LEADERBOARD_ENTRY, place, name, value))
         }
 
         bukkit.text(text)
