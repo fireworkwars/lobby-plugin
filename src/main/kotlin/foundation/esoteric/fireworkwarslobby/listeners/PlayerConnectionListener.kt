@@ -58,7 +58,9 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
     @EventHandler
     fun onPlayerLeave(event: PlayerQuitEvent) {
+        plugin.leaderboardManager.deleteLeaderboard(event.player)
         scoreboardManager.deleteScoreboard(event.player)
+
         plugin.runTaskOneTickLater { scoreboardManager.refreshAllScoreboards() }
 
         val profile = plugin.playerDataManager.getPlayerProfile(event.player)
@@ -110,6 +112,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
         plugin.runTaskOneTickLater { plugin.core.fireworkWarsPluginData.hidePlayersBetweenDifferentGames() }
 
         plugin.npcManager.npcList.forEach { it.sendInitPackets(player) }
+        plugin.leaderboardManager.createOrUpdateLeaderboard(player)
 
         scoreboardManager.createOrUpdateScoreboard(player)
         scoreboardManager.refreshAllScoreboards()
