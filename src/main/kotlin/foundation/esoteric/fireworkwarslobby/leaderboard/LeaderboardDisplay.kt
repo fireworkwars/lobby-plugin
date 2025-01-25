@@ -18,11 +18,11 @@ import org.bukkit.entity.Player
 class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private val location: EntityLocation, private val owner: Player) {
     private val handle: TextDisplay
 
-    private lateinit var title: Component
-    private lateinit var subtitle: Component
+    lateinit var title: Component
+    lateinit var subtitle: Component
     private val entries = mutableListOf<PlayerProfile>()
 
-    lateinit var displayValue: (profile: PlayerProfile) -> Int
+    lateinit var valueFunction: (profile: PlayerProfile) -> Int
 
     init {
         this.handle = this.createLeaderboard()
@@ -40,14 +40,6 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
         return display
     }
 
-    fun setTitleText(title: Component) {
-        this.title = title
-    }
-
-    fun setSubtitleText(subtitle: Component) {
-        this.subtitle = subtitle
-    }
-
     private fun updateText() {
         val bukkit = handle.bukkitEntity as org.bukkit.entity.TextDisplay
 
@@ -61,9 +53,9 @@ class LeaderboardDisplay(private val plugin: FireworkWarsLobbyPlugin, private va
         entries.clear()
         entries.addAll(plugin.server.onlinePlayers.map { plugin.playerDataManager.getPlayerProfile(it) })
 
-        entries.sortedByDescending { displayValue(it) }.forEachIndexed { index, profile ->
+        entries.sortedByDescending { valueFunction(it) }.forEachIndexed { index, profile ->
             text = text.append(owner.getMessage(
-                Message.LEADERBOARD_ENTRY, index + 1, profile.formattedName(), displayValue(profile)))
+                Message.LEADERBOARD_ENTRY, index + 1, profile.formattedName(), valueFunction(profile)))
         }
 
         bukkit.text(text)

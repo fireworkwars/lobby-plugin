@@ -24,15 +24,17 @@ class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     fun createOrUpdateLeaderboard(player: Player) {
         killLeaderboards.computeIfAbsent(player.uniqueId) {
             LeaderboardDisplay(plugin, config.allTimeKillsLocation, player).apply {
-                this.setTitleText(player.getMessage(Message.LEADERBOARD_TITLE))
-                this.setSubtitleText(player.getMessage(Message.LEADERBOARD_TYPE, allTimeKills))
+                this.title = player.getMessage(Message.LEADERBOARD_TITLE)
+                this.subtitle = player.getMessage(Message.LEADERBOARD_TYPE, allTimeKills)
+                this.valueFunction = { it.stats.kills }
             }
         }.let(LeaderboardDisplay::updateAndSendPackets)
 
         winLeaderboards.computeIfAbsent(player.uniqueId) {
             LeaderboardDisplay(plugin, config.allTimeWinsLocation, player).apply {
-                this.setTitleText(player.getMessage(Message.LEADERBOARD_TITLE))
-                this.setSubtitleText(player.getMessage(Message.LEADERBOARD_TYPE, allTimeWins))
+                this.title = player.getMessage(Message.LEADERBOARD_TITLE)
+                this.subtitle = player.getMessage(Message.LEADERBOARD_TYPE, allTimeWins)
+                this.valueFunction = { it.stats.wins }
             }
         }.let(LeaderboardDisplay::updateAndSendPackets)
     }
