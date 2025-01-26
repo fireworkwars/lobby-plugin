@@ -40,8 +40,18 @@
             }
         }
     ],
-    "leaderboards": {
-        "allTimeWinsLocation": { "world": "world", "x": -246.5, "y": 73, "z": -57.5, "yaw": 0, "pitch": 0 },
-        "allTimeKillsLocation": { "world": "world", "x": -246.5, "y": 73, "z": -71.5, "yaw": 0, "pitch": 0 }
-    }
+    "leaderboards": [
+        {
+            "location": { "world": "world", "x": -246.5, "y": 73, "z": -57.5, "yaw": 0, "pitch": 0 },
+            "type": "WINS",
+            "titleMessage": "LEADERBOARD_TITLE_WINS",
+            "subtitleMessage": "LEADERBOARD_TYPE_WINS"
+        },
+        {
+            "location": { "world": "world", "x": -246.5, "y": 73, "z": -71.5, "yaw": 0, "pitch": 0 },
+            "type": "KILLS",
+            "titleMessage": "LEADERBOARD_TITLE_KILLS",
+            "subtitleMessage": "LEADERBOARD_TYPE_KILLS"
+        }
+    ]
 }

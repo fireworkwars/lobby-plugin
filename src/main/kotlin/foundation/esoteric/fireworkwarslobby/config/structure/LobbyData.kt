@@ -9,7 +9,7 @@ data class LobbyData (
     val spawnLocation: EntityLocation,
     val fireworkLocations: List<EntityLocation>,
     val npcs: List<NPCData>,
-    val leaderboards: LeaderboardData
+    val leaderboards: List<LeaderboardData>
 ) {
     fun getWorld(): World {
         return Bukkit.getWorld(worldName)!!

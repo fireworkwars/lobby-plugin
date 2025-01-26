@@ -1,5 +1,7 @@
 package foundation.esoteric.fireworkwarslobby.config.structure
 
+import foundation.esoteric.fireworkwarscore.language.Message
+import foundation.esoteric.fireworkwarslobby.leaderboard.LeaderboardDisplay
 import org.bukkit.Bukkit
 
 data class EntityLocation(
@@ -37,6 +39,8 @@ data class NPCSkin(
 )
 
 data class LeaderboardData(
-    val allTimeWinsLocation: EntityLocation,
-    val allTimeKillsLocation: EntityLocation,
+    val location: EntityLocation,
+    val type: LeaderboardDisplay.LeaderboardType,
+    val titleMessage: Message,
+    val subtitleMessage: Message
 )
