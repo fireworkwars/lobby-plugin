@@ -6,7 +6,6 @@ import foundation.esoteric.fireworkwarscore.util.NMSUtil
 import foundation.esoteric.fireworkwarscore.util.getMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.LeaderboardData
-import foundation.esoteric.fireworkwarslobby.util.Keys
 import foundation.esoteric.fireworkwarslobby.util.PacketUtil
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket
@@ -41,9 +40,8 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
     init {
         this.body = this.createLeaderboardBody()
         this.header = this.createLeaderboardHeader()
-
-        this.id = body.id
         this.interaction = this.createLeaderboardInteraction()
+        this.id = interaction.id
     }
 
     private fun createLeaderboardBody(): TextDisplay {
@@ -77,7 +75,6 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
         interaction.setPos(location.x, location.y, location.z)
 
         bukkit.interactionHeight = 3.0F
-        pdcManager.setIntValue(bukkit, Keys.LEADERBOARD_DISPLAY_ID, id)
 
         return interaction
     }
@@ -128,13 +125,13 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(owner).connection
 
         connection.send(PacketUtil.getEntityAddPacket(body))
-        connection.send(ClientboundSetEntityDataPacket(id, body.entityData.packAll()))
+        connection.send(ClientboundSetEntityDataPacket(body.id, body.entityData.packAll()))
 
         connection.send(PacketUtil.getEntityAddPacket(header))
         connection.send(ClientboundSetEntityDataPacket(header.id, header.entityData.packAll()))
 
         connection.send(PacketUtil.getEntityAddPacket(interaction))
-        connection.send(ClientboundSetEntityDataPacket(interaction.id, interaction.entityData.packAll()))
+        connection.send(ClientboundSetEntityDataPacket(id, interaction.entityData.packAll()))
     }
 
     enum class LeaderboardType {
