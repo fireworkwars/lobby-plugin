@@ -18,7 +18,6 @@ import org.bukkit.entity.Player
 
 class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWarsLobbyPlugin, private val owner: Player) {
     private val playerDataManager = plugin.playerDataManager
-    private val pdcManager = plugin.pdcManager
     private val mm = MiniMessage.builder().strict(true).build()
 
     private val location = data.location
