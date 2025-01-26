@@ -24,7 +24,7 @@ class NPCInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
         val player = event.player
 
-        val npc = plugin.npcManager.getNPC(event.entityId)
+        val npc = plugin.npcManager.getNPC(event.entityId) ?: return
         val menuData = npc.data.menu
 
         ArenaGUI(plugin, menuData, player).show()

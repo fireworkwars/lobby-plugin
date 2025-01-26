@@ -15,8 +15,8 @@ class NPCManager(private val plugin: FireworkWarsLobbyPlugin) {
         }
     }
 
-    fun getNPC(id: Int): NPC {
-        return npcs[id] ?: throw IllegalArgumentException("NPC with id $id not found")
+    fun getNPC(id: Int): NPC? {
+        return npcs[id]
     }
 
     private fun registerNPC(npc: NPC) {
