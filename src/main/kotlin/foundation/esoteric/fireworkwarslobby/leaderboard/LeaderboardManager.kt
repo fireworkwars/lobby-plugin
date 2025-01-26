@@ -31,6 +31,10 @@ class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     }
 
     fun deleteLeaderboard(player: Player) {
-        leaderboards.remove(player.uniqueId)
+        leaderboards.remove(player.uniqueId)?.let {
+            it.forEach { display ->
+                leaderboardMap.remove(display.id)
+            }
+        }
     }
 }
