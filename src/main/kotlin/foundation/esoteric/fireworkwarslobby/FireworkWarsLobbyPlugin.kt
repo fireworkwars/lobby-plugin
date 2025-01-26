@@ -85,6 +85,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
 
         listeners.add(playerConnectionListener)
         listeners.add(NPCInteractListener(this).apply { register() })
+        listeners.add(LeaderboardInteractListener(this).apply { register() })
         listeners.add(HouseKeepingListener(this).apply { register() })
         listeners.add(PlayerWorldChangeListener(this).apply { register() })
         listeners.add(PlayerChatListener(this).apply { register() })
