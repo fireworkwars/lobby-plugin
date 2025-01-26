@@ -3,7 +3,6 @@ package foundation.esoteric.fireworkwarslobby
 import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
 import foundation.esoteric.fireworkwarscore.language.LanguageManager
 import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
-import foundation.esoteric.fireworkwarscore.util.PersistentDataManager
 import foundation.esoteric.fireworkwarslobby.communication.LobbyPluginDataHolder
 import foundation.esoteric.fireworkwarslobby.config.ConfigManager
 import foundation.esoteric.fireworkwarslobby.leaderboard.LeaderboardManager
@@ -20,7 +19,6 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
 
     lateinit var playerDataManager: PlayerDataManager
     lateinit var languageManager: LanguageManager
-    lateinit var pdcManager: PersistentDataManager
 
     lateinit var configManager: ConfigManager
     lateinit var npcManager: NPCManager
@@ -54,7 +52,6 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
 
         this.playerDataManager = core.playerDataManager
         this.languageManager = core.languageManager
-        this.pdcManager = PersistentDataManager(this)
 
         logger.info("Successfully connected to Firework Wars Core.")
         logger.info("Writing data to core...")
