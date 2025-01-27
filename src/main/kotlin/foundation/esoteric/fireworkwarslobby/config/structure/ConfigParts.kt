@@ -41,6 +41,5 @@ data class NPCSkin(
 data class LeaderboardData(
     val location: EntityLocation,
     val type: LeaderboardDisplay.LeaderboardType,
-    val titleMessage: Message,
-    val subtitleMessage: Message
+    val titleMessage: Message
 )
