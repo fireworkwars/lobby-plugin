@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.esotericfoundation:firework-wars-core-plugin:0.5.0")
+    compileOnly("com.github.esotericfoundation:firework-wars-core-plugin:0.5.1")
 
     paperweight.paperDevBundle("$paperApiVersion-R0.1-SNAPSHOT")
 
