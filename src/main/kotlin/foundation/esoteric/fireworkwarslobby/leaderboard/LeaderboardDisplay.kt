@@ -7,6 +7,7 @@ import foundation.esoteric.fireworkwarscore.util.getMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.LeaderboardData
 import foundation.esoteric.fireworkwarslobby.util.PacketUtil
+import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket
 import net.minecraft.server.level.ServerPlayer
@@ -30,8 +31,8 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
 
     private val entries = mutableListOf<PlayerProfile>()
 
-    private var title = owner.getMessage(data.titleMessage)
-    private var subtitle = owner.getMessage(data.subtitleMessage)
+    private var title: Component = Component.empty()
+    private var subtitle: Component = Component.empty()
 
     private val type = data.type
     var timePeriod = LeaderboardTime.ALL_TIME
@@ -78,14 +79,19 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
         return interaction
     }
 
-    private fun updateText() {
-        val bukkit = body.bukkitEntity as org.bukkit.entity.TextDisplay
+    private fun updateTitle() {
+        val bukkit = header.bukkitEntity as org.bukkit.entity.TextDisplay
 
         this.title = owner.getMessage(data.titleMessage)
-        this.subtitle = owner.getMessage(data.subtitleMessage)
+        this.subtitle = owner.getMessage(timePeriod.message())
 
-        val header = mm.deserialize("${mm.serialize(title)}<br/>${mm.serialize(subtitle)}<br/><br/>")
-        var text = header
+        val text = mm.deserialize("${mm.serialize(title)}<br/><br/>${mm.serialize(subtitle)}<br/><br/>")
+        bukkit.text(text)
+    }
+
+    private fun updateEntries() {
+        val bukkit = body.bukkitEntity as org.bukkit.entity.TextDisplay
+        var text: Component = Component.empty()
 
         entries.clear()
         entries.addAll(playerDataManager.getAllProfiles())
@@ -119,7 +125,8 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
     fun updateAndSendPackets() {
         if (!owner.isOnline) return
 
-        this.updateText()
+        this.updateTitle()
+        this.updateEntries()
 
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(owner).connection
 
@@ -148,6 +155,14 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
                 DAILY -> WEEKLY
                 WEEKLY -> ALL_TIME
                 ALL_TIME -> DAILY
+            }
+        }
+
+        fun message(): Message {
+            return when (this) {
+                DAILY -> Message.LEADERBOARD_TIME_DAILY
+                WEEKLY -> Message.LEADERBOARD_TIME_WEEKLY
+                ALL_TIME -> Message.LEADERBOARD_TIME_ALL_TIME
             }
         }
     }
