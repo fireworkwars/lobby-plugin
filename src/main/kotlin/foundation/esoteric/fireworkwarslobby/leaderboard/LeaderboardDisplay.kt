@@ -64,6 +64,9 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
 
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.CENTER
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
+        bukkit.transformation = bukkit.transformation.apply {
+            translation.set(0.0, 1.0, 0.0)
+        }
 
         return display
     }
@@ -130,11 +133,11 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
 
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(owner).connection
 
-        connection.send(PacketUtil.getEntityAddPacket(body))
-        connection.send(ClientboundSetEntityDataPacket(body.id, body.entityData.packAll()))
-
         connection.send(PacketUtil.getEntityAddPacket(header))
         connection.send(ClientboundSetEntityDataPacket(header.id, header.entityData.packAll()))
+
+        connection.send(PacketUtil.getEntityAddPacket(body))
+        connection.send(ClientboundSetEntityDataPacket(body.id, body.entityData.packAll()))
 
         connection.send(PacketUtil.getEntityAddPacket(interaction))
         connection.send(ClientboundSetEntityDataPacket(id, interaction.entityData.packAll()))
