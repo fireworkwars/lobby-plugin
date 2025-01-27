@@ -2,7 +2,9 @@ package foundation.esoteric.fireworkwarslobby.listeners
 
 import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent
 import foundation.esoteric.fireworkwarscore.interfaces.Event
+import foundation.esoteric.fireworkwarscore.util.playSound
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
+import org.bukkit.Sound
 import org.bukkit.event.EventHandler
 import org.bukkit.inventory.EquipmentSlot
 
@@ -26,5 +28,7 @@ class LeaderboardInteractListener(private val plugin: FireworkWarsLobbyPlugin) :
 
         leaderboard.timePeriod = leaderboard.timePeriod.next()
         leaderboard.updateAndSendPackets()
+
+        event.player.playSound(Sound.UI_BUTTON_CLICK)
     }
 }
