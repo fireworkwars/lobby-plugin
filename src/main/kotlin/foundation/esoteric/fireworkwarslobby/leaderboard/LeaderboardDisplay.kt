@@ -70,7 +70,7 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
         bukkit.lineWidth = 150
         bukkit.transformation = bukkit.transformation.apply {
-            translation.set(0.0, 1.0, 0.0)
+            translation.set(0.0, 1.0 + body.height, 0.0)
         }
 
         return display
