@@ -16,12 +16,14 @@ import net.minecraft.world.entity.Display.TextDisplay
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Interaction
 import org.bukkit.entity.Player
+import java.util.concurrent.TimeUnit
 
-class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWarsLobbyPlugin, private val owner: Player) {
+class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: FireworkWarsLobbyPlugin, private val owner: Player) {
     private val playerDataManager = plugin.playerDataManager
     private val mm = MiniMessage.builder().strict(true).build()
 
     private val location = data.location
+    private val level = NMSUtil.toNMSWorld(location.toBukkit().world)
 
     private val body: TextDisplay
     private val header: TextDisplay
@@ -45,25 +47,28 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
     }
 
     private fun createLeaderboardBody(): TextDisplay {
-        val display = TextDisplay(EntityType.TEXT_DISPLAY, NMSUtil.toNMSWorld(location.toBukkit().world))
+        val display = TextDisplay(EntityType.TEXT_DISPLAY, level)
         val bukkit = display.bukkitEntity as org.bukkit.entity.TextDisplay
 
         display.setPos(location.x, location.y, location.z)
 
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.LEFT
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
+        bukkit.lineWidth = 150
 
         return display
     }
 
     private fun createLeaderboardHeader(): TextDisplay {
-        val display = TextDisplay(EntityType.TEXT_DISPLAY, NMSUtil.toNMSWorld(location.toBukkit().world))
+        val display = TextDisplay(EntityType.TEXT_DISPLAY, level)
         val bukkit = display.bukkitEntity as org.bukkit.entity.TextDisplay
 
+        display.setPos(location.x, location.y, location.z)
         display.startRiding(body)
 
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.CENTER
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
+        bukkit.lineWidth = 150
         bukkit.transformation = bukkit.transformation.apply {
             translation.set(0.0, 1.0, 0.0)
         }
@@ -72,7 +77,7 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
     }
 
     private fun createLeaderboardInteraction(): Interaction {
-        val interaction = Interaction(EntityType.INTERACTION, NMSUtil.toNMSWorld(location.toBukkit().world))
+        val interaction = Interaction(EntityType.INTERACTION, level)
         val bukkit = interaction.bukkitEntity as org.bukkit.entity.Interaction
 
         interaction.setPos(location.x, location.y, location.z)
@@ -109,6 +114,11 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
                 .appendNewline()
         }
 
+        text = text
+            .appendNewline()
+            .append(this.getResetMessage())
+            .appendNewline()
+
         bukkit.text(text)
     }
 
@@ -125,6 +135,29 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
         }
     }
 
+    private fun getResetMessage(): Component {
+        val nextResetTime = when (timePeriod) {
+            LeaderboardTime.DAILY -> plugin.core.statResetScheduler.getNextDailyReset()
+            LeaderboardTime.WEEKLY -> plugin.core.statResetScheduler.getNextWeeklyReset()
+            LeaderboardTime.ALL_TIME -> return owner.getMessage(Message.LEADERBOARD_NEVER_RESETS)
+        }
+
+        val days = TimeUnit.MILLISECONDS.toDays(nextResetTime)
+        val hours = TimeUnit.MILLISECONDS.toHours(nextResetTime) % 24
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(nextResetTime) % 60
+
+        val daysPl = if (days == 1L) "" else "s"
+        val hoursPl = if (hours == 1L) "" else "s"
+        val minutesPl = if (minutes == 1L) "" else "s"
+
+        return when {
+            days > 0 -> owner.getMessage(Message.LEADERBOARD_RESETS_IN_DAYS, days, daysPl)
+            hours > 0 -> owner.getMessage(Message.LEADERBOARD_RESETS_IN_HOURS, hours, hoursPl)
+            minutes > 0 -> owner.getMessage(Message.LEADERBOARD_RESETS_IN_MINUTES, minutes, minutesPl)
+            else -> owner.getMessage(Message.LEADERBOARD_RESETS_SOON)
+        }
+    }
+
     fun updateAndSendPackets() {
         if (!owner.isOnline) return
 
@@ -133,11 +166,11 @@ class LeaderboardDisplay(private val data: LeaderboardData, plugin: FireworkWars
 
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(owner).connection
 
-        connection.send(PacketUtil.getEntityAddPacket(header))
-        connection.send(ClientboundSetEntityDataPacket(header.id, header.entityData.packAll()))
-
         connection.send(PacketUtil.getEntityAddPacket(body))
         connection.send(ClientboundSetEntityDataPacket(body.id, body.entityData.packAll()))
+
+        connection.send(PacketUtil.getEntityAddPacket(header))
+        connection.send(ClientboundSetEntityDataPacket(header.id, header.entityData.packAll()))
 
         connection.send(PacketUtil.getEntityAddPacket(interaction))
         connection.send(ClientboundSetEntityDataPacket(id, interaction.entityData.packAll()))
