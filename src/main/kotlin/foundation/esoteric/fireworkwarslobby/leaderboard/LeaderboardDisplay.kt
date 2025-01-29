@@ -19,6 +19,9 @@ import org.bukkit.entity.Player
 import java.util.concurrent.TimeUnit
 
 class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: FireworkWarsLobbyPlugin, private val owner: Player) {
+    private val lineWidth = 200
+    private val interactionHeight = 2.0F
+
     private val playerDataManager = plugin.playerDataManager
     private val mm = MiniMessage.builder().strict(true).build()
 
@@ -54,7 +57,7 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
 
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.LEFT
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
-        bukkit.lineWidth = 150
+        bukkit.lineWidth = lineWidth
 
         return display
     }
@@ -68,9 +71,9 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
 
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.CENTER
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
-        bukkit.lineWidth = 150
+        bukkit.lineWidth = lineWidth
         bukkit.transformation = bukkit.transformation.apply {
-            translation.set(0.0, 1.0 + body.height, 0.0)
+            translation.set(0.0, entries.size * 0.25, 0.0)
         }
 
         return display
@@ -82,7 +85,7 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
 
         interaction.setPos(location.x, location.y, location.z)
 
-        bukkit.interactionHeight = 3.0F
+        bukkit.interactionHeight = interactionHeight
 
         return interaction
     }
