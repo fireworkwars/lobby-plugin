@@ -7,7 +7,6 @@ import foundation.esoteric.fireworkwarscore.util.getMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import foundation.esoteric.fireworkwarslobby.config.structure.LeaderboardData
 import foundation.esoteric.fireworkwarslobby.util.PacketUtil
-import foundation.esoteric.fireworkwarslobby.util.length
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket
@@ -101,7 +100,7 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
 
         bukkit.text(text)
         bukkit.transformation = bukkit.transformation.apply {
-            translation.set(0.0, 0.5 + entries.size * 0.25, 0.0)
+            translation.set(0.0, 0.75 + entries.size * 0.25, 0.0)
         }
     }
 
@@ -117,12 +116,8 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
             val name = profile.formattedName()
             val value = this.getProfileValue(profile)
 
-            val length = 4 + place.toString().length + profile.username.length + value.toString().length
-            val amount = owner.getMessage(data.titleMessage).length() - length
-            val padding = " ".repeat(amount)
-
             text = text
-                .append(owner.getMessage(Message.LEADERBOARD_ENTRY, place, name, value, padding))
+                .append(owner.getMessage(Message.LEADERBOARD_ENTRY, place, name, value))
                 .appendNewline()
         }
 
