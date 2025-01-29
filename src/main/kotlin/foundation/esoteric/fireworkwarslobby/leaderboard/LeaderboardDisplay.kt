@@ -116,7 +116,10 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
             val place = index + 1
             val name = profile.formattedName()
             val value = this.getProfileValue(profile)
-            val padding = owner.getMessage(data.titleMessage).length() - (6 + place.toString().length + name.length() + value.toString().length)
+
+            val length = 6 + place.toString().length + profile.username.length + value.toString().length
+            val amount = owner.getMessage(data.titleMessage).length() - length
+            val padding = " ".repeat(amount)
 
             text = text
                 .append(owner.getMessage(Message.LEADERBOARD_ENTRY, place, name, value, padding))
