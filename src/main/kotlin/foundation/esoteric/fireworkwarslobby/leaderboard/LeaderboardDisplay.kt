@@ -93,13 +93,20 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
         this.title = owner.getMessage(data.titleMessage)
         this.subtitle = owner.getMessage(timePeriod.message())
 
-        val text = mm.deserialize("${mm.serialize(title)}<br/><br/>${mm.serialize(subtitle)}<br/><br/>")
+        val text = mm.deserialize("" +
+            "${mm.serialize(title)}<br/><br/>" +
+            "${mm.serialize(subtitle)}<br/>" +
+            "${mm.serialize(this.getResetMessage())}<br/>")
+
         bukkit.text(text)
+        bukkit.transformation = bukkit.transformation.apply {
+            translation.set(0.0, entries.size * 0.25, 0.0)
+        }
     }
 
     private fun updateEntries() {
         val bukkit = body.bukkitEntity as org.bukkit.entity.TextDisplay
-        var text: Component = Component.empty()
+        var text: Component = Component.newline()
 
         entries.clear()
         entries.addAll(playerDataManager.getAllProfiles())
@@ -113,11 +120,6 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
                 .append(owner.getMessage(Message.LEADERBOARD_ENTRY, place, name, value))
                 .appendNewline()
         }
-
-        text = text
-            .appendNewline()
-            .append(this.getResetMessage())
-            .appendNewline()
 
         bukkit.text(text)
     }
@@ -161,8 +163,8 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
     fun updateAndSendPackets() {
         if (!owner.isOnline) return
 
-        this.updateTitle()
         this.updateEntries()
+        this.updateTitle()
 
         val connection: ServerGamePacketListenerImpl = NMSUtil.toNMSEntity<ServerPlayer>(owner).connection
 
