@@ -72,9 +72,6 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.CENTER
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
         bukkit.lineWidth = lineWidth
-        bukkit.transformation = bukkit.transformation.apply {
-            translation.set(0.0, entries.size * 0.25, 0.0)
-        }
 
         return display
     }
@@ -103,7 +100,7 @@ class LeaderboardDisplay(private val data: LeaderboardData, private val plugin: 
 
         bukkit.text(text)
         bukkit.transformation = bukkit.transformation.apply {
-            translation.set(0.0, entries.size * 0.25, 0.0)
+            translation.set(0.0, 0.5 + entries.size * 0.25, 0.0)
         }
     }
 
