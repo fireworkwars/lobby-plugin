@@ -1,13 +1,12 @@
 package foundation.esoteric.fireworkwarslobby.util
 
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
 
 fun Component.length(): Int {
-    val decorationsMap = this.decorations().map { it.key to TextDecoration.State.NOT_SET }.toMap()
-    val withoutDecorations = this.compact().decorations(decorationsMap)
-    val withoutEvents = withoutDecorations.clickEvent(null).hoverEvent(null)
+    val mm = MiniMessage.miniMessage()
+    val mmString = mm.serialize(this)
 
-    return MiniMessage.miniMessage().serialize(withoutEvents).length
+    val withoutTags = mmString.replace(Regex("<[^>]*>"), "")
+    return withoutTags.length
 }
