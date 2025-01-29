@@ -29,6 +29,6 @@ class LeaderboardInteractListener(private val plugin: FireworkWarsLobbyPlugin) :
         leaderboard.timePeriod = leaderboard.timePeriod.next()
         leaderboard.updateAndSendPackets()
 
-        event.player.playSound(Sound.UI_BUTTON_CLICK)
+        event.player.playSound(Sound.BLOCK_LEVER_CLICK)
     }
 }
