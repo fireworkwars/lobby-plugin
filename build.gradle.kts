@@ -15,7 +15,7 @@ val buildToMain = true
 val buildToCore = false
 
 group = "foundation.esoteric"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 val paperApiVersion = "1.21.4"
 val targetJavaVersion = 21
