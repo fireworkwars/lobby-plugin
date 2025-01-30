@@ -25,6 +25,9 @@
 - Added `/profile` command
 - Added first join date and last seen date info tracking
 - Shift + right-clicking a player will show their profile
+- Added per-player leaderboards for kills & wins, with 3 different timeframe options
+- Added more detailed stats tracking
+- Added daily & weekly stats tracking in addition to the all-time stats
 
 ## Changed
 - Tweaked sounds in the NPC menu
