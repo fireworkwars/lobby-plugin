@@ -23,14 +23,14 @@ class LobbyScoreboardManager(private val plugin: FireworkWarsLobbyPlugin) {
         val version = plugin.core.fireworkWarsPluginData.getVersionString()
 
         val board = FastBoard(player).apply {
-            updateTitle(languageManager.getMessage(Message.LOBBY_SB_TITLE, player, version))
+            this.updateTitle(languageManager.getMessage(Message.LOBBY_SB_TITLE, player, version))
         }
 
         scoreboards[player.uniqueId] = board
     }
 
     fun refreshAllScoreboards() {
-        scoreboards.keys.forEach { updateScoreboard(plugin.server.getPlayer(it)!!) }
+        scoreboards.keys.forEach { this.updateScoreboard(plugin.server.getPlayer(it)!!) }
     }
 
     private fun updateScoreboard(player: Player) {
