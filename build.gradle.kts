@@ -11,7 +11,7 @@ plugins {
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
 }
 
-val buildToMain = true
+val buildToMain = false
 val buildToCore = false
 
 group = "foundation.esoteric"
