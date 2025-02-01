@@ -26,8 +26,6 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
     }
 
     fun setNameTagVisible(player: Player, visible: Boolean) {
-        plugin.logLoudly("Setting name tag visibility for ${player.name} to $visible")
-
         nameTagVisibility[player.uniqueId] = visible
         nameTags[player.uniqueId]?.isVisibleByDefault = visible
     }
@@ -38,8 +36,6 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         val location = player.location
 
         val display = world.spawn(location, TextDisplay::class.java)
-
-        plugin.logLoudly("creating name tag with visibility " + (nameTagVisibility[player.uniqueId] ?: true))
 
         display.text(profile.formattedName())
         display.isVisibleByDefault = nameTagVisibility[player.uniqueId] ?: true
