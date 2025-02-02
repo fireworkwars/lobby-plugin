@@ -4,6 +4,7 @@ import foundation.esoteric.fireworkwarscore.interfaces.Event
 import foundation.esoteric.fireworkwarscore.language.Message
 import foundation.esoteric.fireworkwarscore.profiles.Rank
 import foundation.esoteric.fireworkwarscore.util.FireworkCreator
+import foundation.esoteric.fireworkwarscore.util.prepareAndTeleport
 import foundation.esoteric.fireworkwarscore.util.sendMessage
 import foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin
 import org.bukkit.entity.Player
@@ -79,7 +80,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
     }
 
     fun handlePlayerJoinLobby(player: Player) {
-        player.teleport(config.spawnLocation.toBukkit())
+        player.prepareAndTeleport(config.spawnLocation.toBukkit())
 
         val profile = plugin.playerDataManager.getPlayerProfile(player)
 
