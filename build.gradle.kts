@@ -11,6 +11,8 @@ plugins {
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
 }
 
+// build output location configuration
+// both false = build to build/libs
 val buildToMain = false
 val buildToCore = false
 
@@ -20,18 +22,29 @@ version = "1.0.0"
 val paperApiVersion = "1.21.4"
 val targetJavaVersion = 21
 
-kotlin {
-    jvmToolchain(targetJavaVersion)
-}
+// authors
+val rolyPolyVole = "rolyPolyVole"
+val esotericEnderman = "Esoteric Enderman"
+
+// plugin yml
+val pluginName = "FireworkWarsLobby"
+val pluginAuthors = listOf(rolyPolyVole, esotericEnderman)
+val pluginGithub = "https://github.com/fireworkwars/lobby-plugin"
+val mainClassPath = "$group.fireworkwarslobby.FireworkWarsLobbyPlugin"
+
+val corePluginName = "FireworkWarsCore"
 
 repositories {
     mavenCentral()
+
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc-repo"
     }
+
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+
     maven("https://jitpack.io")
 }
 
@@ -43,8 +56,13 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 }
 
+kotlin {
+    jvmToolchain(targetJavaVersion)
+}
+
 tasks.withType(xyz.jpenilla.runtask.task.AbstractRun::class) {
     javaLauncher = javaToolchains.launcherFor {
+        @Suppress("UnstableApiUsage")
         vendor = JvmVendorSpec.JETBRAINS
         languageVersion = JavaLanguageVersion.of(21)
     }
@@ -94,16 +112,16 @@ tasks {
 }
 
 paperPluginYaml {
-    name = "FireworkWarsLobby"
-    authors = listOf("rolyPolyVole")
-    website = "https://github.com/EsotericFoundation/firework-wars-lobby-plugin"
+    name = pluginName
+    authors = pluginAuthors
+    website = pluginGithub
 
-    main = "foundation.esoteric.fireworkwarslobby.FireworkWarsLobbyPlugin"
+    main = mainClassPath
     apiVersion = paperApiVersion
     description = project.description
 
     dependencies {
-        server("FireworkWarsCore", PaperPluginYaml.Load.BEFORE, required = true, joinClasspath = true)
+        server(corePluginName, PaperPluginYaml.Load.BEFORE, required = true, joinClasspath = true)
     }
 }
 
