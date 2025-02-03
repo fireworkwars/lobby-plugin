@@ -18,6 +18,7 @@ val buildToCore = false
 
 group = "foundation.esoteric"
 version = "1.0.0"
+description = "Lobby features for a Firework Wars server."
 
 val paperApiVersion = "1.21.4"
 val targetJavaVersion = 21
@@ -30,6 +31,7 @@ val esotericEnderman = "Esoteric Enderman"
 val pluginName = "FireworkWarsLobby"
 val pluginAuthors = listOf(rolyPolyVole, esotericEnderman)
 val pluginGithub = "https://github.com/fireworkwars/lobby-plugin"
+
 val mainClassPath = "$group.fireworkwarslobby.FireworkWarsLobbyPlugin"
 
 val corePluginName = "FireworkWarsCore"
@@ -113,12 +115,13 @@ tasks {
 
 paperPluginYaml {
     name = pluginName
+    description = project.description
     authors = pluginAuthors
     website = pluginGithub
 
-    main = mainClassPath
     apiVersion = paperApiVersion
-    description = project.description
+
+    main = mainClassPath
 
     dependencies {
         server(corePluginName, PaperPluginYaml.Load.BEFORE, required = true, joinClasspath = true)
