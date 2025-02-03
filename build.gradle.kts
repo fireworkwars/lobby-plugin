@@ -21,6 +21,7 @@ version = "1.0.0"
 description = "Lobby features for a Firework Wars server."
 
 val paperApiVersion = "1.21.4"
+val corePluginDependencyVersion = "1.2.0"
 val targetJavaVersion = 21
 
 // authors
@@ -51,7 +52,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.esotericfoundation:firework-wars-core-plugin:1.1.0")
+    compileOnly("com.github.fireworkwars:core-plugin:$corePluginDependencyVersion")
 
     paperweight.paperDevBundle("$paperApiVersion-R0.1-SNAPSHOT")
 
