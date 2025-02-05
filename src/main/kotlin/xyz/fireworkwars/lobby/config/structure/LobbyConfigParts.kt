@@ -1,6 +1,6 @@
 package xyz.fireworkwars.lobby.config.structure
 
-import foundation.esoteric.fireworkwarscore.language.Message
+import xyz.fireworkwars.core.language.Message
 import org.bukkit.Bukkit
 import xyz.fireworkwars.lobby.leaderboard.LeaderboardDisplay
 

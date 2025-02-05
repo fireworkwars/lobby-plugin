@@ -1,4 +1,4 @@
-package xyz.fireworkwars.lobby.config
+package xyz.fireworkwars.lobby.config.manager
 
 import com.google.gson.GsonBuilder
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
