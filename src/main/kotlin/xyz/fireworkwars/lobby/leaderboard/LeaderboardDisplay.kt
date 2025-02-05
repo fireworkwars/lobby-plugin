@@ -1,9 +1,9 @@
 package xyz.fireworkwars.lobby.leaderboard
 
-import foundation.esoteric.fireworkwarscore.language.Message
-import foundation.esoteric.fireworkwarscore.profiles.PlayerProfile
-import foundation.esoteric.fireworkwarscore.util.NMSUtil
-import foundation.esoteric.fireworkwarscore.util.getMessage
+import xyz.fireworkwars.core.language.Message
+import xyz.fireworkwars.core.profiles.PlayerProfile
+import xyz.fireworkwars.core.util.NMSUtil
+import xyz.fireworkwars.core.util.getMessage
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket

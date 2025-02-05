@@ -1,16 +1,16 @@
 package xyz.fireworkwars.lobby.listeners
 
-import foundation.esoteric.fireworkwarscore.interfaces.Event
-import foundation.esoteric.fireworkwarscore.language.Message
-import foundation.esoteric.fireworkwarscore.profiles.Rank
-import foundation.esoteric.fireworkwarscore.util.FireworkCreator
-import foundation.esoteric.fireworkwarscore.util.prepareAndTeleport
-import foundation.esoteric.fireworkwarscore.util.sendMessage
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import xyz.fireworkwars.core.interfaces.Event
+import xyz.fireworkwars.core.language.Message
+import xyz.fireworkwars.core.profiles.Rank
+import xyz.fireworkwars.core.util.FireworkCreator
+import xyz.fireworkwars.core.util.prepareAndTeleport
+import xyz.fireworkwars.core.util.sendMessage
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 
 class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
@@ -111,7 +111,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         profile.updateOwnTablist()
 
-        plugin.runTaskOneTickLater { plugin.core.fireworkWarsPluginData.hidePlayersBetweenDifferentGames() }
+        plugin.runTaskOneTickLater { plugin.core.fireworkWarsServiceProvider.hidePlayersBetweenDifferentGames() }
 
         plugin.npcManager.npcList.forEach { it.sendInitPackets(player) }
         plugin.leaderboardManager.createOrUpdateLeaderboard(player)

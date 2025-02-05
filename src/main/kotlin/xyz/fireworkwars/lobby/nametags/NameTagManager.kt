@@ -1,6 +1,5 @@
 package xyz.fireworkwars.lobby.nametags
 
-import foundation.esoteric.fireworkwarscore.interfaces.Event
 import org.bukkit.entity.Display
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
@@ -12,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.event.player.PlayerTeleportEvent
+import xyz.fireworkwars.core.interfaces.Event
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 import java.util.*
 

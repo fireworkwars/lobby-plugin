@@ -1,6 +1,5 @@
 package xyz.fireworkwars.lobby.listeners
 
-import foundation.esoteric.fireworkwarscore.interfaces.Event
 import io.papermc.paper.chat.ChatRenderer
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
@@ -8,6 +7,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
+import xyz.fireworkwars.core.interfaces.Event
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 
 class PlayerChatListener(private val plugin: FireworkWarsLobbyPlugin) : Event {

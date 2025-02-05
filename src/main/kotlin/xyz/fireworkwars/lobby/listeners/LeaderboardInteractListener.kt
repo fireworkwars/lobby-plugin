@@ -1,11 +1,11 @@
 package xyz.fireworkwars.lobby.listeners
 
 import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent
-import foundation.esoteric.fireworkwarscore.interfaces.Event
-import foundation.esoteric.fireworkwarscore.util.playSound
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
 import org.bukkit.inventory.EquipmentSlot
+import xyz.fireworkwars.core.interfaces.Event
+import xyz.fireworkwars.core.util.playSound
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 
 class LeaderboardInteractListener(private val plugin: FireworkWarsLobbyPlugin) : Event {

@@ -1,8 +1,8 @@
 package xyz.fireworkwars.lobby.listeners
 
-import foundation.esoteric.fireworkwarscore.interfaces.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerChangedWorldEvent
+import xyz.fireworkwars.core.interfaces.Event
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 
 class PlayerWorldChangeListener(private val plugin: FireworkWarsLobbyPlugin) : Event {

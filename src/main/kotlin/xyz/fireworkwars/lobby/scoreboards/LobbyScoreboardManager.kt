@@ -1,9 +1,9 @@
 package xyz.fireworkwars.lobby.scoreboards
 
-import foundation.esoteric.fireworkwarscore.language.Message
-import foundation.esoteric.fireworkwarscore.libs.fastboard.adventure.FastBoard
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
+import xyz.fireworkwars.core.language.Message
+import xyz.fireworkwars.core.libs.fastboard.adventure.FastBoard
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 import java.util.*
 
@@ -20,7 +20,7 @@ class LobbyScoreboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     }
 
     private fun createScoreboard(player: Player) {
-        val version = plugin.core.fireworkWarsPluginData.getVersionString()
+        val version = plugin.core.fireworkWarsServiceProvider.getVersionString()
 
         val board = FastBoard(player).apply {
             this.updateTitle(languageManager.getMessage(Message.LOBBY_SB_TITLE, player, version))

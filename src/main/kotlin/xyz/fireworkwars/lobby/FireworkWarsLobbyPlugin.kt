@@ -1,12 +1,13 @@
 package xyz.fireworkwars.lobby
 
-import foundation.esoteric.fireworkwarscore.FireworkWarsCorePlugin
-import foundation.esoteric.fireworkwarscore.language.LanguageManager
-import foundation.esoteric.fireworkwarscore.profiles.PlayerDataManager
 import net.kyori.adventure.text.Component.text
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
-import xyz.fireworkwars.lobby.config.ConfigManager
+import xyz.fireworkwars.core.FireworkWarsCorePlugin
+import xyz.fireworkwars.core.language.LanguageManager
+import xyz.fireworkwars.core.profiles.PlayerDataManager
+import xyz.fireworkwars.lobby.communication.LobbyPluginHook
+import xyz.fireworkwars.lobby.config.manager.ConfigManager
 import xyz.fireworkwars.lobby.leaderboard.LeaderboardManager
 import xyz.fireworkwars.lobby.listeners.*
 import xyz.fireworkwars.lobby.nametags.NameTagManager
@@ -55,7 +56,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("Successfully connected to Firework Wars Core.")
         logger.info("Writing data to core...")
 
-        core.lobbyPluginData = xyz.fireworkwars.lobby.communication.LobbyPluginDataHolder(this)
+        core.lobbyServiceProvider = LobbyPluginHook(this)
 
         logger.info("Finished writing data to core.")
         logger.info("Initialising NPC Manager...")

@@ -1,21 +1,21 @@
 package xyz.fireworkwars.lobby.npc.gui
 
-import foundation.esoteric.fireworkwarscore.communication.Arena
-import foundation.esoteric.fireworkwarscore.language.Message
-import foundation.esoteric.fireworkwarscore.libs.gui.builder.item.ItemBuilder
-import foundation.esoteric.fireworkwarscore.libs.gui.guis.Gui
-import foundation.esoteric.fireworkwarscore.util.format
-import foundation.esoteric.fireworkwarscore.util.playSound
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryCloseEvent
+import xyz.fireworkwars.core.communication.FireworkWarsServiceProvider.LiveArenaData
+import xyz.fireworkwars.core.language.Message
+import xyz.fireworkwars.core.libs.gui.builder.item.ItemBuilder
+import xyz.fireworkwars.core.libs.gui.guis.Gui
+import xyz.fireworkwars.core.util.format
+import xyz.fireworkwars.core.util.playSound
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 import xyz.fireworkwars.lobby.config.structure.MapType
 import xyz.fireworkwars.lobby.config.structure.NPCMenu
 
 class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NPCMenu, private val player: Player) {
-    private val fireworkWarsData = plugin.core.fireworkWarsPluginData
+    private val fireworkWarsData = plugin.core.fireworkWarsServiceProvider
     private val languageManager = plugin.languageManager
 
     private val gui = Gui.gui()
@@ -51,7 +51,7 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
             MapType.TOWN -> fireworkWarsData.getTownArenas()
         }
 
-        val filtered = arenas.filter(Arena::isAvailable)
+        val filtered = arenas.filter(LiveArenaData::isAvailable)
 
         if (filtered.isEmpty()) {
             return this.setNoArenasItem()
@@ -69,7 +69,7 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
         gui.setItem(0, item)
     }
 
-    private fun setArenaJoinItem(index: Int, arena: Arena) {
+    private fun setArenaJoinItem(index: Int, arena: LiveArenaData) {
         val currentPlayers = arena.getCurrentPlayers()
         val maxPlayers = arena.getMaxPlayers()
 
@@ -88,7 +88,7 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
             .name(arena.getName().format())
             .lore(lore)
             .asGuiItem {
-                fireworkWarsData.getArenaJoinCommand().executeJoinForPlayer(player, arena.getArenaNumber())
+                fireworkWarsData.getArenaJoinExecutor().executeJoinForPlayer(player, arena.getArenaNumber())
             }
 
         gui.setItem(index, item)

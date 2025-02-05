@@ -1,7 +1,6 @@
 package xyz.fireworkwars.lobby.listeners
 
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent
-import foundation.esoteric.fireworkwarscore.interfaces.Event
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
@@ -11,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityExplodeEvent
 import org.bukkit.event.entity.EntityPickupItemEvent
 import org.bukkit.event.player.PlayerDropItemEvent
+import xyz.fireworkwars.core.interfaces.Event
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 
 class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event {

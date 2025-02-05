@@ -2,8 +2,6 @@ package xyz.fireworkwars.lobby.npc
 
 import com.destroystokyo.paper.profile.CraftPlayerProfile
 import com.destroystokyo.paper.profile.ProfileProperty
-import foundation.esoteric.fireworkwarscore.util.NMSUtil
-import foundation.esoteric.fireworkwarscore.util.format
 import net.minecraft.network.protocol.game.*
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket.Action
 import net.minecraft.network.protocol.game.ClientboundSetPlayerTeamPacket.createAddOrModifyPacket
@@ -21,6 +19,8 @@ import org.bukkit.Location
 import org.bukkit.entity.Display
 import org.bukkit.entity.Player
 import org.bukkit.entity.TextDisplay
+import xyz.fireworkwars.core.util.NMSUtil
+import xyz.fireworkwars.core.util.format
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 import xyz.fireworkwars.lobby.config.structure.NPCData
 import xyz.fireworkwars.lobby.npc.connection.EmptyConnection
