@@ -1,12 +1,12 @@
 package xyz.fireworkwars.lobby.communication
 
-import foundation.esoteric.fireworkwarscore.communication.LobbyPluginData
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.entity.Player
+import xyz.fireworkwars.core.communication.LobbyServiceProvider
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 
-class LobbyPluginDataHolder(private val plugin: FireworkWarsLobbyPlugin) : LobbyPluginData {
+class LobbyPluginHook(private val plugin: FireworkWarsLobbyPlugin) : LobbyServiceProvider {
     private val config = plugin.configManager.lobbyConfig
 
     override fun getLobbySpawn(): Location {
