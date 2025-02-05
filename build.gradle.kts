@@ -16,7 +16,7 @@ plugins {
 val buildToMain = false
 val buildToCore = false
 
-group = "foundation.esoteric"
+group = "xyz.fireworkwars"
 version = "1.0.0"
 description = "Lobby features for a Firework Wars server."
 
@@ -33,7 +33,7 @@ val pluginName = "FireworkWarsLobby"
 val pluginAuthors = listOf(rolyPolyVole, esotericEnderman)
 val pluginGithub = "https://github.com/fireworkwars/lobby-plugin"
 
-val mainClassPath = "$group.fireworkwarslobby.FireworkWarsLobbyPlugin"
+val mainClassPath = "$group.lobby.FireworkWarsLobbyPlugin"
 
 val corePluginName = "FireworkWarsCore"
 
