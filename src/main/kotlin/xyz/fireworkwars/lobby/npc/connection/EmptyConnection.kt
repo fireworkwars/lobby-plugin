@@ -6,7 +6,7 @@ import net.minecraft.network.protocol.Packet
 import java.io.Serial
 import java.net.SocketAddress
 
-class EmptyConnection : Connection(null!!) {
+class EmptyConnection : Connection(null) {
     init {
         this.channel = EmptyChannel()
         this.address = object : SocketAddress() {
