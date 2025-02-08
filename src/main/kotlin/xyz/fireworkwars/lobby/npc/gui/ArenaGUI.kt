@@ -73,15 +73,14 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
         val currentPlayers = arena.getCurrentPlayers()
         val maxPlayers = arena.getMaxPlayers()
 
-        val playerCountMessage = languageManager.getMessage(
-            Message.CURRENT_PLAYERS, player, currentPlayers, maxPlayers
-        )
+        val playerCountMessage = languageManager.getMessage(Message.CURRENT_PLAYERS,
+            player, currentPlayers, maxPlayers)
 
         val lore = arena.getDescription()
             .split("\n")
             .map(String::format)
             .toMutableList()
-            .apply { add(playerCountMessage) }
+            .apply { this.add(playerCountMessage) }
             .toList()
 
         val item = ItemBuilder.from(Material.PAPER)
