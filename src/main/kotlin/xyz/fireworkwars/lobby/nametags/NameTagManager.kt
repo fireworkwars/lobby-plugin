@@ -94,7 +94,7 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         this.removeNameTag(event.player)
 
         plugin.runTaskOneTickLater {
-            if (event.player.isOnline) {
+            if (event.player.isConnected) {
                 this.createNameTag(event.player)
             }
         }
