@@ -22,7 +22,7 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val nameTagVisibility: MutableMap<UUID, Boolean> = mutableMapOf()
 
     override fun register() {
-        plugin.server.pluginManager.registerEvents(this, plugin)
+        plugin.registerEvent(this)
     }
 
     fun setNameTagVisible(player: Player, visible: Boolean) {

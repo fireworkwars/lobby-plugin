@@ -34,8 +34,8 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
 
     private fun createForPlayer() {
         gui.setOpenGuiAction {
-            plugin.runTaskLater({ player.playSound(Sound.ITEM_CROSSBOW_QUICK_CHARGE_3) }, 2L)
-            plugin.runTaskLater({ player.playSound(Sound.ITEM_CROSSBOW_LOADING_END) }, 10L)
+            plugin.runTaskLater(2L) { player.playSound(Sound.ITEM_CROSSBOW_QUICK_CHARGE_3) }
+            plugin.runTaskLater(10L) { player.playSound(Sound.ITEM_CROSSBOW_LOADING_END) }
         }
 
         gui.setDefaultClickAction {

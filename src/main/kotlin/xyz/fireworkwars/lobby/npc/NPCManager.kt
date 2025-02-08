@@ -21,6 +21,6 @@ class NPCManager(private val plugin: FireworkWarsLobbyPlugin) {
         this.npcs[npc.id] = npc
         npcList.add(npc)
 
-        plugin.runTaskTimer(npc::lookAtEachPlayer, 0L, 1L)
+        plugin.runTaskTimer(0L, 1L, npc::lookAtEachPlayer)
     }
 }

@@ -39,7 +39,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("Enabling Firework Wars Lobby Systems...")
         logger.info("Reading configuration files...")
 
-        this.configManager = ConfigManager(this).apply { loadLobbyFromConfig() }
+        this.configManager = ConfigManager(this).apply { this.loadLobbyFromConfig() }
 
         logger.info("Successfully loaded configuration files.")
     }
@@ -61,7 +61,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("Finished writing data to core.")
         logger.info("Initialising NPC Manager...")
 
-        this.npcManager = NPCManager(this).apply { spawnNPCs() }
+        this.npcManager = NPCManager(this).apply { this.spawnNPCs() }
 
         logger.info("Successfully deployed NPCs.")
         logger.info("Initialising Scoreboard Manager...")
@@ -71,7 +71,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("Successfully initialised Scoreboard Manager.")
         logger.info("Initialising Nametag Manager...")
 
-        this.nameTagManager = NameTagManager(this).apply { register() }
+        this.nameTagManager = NameTagManager(this).apply { this.register() }
 
         logger.info("Successfully initialised Nametag Manager.")
         logger.info("Initialising Leaderboard Manager...")
@@ -81,14 +81,14 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("Successfully initialised Leaderboard Manager.")
         logger.info("Registering event listeners...")
 
-        this.playerConnectionListener = PlayerConnectionListener(this).apply { register() }
+        this.playerConnectionListener = PlayerConnectionListener(this).apply { this.register() }
 
         listeners.add(playerConnectionListener)
-        listeners.add(NPCInteractListener(this).apply { register() })
-        listeners.add(LeaderboardInteractListener(this).apply { register() })
-        listeners.add(HouseKeepingListener(this).apply { register() })
-        listeners.add(PlayerWorldChangeListener(this).apply { register() })
-        listeners.add(PlayerChatListener(this).apply { register() })
+        listeners.add(NPCInteractListener(this).apply { this.register() })
+        listeners.add(LeaderboardInteractListener(this).apply { this.register() })
+        listeners.add(HouseKeepingListener(this).apply { this.register() })
+        listeners.add(PlayerWorldChangeListener(this).apply { this.register() })
+        listeners.add(PlayerChatListener(this).apply { this.register() })
 
         logger.info("Completed registration of event listeners.")
         logger.info("Listening to ${listeners.size} events.")
@@ -112,15 +112,15 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         return core.isBuildModeEnabled
     }
 
-    fun runTaskLater(task: Runnable, delay: Long) {
+    fun runTaskLater(delay: Long, task: Runnable) {
         server.scheduler.runTaskLater(this, task, delay)
     }
 
     fun runTaskOneTickLater(task: Runnable) {
-        this.runTaskLater(task, 1L)
+        this.runTaskLater(1L, task)
     }
 
-    fun runTaskTimer(task: Runnable, delay: Long, period: Long) {
+    fun runTaskTimer(delay: Long, period: Long, task: Runnable) {
         server.scheduler.runTaskTimer(this, task, delay, period)
     }
 

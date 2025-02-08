@@ -11,9 +11,9 @@ class LeaderboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     val leaderboardMap = mutableMapOf<Int, LeaderboardDisplay>()
 
     init {
-        plugin.runTaskTimer({
+        plugin.runTaskTimer(0L, 20L * 30) {
             this.updateAll()
-        }, 0L, 20L * 30)
+        }
     }
 
     fun createOrUpdateLeaderboard(player: Player) {

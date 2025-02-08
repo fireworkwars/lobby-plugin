@@ -105,9 +105,9 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         connection.send(createAddOrModifyPacket(team, true))
         connection.send(createPlayerPacket(team, handle.scoreboardName, ClientboundSetPlayerTeamPacket.Action.ADD))
 
-        plugin.runTaskLater({
+        plugin.runTaskLater(20L) {
             connection.send(ClientboundPlayerInfoRemovePacket(listOf(handle.uuid)))
-        }, 20L)
+        }
     }
 
     private fun updateScoreboardTeamSettings() {
