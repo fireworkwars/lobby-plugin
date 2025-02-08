@@ -99,6 +99,12 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= All systems operational  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
     }
 
+    override fun onDisable() {
+        super.onDisable()
+
+        nameTagManager.removeAllNameTags()
+    }
+
     fun registerEvent(event: Listener) {
         server.pluginManager.registerEvents(event, this)
     }
@@ -125,7 +131,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
     }
 
     fun logLoudly(message: String, force: Boolean = false) {
-        if (isDebugging() || force) {
+        if (this.isDebugging() || force) {
             server.broadcast(text(message))
         }
     }

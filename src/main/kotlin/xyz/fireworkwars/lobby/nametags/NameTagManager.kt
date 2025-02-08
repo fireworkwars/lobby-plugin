@@ -30,6 +30,12 @@ class NameTagManager(private val plugin: FireworkWarsLobbyPlugin) : Event {
         nameTags[player.uniqueId]?.isVisibleByDefault = visible
     }
 
+    fun removeAllNameTags() {
+        nameTags.values.forEach(TextDisplay::remove)
+        nameTags.clear()
+        nameTagVisibility.clear()
+    }
+
     private fun createNameTag(player: Player) {
         val profile = playerDataManager.getPlayerProfile(player)
         val world = player.world
