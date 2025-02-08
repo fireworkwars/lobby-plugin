@@ -111,7 +111,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         profile.updateOwnTablist()
 
-        plugin.runTaskOneTickLater { plugin.core.fireworkWarsServiceProvider.hidePlayersBetweenDifferentGames() }
+        plugin.runTaskOneTickLater { plugin.core.fireworkWarsHook.resyncPlayerVisibility() }
 
         plugin.npcManager.npcList.forEach { it.sendInitPackets(player) }
         plugin.leaderboardManager.createOrUpdateLeaderboard(player)

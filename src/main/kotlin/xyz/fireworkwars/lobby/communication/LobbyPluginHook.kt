@@ -3,10 +3,10 @@ package xyz.fireworkwars.lobby.communication
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.entity.Player
-import xyz.fireworkwars.core.communication.LobbyServiceProvider
+import xyz.fireworkwars.core.communication.LobbyHook
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 
-class LobbyPluginHook(private val plugin: FireworkWarsLobbyPlugin) : LobbyServiceProvider {
+class LobbyPluginHook(private val plugin: FireworkWarsLobbyPlugin) : LobbyHook {
     private val config = plugin.configManager.lobbyConfig
 
     override fun getLobbySpawn(): Location {

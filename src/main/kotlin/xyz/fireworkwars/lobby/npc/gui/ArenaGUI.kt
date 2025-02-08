@@ -4,7 +4,7 @@ import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryCloseEvent
-import xyz.fireworkwars.core.communication.FireworkWarsServiceProvider.LiveArenaData
+import xyz.fireworkwars.core.communication.FireworkWarsHook.LiveArenaData
 import xyz.fireworkwars.core.language.Message
 import xyz.fireworkwars.core.libs.gui.builder.item.ItemBuilder
 import xyz.fireworkwars.core.libs.gui.guis.Gui
@@ -15,7 +15,7 @@ import xyz.fireworkwars.lobby.config.structure.MapType
 import xyz.fireworkwars.lobby.config.structure.NPCMenu
 
 class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NPCMenu, private val player: Player) {
-    private val fireworkWarsData = plugin.core.fireworkWarsServiceProvider
+    private val fireworkWarsData = plugin.core.fireworkWarsHook
     private val languageManager = plugin.languageManager
 
     private val gui = Gui.gui()

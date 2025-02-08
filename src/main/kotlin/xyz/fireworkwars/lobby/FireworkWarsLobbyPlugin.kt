@@ -56,7 +56,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         logger.info("Successfully connected to Firework Wars Core.")
         logger.info("Writing data to core...")
 
-        core.lobbyServiceProvider = LobbyPluginHook(this)
+        core.lobbyHook = LobbyPluginHook(this)
 
         logger.info("Finished writing data to core.")
         logger.info("Initialising NPC Manager...")

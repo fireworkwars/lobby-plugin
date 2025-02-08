@@ -20,7 +20,7 @@ class LobbyScoreboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     }
 
     private fun createScoreboard(player: Player) {
-        val version = plugin.core.fireworkWarsServiceProvider.getVersionString()
+        val version = plugin.core.fireworkWarsHook.getVersionString()
 
         val board = FastBoard(player).apply {
             this.updateTitle(languageManager.getMessage(Message.LOBBY_SB_TITLE, player, version))
