@@ -13,7 +13,7 @@ plugins {
 
 // build output location configuration
 // both false = build to build/libs
-val buildToMain = false
+val buildToMain = true
 val buildToCore = false
 
 group = "xyz.fireworkwars"
@@ -21,7 +21,7 @@ version = "1.1.1"
 description = "Lobby features for a Firework Wars server."
 
 val paperApiVersion = "1.21.4"
-val corePluginDependencyVersion = "1.4.0"
+val corePluginDependencyVersion = "1.4.1"
 val targetJavaVersion = 21
 
 // authors
