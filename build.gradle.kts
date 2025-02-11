@@ -21,7 +21,7 @@ version = "1.1.2"
 description = "Lobby features for a Firework Wars server."
 
 val paperApiVersion = "1.21.4"
-val corePluginDependencyVersion = "1.4.1"
+val corePluginDependencyVersion = "1.4.2"
 val targetJavaVersion = 21
 
 // authors
