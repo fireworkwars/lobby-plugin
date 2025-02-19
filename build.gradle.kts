@@ -24,18 +24,28 @@ val paperApiVersion = "1.21.4"
 val corePluginDependencyVersion = "1.4.2"
 val targetJavaVersion = 21
 
-// authors
-val rolyPolyVole = "rolyPolyVole"
-val esotericEnderman = "Esoteric Enderman"
-
-// plugin yml
-val pluginName = "FireworkWarsLobby"
-val pluginAuthors = listOf(rolyPolyVole, esotericEnderman)
-val pluginGithub = "https://github.com/fireworkwars/lobby-plugin"
-
 val mainClassPath = "$group.lobby.FireworkWarsLobbyPlugin"
 
 val corePluginName = "FireworkWarsCore"
+
+paperPluginYaml {
+    name = project.name
+    description = project.description
+    authors = listOf("Esoteric Foundation", "rolyPolyVole", "Esoteric Enderman")
+    website = "https://github.com/fireworkwars/lobby-plugin"
+
+    apiVersion = paperApiVersion
+
+    main = mainClassPath
+
+    dependencies {
+        server(corePluginName, PaperPluginYaml.Load.BEFORE, required = true, joinClasspath = true)
+    }
+}
+
+bukkitPluginYaml {
+    load = BukkitPluginYaml.PluginLoadOrder.POSTWORLD
+}
 
 repositories {
     mavenCentral()
@@ -72,7 +82,6 @@ tasks.withType(xyz.jpenilla.runtask.task.AbstractRun::class) {
 
     jvmArgs("-XX:+AllowEnhancedClassRedefinition")
 }
-
 tasks {
     shadowJar {
         minimize {
@@ -114,21 +123,3 @@ tasks {
     }
 }
 
-paperPluginYaml {
-    name = pluginName
-    description = project.description
-    authors = pluginAuthors
-    website = pluginGithub
-
-    apiVersion = paperApiVersion
-
-    main = mainClassPath
-
-    dependencies {
-        server(corePluginName, PaperPluginYaml.Load.BEFORE, required = true, joinClasspath = true)
-    }
-}
-
-bukkitPluginYaml {
-    load = BukkitPluginYaml.PluginLoadOrder.POSTWORLD
-}
