@@ -26,10 +26,11 @@ val targetJavaVersion = 21
 
 val mainClassPath = "$group.lobby.FireworkWarsLobbyPlugin"
 
+val pluginName = "FireworkWarsLobby"
 val corePluginName = "FireworkWarsCore"
 
 paperPluginYaml {
-    name = project.name
+    name = pluginName
     description = project.description
     authors = listOf("Esoteric Foundation", "rolyPolyVole", "Esoteric Enderman")
     website = "https://github.com/fireworkwars/lobby-plugin"
