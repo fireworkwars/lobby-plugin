@@ -58,6 +58,7 @@
 - Fixed `/msg` alias not working
 - Fixed updating scoreboards too early on player leave
 - Fixed random `NullPointerException`
+- Fixed old name tags remaining on the server when the server restarts
 
 ## Future Ideas
 - None
