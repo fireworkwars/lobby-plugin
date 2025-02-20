@@ -57,6 +57,7 @@
 - Update all tablist upon: player rank change
 - Fixed `/msg` alias not working
 - Fixed updating scoreboards too early on player leave
+- Fixed random `NullPointerException`
 
 ## Future Ideas
 - None
