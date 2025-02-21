@@ -84,6 +84,8 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
         display.text(data.name.format().appendNewline().append(data.subtitle.format()))
         display.alignment = TextDisplay.TextAlignment.CENTER
         display.billboard = Display.Billboard.VERTICAL
+        display.isDefaultBackground = true
+        display.isSeeThrough = true
 
         val location = Location(world, npcLocation.x, npcLocation.y + 2.0F, npcLocation.z)
         display.teleport(location)
