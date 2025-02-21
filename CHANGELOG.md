@@ -59,6 +59,7 @@
 - Fixed updating scoreboards too early on player leave
 - Fixed random `NullPointerException`
 - Fixed old name tags remaining on the server when the server restarts
+- Fixed NPC overhead displays having a solid black background
 
 ## Future Ideas
 - None
