@@ -13,12 +13,11 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.server.network.CommonListenerCookie
 import net.minecraft.server.network.ServerGamePacketListenerImpl
+import net.minecraft.world.entity.Display.TextDisplay
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.scores.Scoreboard
 import net.minecraft.world.scores.Team
-import org.bukkit.Location
-import org.bukkit.entity.Display
 import org.bukkit.entity.Player
-import org.bukkit.entity.TextDisplay
 import xyz.fireworkwars.core.util.NMSUtil
 import xyz.fireworkwars.core.util.format
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
@@ -60,8 +59,7 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
             nmsWorld.server!!,
             nmsWorld as ServerLevel,
             profile.gameProfile,
-            ClientInformation.createDefault()
-        )
+            ClientInformation.createDefault())
 
         val entityData = npc.entityData
         val bitmask = (0x01 or 0x04 or 0x08 or 0x10 or 0x20 or 0x40).toByte()
@@ -72,23 +70,20 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
             npc.server,
             EmptyConnection(),
             npc,
-            CommonListenerCookie.createInitial(npc.getGameProfile(), false)
-        )
+            CommonListenerCookie.createInitial(npc.getGameProfile(), false))
 
         return npc
     }
 
     private fun createNameTag(): TextDisplay {
-        val display = world.spawn(npcLocation, TextDisplay::class.java)
+        val display = TextDisplay(EntityType.TEXT_DISPLAY, nmsWorld)
+        val bukkit = display.bukkitEntity as org.bukkit.entity.TextDisplay
 
-        display.text(data.name.format().appendNewline().append(data.subtitle.format()))
-        display.alignment = TextDisplay.TextAlignment.CENTER
-        display.billboard = Display.Billboard.VERTICAL
-        display.isDefaultBackground = true
-        display.isSeeThrough = true
+        display.setPos(npcLocation.x, npcLocation.y + 2.0, npcLocation.z)
 
-        val location = Location(world, npcLocation.x, npcLocation.y + 2.0F, npcLocation.z)
-        display.teleport(location)
+        bukkit.text(data.name.format().appendNewline().append(data.subtitle.format()))
+        bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.CENTER
+        bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
 
         return display
     }
@@ -106,6 +101,9 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
 
         connection.send(createAddOrModifyPacket(team, true))
         connection.send(createPlayerPacket(team, handle.scoreboardName, ClientboundSetPlayerTeamPacket.Action.ADD))
+
+        connection.send(PacketUtil.getEntityAddPacket(nameTag))
+        connection.send(ClientboundSetEntityDataPacket(nameTag.id, nameTag.entityData.packAll()))
 
         plugin.runTaskLater(20L) {
             connection.send(ClientboundPlayerInfoRemovePacket(listOf(handle.uuid)))
@@ -141,20 +139,13 @@ class NPC(private val plugin: FireworkWarsLobbyPlugin, val data: NPCData) {
             val nmsPlayer = NMSUtil.toNMSEntity<ServerPlayer>(it)
 
             nmsPlayer.connection.send(
-                ClientboundRotateHeadPacket(
-                    handle,
-                    (yaw * 256.0 / 360.0).toInt().toByte()
-                )
-            )
+                ClientboundRotateHeadPacket(handle, (yaw * 256.0 / 360.0).toInt().toByte()))
 
-            nmsPlayer.connection.send(
-                ClientboundMoveEntityPacket.Rot(
-                    handle.id,
-                    (yaw * 256.0 / 360.0).toInt().toByte(),
-                    (pitch * 256.0 / 360.0).toInt().toByte(),
-                    true
-                )
-            )
+            nmsPlayer.connection.send(ClientboundMoveEntityPacket.Rot(
+                handle.id,
+                (yaw * 256.0 / 360.0).toInt().toByte(),
+                (pitch * 256.0 / 360.0).toInt().toByte(),
+                true))
         }
     }
 }
