@@ -60,6 +60,7 @@
 - Fixed random `NullPointerException`
 - Fixed old name tags remaining on the server when the server restarts
 - Fixed NPC overhead displays having a solid black background
+- Changed to packet-based display entities for NPC name tags
 
 ## Future Ideas
 - None
