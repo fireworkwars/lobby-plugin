@@ -40,8 +40,6 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
 
         gui.setDefaultClickAction {
             it.isCancelled = true
-
-            player.closeInventory(InventoryCloseEvent.Reason.PLUGIN)
         }
     }
 
@@ -87,6 +85,7 @@ class ArenaGUI(private val plugin: FireworkWarsLobbyPlugin, private val data: NP
             .name(arena.getName().format())
             .lore(lore)
             .asGuiItem {
+                player.closeInventory(InventoryCloseEvent.Reason.PLUGIN)
                 fireworkWarsData.getArenaJoinExecutor().executeJoinForPlayer(player, arena.getArenaNumber())
             }
 
