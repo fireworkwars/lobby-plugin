@@ -4,6 +4,7 @@ import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockExplodeEvent
 import org.bukkit.event.entity.EntityDamageEvent
@@ -34,7 +35,7 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onExplosion(event: EntityExplodeEvent) {
         val location = event.location
         val world = location.world
@@ -51,7 +52,7 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onExplosion(event: BlockExplodeEvent) {
         val location = event.block.location
         val world = location.world
