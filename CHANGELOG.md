@@ -67,6 +67,15 @@
 - Build against the latest version of the core plugin
 # Release v1.3.1
 - Build against the latest version of the core plugin
+# Release v1.4.0
+- Build against the latest version of the core plugin
+# Release v1.5.0
+- Build against the latest version of the core plugin
+# Release v1.5.1
+- Build against the latest version of the core plugin
+# Release v1.5.2
+- Fixed leaderboard displaying players other than the top 10
+- Fixed explosion events being cancelled too late by housekeeping listeners
 
 
 ## Future Ideas
