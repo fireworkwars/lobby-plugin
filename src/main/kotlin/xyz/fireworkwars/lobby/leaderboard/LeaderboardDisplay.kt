@@ -1,9 +1,5 @@
 package xyz.fireworkwars.lobby.leaderboard
 
-import xyz.fireworkwars.core.language.Message
-import xyz.fireworkwars.core.profiles.PlayerProfile
-import xyz.fireworkwars.core.util.NMSUtil
-import xyz.fireworkwars.core.util.getMessage
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket
@@ -13,6 +9,10 @@ import net.minecraft.world.entity.Display.TextDisplay
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Interaction
 import org.bukkit.entity.Player
+import xyz.fireworkwars.core.language.Message
+import xyz.fireworkwars.core.profiles.PlayerProfile
+import xyz.fireworkwars.core.util.NMSUtil
+import xyz.fireworkwars.core.util.getMessage
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 import xyz.fireworkwars.lobby.config.structure.LeaderboardData
 import xyz.fireworkwars.lobby.util.PacketUtil
@@ -117,7 +117,7 @@ class LeaderboardDisplay(
         entries.clear()
         entries.addAll(playerDataManager.getAllProfiles())
 
-        entries.sortedByDescending(this::getProfileValue).forEachIndexed { index, profile ->
+        entries.sortedByDescending(this::getProfileValue).take(10).forEachIndexed { index, profile ->
             val place = index + 1
             val name = profile.formattedName()
             val value = this.getProfileValue(profile)
