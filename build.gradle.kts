@@ -21,7 +21,7 @@ version = "1.5.2"
 description = "Lobby features for a Firework Wars server."
 
 val paperApiVersion = "1.21.4"
-val corePluginDependencyVersion = "1.14.4"
+val corePluginDependencyVersion = "1.14.5"
 val targetJavaVersion = 21
 
 val mainClassPath = "$group.lobby.FireworkWarsLobbyPlugin"
