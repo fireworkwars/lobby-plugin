@@ -62,6 +62,7 @@ class LeaderboardDisplay(
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.LEFT
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
         bukkit.lineWidth = lineWidth
+        bukkit.isSeeThrough = true
 
         return display
     }
@@ -76,6 +77,7 @@ class LeaderboardDisplay(
         bukkit.alignment = org.bukkit.entity.TextDisplay.TextAlignment.CENTER
         bukkit.billboard = org.bukkit.entity.Display.Billboard.VERTICAL
         bukkit.lineWidth = lineWidth
+        bukkit.isSeeThrough = true
 
         return display
     }
