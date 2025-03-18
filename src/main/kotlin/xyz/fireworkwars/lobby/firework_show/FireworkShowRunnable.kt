@@ -29,6 +29,10 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
                 ticksUntilStart = getNextFireworkShowTicks()
             }
 
+            if (ticksUntilEnd % 10 != 0) {
+                return
+            }
+
             for (i in (1..10)) {
                 spawnFirework()
             }
@@ -36,7 +40,7 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
     }
 
     fun start() {
-        runTaskTimer(plugin, 0, 10)
+        runTaskTimer(plugin, 0, 1)
     }
 
     private fun getNextFireworkShowTicks(): Int {
