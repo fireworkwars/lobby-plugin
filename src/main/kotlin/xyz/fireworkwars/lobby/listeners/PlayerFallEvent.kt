@@ -16,7 +16,7 @@ class PlayerFallEvent(private val plugin: FireworkWarsLobbyPlugin) : Event {
 
     @EventHandler
     fun onPlayerFall(event: PlayerMoveEvent) {
-        if (event.player.world != lobbyWorld) {
+        if (event.player.world.uid != lobbyWorld.uid) {
             return
         }
 
