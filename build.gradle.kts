@@ -17,7 +17,7 @@ val buildToMain = false
 val buildToCore = false
 
 group = "xyz.fireworkwars"
-version = "1.5.3"
+version = "1.6.0"
 description = "Lobby features for a Firework Wars server."
 
 val paperApiVersion = "1.21.4"
