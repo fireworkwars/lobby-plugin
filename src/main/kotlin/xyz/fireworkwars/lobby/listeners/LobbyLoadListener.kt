@@ -6,7 +6,7 @@ import xyz.fireworkwars.core.interfaces.Event
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 import xyz.fireworkwars.lobby.firework_show.FireworkShowRunnable
 
-class WorldLoadListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
+class LobbyLoadListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
     private val lobbyWorld = plugin.configManager.lobbyConfig.getWorld()
 
     override fun register() {
