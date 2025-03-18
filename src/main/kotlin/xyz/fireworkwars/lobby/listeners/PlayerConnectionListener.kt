@@ -98,7 +98,7 @@ class PlayerConnectionListener(private val plugin: FireworkWarsLobbyPlugin) : Ev
 
         if (profile.rank == Rank.GOLD) {
             config.randomFireworkLocations().forEach {
-                FireworkCreator.sendSupplyDropFirework(it, (20..30).random())
+                FireworkCreator.sendLobbyFirework(it, (20..30).random())
             }
         }
 

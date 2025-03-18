@@ -29,12 +29,14 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
                 ticksUntilStart = getNextFireworkShowTicks()
             }
 
-            spawnFirework()
+            for (i in (1..10)) {
+                spawnFirework()
+            }
         }
     }
 
     fun start() {
-        runTaskTimer(plugin, 0, 1)
+        runTaskTimer(plugin, 0, 10)
     }
 
     private fun getNextFireworkShowTicks(): Int {
@@ -44,7 +46,7 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
     private fun spawnFirework() {
         val location = getRandomLocation()
 
-        FireworkCreator.sendSupplyDropFirework(location, (40..70).random())
+        FireworkCreator.sendLobbyFirework(location, (40..70).random())
     }
 
     private fun getRandomLocation(): Location {
