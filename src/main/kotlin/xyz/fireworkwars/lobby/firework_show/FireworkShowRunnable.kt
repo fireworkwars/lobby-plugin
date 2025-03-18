@@ -29,11 +29,11 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
                 ticksUntilStart = getNextFireworkShowTicks()
             }
 
-            if (ticksUntilEnd % 10 != 0) {
+            if (ticksUntilEnd % fireworkShowConfig.fireworkInterval != 0) {
                 return
             }
 
-            for (i in (1..10)) {
+            for (i in (1..fireworkShowConfig.fireworkAmount)) {
                 spawnFirework()
             }
         }
