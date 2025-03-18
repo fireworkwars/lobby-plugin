@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityExplodeEvent
 import org.bukkit.event.entity.EntityPickupItemEvent
 import org.bukkit.event.player.PlayerDropItemEvent
+import org.bukkit.event.player.PlayerInteractEvent
 import xyz.fireworkwars.core.interfaces.Event
 import xyz.fireworkwars.lobby.FireworkWarsLobbyPlugin
 
@@ -32,6 +33,15 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
     fun onBlockBreak(event: BlockBreakEvent) {
         if (lobbyWorld == event.block.world) {
             event.isCancelled = !plugin.isBuildModeEnabled()
+        }
+    }
+
+    @EventHandler
+    fun onCandleExtinguish(event: PlayerInteractEvent) {
+        if (lobbyWorld == event.player.world) {
+            if (event.clickedBlock?.type?.name?.contains("CANDLE") == true) {
+                event.isCancelled = !plugin.isBuildModeEnabled()
+            }
         }
     }
 
