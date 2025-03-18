@@ -89,6 +89,7 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         listeners.add(HouseKeepingListener(this).apply { this.register() })
         listeners.add(PlayerWorldChangeListener(this).apply { this.register() })
         listeners.add(PlayerChatListener(this).apply { this.register() })
+        listeners.add(PlayerFallEvent(this).apply { this.register() })
 
         logger.info("Completed registration of event listeners.")
         logger.info("Listening to ${listeners.size} events.")
