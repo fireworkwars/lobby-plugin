@@ -12,6 +12,13 @@
         { "world": "world", "x": -247, "y": 96, "z": -81, "yaw": 0, "pitch": 0 },
         { "world": "world", "x": -221, "y": 97, "z": -74, "yaw": 0, "pitch": 0 }
     ],
+    "fireworkShow": {
+        "interval": 1200,
+        "randomness": 300,
+        "duration": 200,
+        "corner1": { "world": "world", "x": -170, "y": 60, "z": -10 },
+        "corner2": { "world": "world", "x": -270, "y": 100, "z": -110 }
+    },
     "npcs": [
         {
             "name": "<bold><red>Firework Wars</red></bold>",

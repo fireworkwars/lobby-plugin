@@ -1,7 +1,7 @@
 package xyz.fireworkwars.lobby.config.structure
 
-import xyz.fireworkwars.core.language.Message
 import org.bukkit.Bukkit
+import xyz.fireworkwars.core.language.Message
 import xyz.fireworkwars.lobby.leaderboard.LeaderboardDisplay
 
 data class EntityLocation(
@@ -42,4 +42,12 @@ data class LeaderboardData(
     val location: EntityLocation,
     val type: LeaderboardDisplay.LeaderboardType,
     val titleMessage: Message
+)
+
+data class FireworkShowData(
+    val interval: Int,
+    val randomness: Int,
+    val duration: Int,
+    val corner1: EntityLocation,
+    val corner2: EntityLocation
 )

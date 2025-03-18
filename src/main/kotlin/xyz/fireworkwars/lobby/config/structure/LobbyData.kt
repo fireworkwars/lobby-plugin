@@ -8,6 +8,7 @@ data class LobbyData(
     val worldName: String,
     val spawnLocation: EntityLocation,
     val fireworkLocations: List<EntityLocation>,
+    val fireworkShow: FireworkShowData,
     val npcs: List<NPCData>,
     val leaderboards: List<LeaderboardData>
 ) {
