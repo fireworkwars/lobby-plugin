@@ -54,7 +54,7 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
 
         val location = Location(cuboid.world, randomX, spawn.y, randomZ)
 
-        if (location.distanceSquared(spawn) > 30 * 30) {
+        if (location.distanceSquared(spawn) < 30 * 30) {
             return getRandomLocation()
         } else {
             location.y = randomY
