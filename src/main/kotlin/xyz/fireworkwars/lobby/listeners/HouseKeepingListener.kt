@@ -24,21 +24,21 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
 
     @EventHandler
     fun onDamage(event: EntityDamageEvent) {
-        if (lobbyWorld == event.entity.world) {
+        if (lobbyWorld.uid == event.entity.world.uid) {
             event.isCancelled = !plugin.isBuildModeEnabled()
         }
     }
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        if (lobbyWorld == event.block.world) {
+        if (lobbyWorld.uid == event.block.world.uid) {
             event.isCancelled = !plugin.isBuildModeEnabled()
         }
     }
 
     @EventHandler
     fun onCandleExtinguish(event: PlayerInteractEvent) {
-        if (lobbyWorld == event.player.world) {
+        if (lobbyWorld.uid == event.player.world.uid) {
             if (event.clickedBlock?.type?.name?.contains("CANDLE") == true) {
                 event.isCancelled = !plugin.isBuildModeEnabled()
             }
@@ -50,7 +50,7 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
         val location = event.location
         val world = location.world
 
-        if (lobbyWorld == world) {
+        if (lobbyWorld.uid == world.uid) {
             world.spawnParticle(Particle.EXPLOSION_EMITTER, location, 1, 0.0, 0.0, 0.0)
             world.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f)
 
@@ -67,7 +67,7 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
         val location = event.block.location
         val world = location.world
 
-        if (lobbyWorld == world) {
+        if (lobbyWorld.uid == world.uid) {
             world.spawnParticle(Particle.EXPLOSION_EMITTER, location, 1, 0.0, 0.0, 0.0)
             world.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f)
 
@@ -79,7 +79,7 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
     fun onExperienceGain(event: PlayerPickupExperienceEvent) {
         val world = event.player.world
 
-        if (lobbyWorld == world) {
+        if (lobbyWorld.uid == world.uid) {
             event.experienceOrb.remove()
             event.isCancelled = !plugin.isBuildModeEnabled()
         }
@@ -89,7 +89,7 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
     fun onPlayerPickUpItem(event: EntityPickupItemEvent) {
         val world = event.entity.world
 
-        if (lobbyWorld == world) {
+        if (lobbyWorld.uid == world.uid) {
             event.isCancelled = !plugin.isBuildModeEnabled()
         }
     }
@@ -98,7 +98,7 @@ class HouseKeepingListener(private val plugin: FireworkWarsLobbyPlugin) : Event 
     fun onPlayerDropItem(event: PlayerDropItemEvent) {
         val world = event.player.world
 
-        if (lobbyWorld == world) {
+        if (lobbyWorld.uid == world.uid) {
             event.isCancelled = !plugin.isBuildModeEnabled()
         }
     }
