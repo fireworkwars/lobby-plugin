@@ -16,6 +16,8 @@
         "interval": 1800,
         "randomness": 300,
         "duration": 200,
+        "fireworkInterval": 10,
+        "fireworkAmount": 5,
         "corner1": { "world": "world", "x": -170, "y": 60, "z": -10 },
         "corner2": { "world": "world", "x": -270, "y": 100, "z": -110 }
     },

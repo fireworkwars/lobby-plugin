@@ -48,6 +48,8 @@ data class FireworkShowData(
     val interval: Int,
     val randomness: Int,
     val duration: Int,
+    val fireworkInterval: Int,
+    val fireworkAmount: Int,
     val corner1: EntityLocation,
     val corner2: EntityLocation
 )
