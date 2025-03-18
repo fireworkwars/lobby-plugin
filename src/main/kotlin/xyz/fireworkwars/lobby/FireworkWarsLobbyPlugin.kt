@@ -8,6 +8,7 @@ import xyz.fireworkwars.core.language.LanguageManager
 import xyz.fireworkwars.core.profiles.PlayerDataManager
 import xyz.fireworkwars.lobby.communication.LobbyPluginHook
 import xyz.fireworkwars.lobby.config.manager.ConfigManager
+import xyz.fireworkwars.lobby.firework_show.FireworkShowRunnable
 import xyz.fireworkwars.lobby.leaderboard.LeaderboardManager
 import xyz.fireworkwars.lobby.listeners.*
 import xyz.fireworkwars.lobby.nametags.NameTagManager
@@ -90,10 +91,15 @@ class FireworkWarsLobbyPlugin : JavaPlugin() {
         listeners.add(PlayerWorldChangeListener(this).apply { this.register() })
         listeners.add(PlayerChatListener(this).apply { this.register() })
         listeners.add(PlayerFallEvent(this).apply { this.register() })
-        listeners.add(LobbyLoadListener(this).apply { this.register() })
 
         logger.info("Completed registration of event listeners.")
         logger.info("Listening to ${listeners.size} events.")
+
+        logger.info("Starting firework show...")
+
+        FireworkShowRunnable(this).start()
+
+        logger.info("Firework show started.")
 
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-= Firework Wars Lobby Plugin =-=-=-=-=-=-=-=-=-=-=-=-=-=")
         logger.info("End of logs for Firework Wars Lobby Plugin.")
