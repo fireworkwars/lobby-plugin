@@ -13,7 +13,7 @@
         { "world": "world", "x": -221, "y": 97, "z": -74, "yaw": 0, "pitch": 0 }
     ],
     "fireworkShow": {
-        "interval": 1200,
+        "interval": 1800,
         "randomness": 300,
         "duration": 200,
         "corner1": { "world": "world", "x": -170, "y": 60, "z": -10 },
