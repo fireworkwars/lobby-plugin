@@ -19,6 +19,8 @@ class LobbyLoadListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
             return
         }
 
+        plugin.logLoudly("Lobby world loaded, starting firework show", true)
+
         FireworkShowRunnable(plugin).start()
         unregister()
     }
