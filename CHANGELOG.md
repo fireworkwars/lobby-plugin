@@ -76,7 +76,16 @@
 # Release v1.5.2
 - Fixed leaderboard displaying players other than the top 10
 - Fixed explosion events being cancelled too late by housekeeping listeners
-
+# Release v1.6.0
+- Build against the latest version of the core plugin
+# Release v1.6.1
+- Build against the latest version of the core plugin
+# Release v1.7.0
+- Added a firework show with configurable settings
+- Teleport players back if they fall into the void
+- Fix players being able to put out lit candles
+# Release v1.7.1
+- Fix extreme FPS lag due to some fireworks not getting removed
 
 ## Future Ideas
 - None
