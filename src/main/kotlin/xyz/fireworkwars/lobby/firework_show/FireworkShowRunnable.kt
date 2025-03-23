@@ -1,6 +1,8 @@
 package xyz.fireworkwars.lobby.firework_show
 
 import org.bukkit.Location
+import org.bukkit.entity.Entity
+import org.bukkit.entity.Firework
 import org.bukkit.scheduler.BukkitRunnable
 import xyz.fireworkwars.core.util.Cuboid
 import xyz.fireworkwars.core.util.FireworkCreator
@@ -25,6 +27,8 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
             }
         } else {
             if (ticksUntilEnd-- <= 0) {
+                clearFireworks()
+
                 waiting = true
                 ticksUntilStart = getNextFireworkShowTicks()
             }
@@ -66,5 +70,10 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
             location.y = randomY
             return location
         }
+    }
+
+    // Dumbass minecraft developers don't despawn some fireworks for some reason, causing insane FPS lag
+    private fun clearFireworks() {
+        spawn.world.getEntitiesByClass(Firework::class.java).forEach(Entity::remove)
     }
 }
