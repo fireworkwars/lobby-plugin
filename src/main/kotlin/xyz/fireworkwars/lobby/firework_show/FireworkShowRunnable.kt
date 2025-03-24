@@ -2,7 +2,6 @@ package xyz.fireworkwars.lobby.firework_show
 
 import org.bukkit.Location
 import org.bukkit.entity.Entity
-import org.bukkit.entity.Firework
 import org.bukkit.scheduler.BukkitRunnable
 import xyz.fireworkwars.core.util.Cuboid
 import xyz.fireworkwars.core.util.FireworkCreator
@@ -18,6 +17,8 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
     private var waiting = true
 
     private val cuboid = Cuboid(fireworkShowConfig.corner1.toBukkit(), fireworkShowConfig.corner2.toBukkit())
+
+    private val fireworks = mutableListOf<Entity>()
 
     override fun run() {
         if (waiting) {
@@ -54,7 +55,7 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
     private fun spawnFirework() {
         val location = getRandomLocation()
 
-        FireworkCreator.sendLobbyFirework(location, (40..70).random())
+        fireworks += FireworkCreator.sendLobbyFirework(location, (40..60).random())
     }
 
     private fun getRandomLocation(): Location {
@@ -74,6 +75,8 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
 
     // Dumbass minecraft developers don't despawn some fireworks for some reason, causing insane FPS lag
     private fun clearFireworks() {
-        spawn.world.getEntitiesByClass(Firework::class.java).forEach(Entity::remove)
+        fireworks.removeIf { !it.isValid }
+        fireworks.forEach { it.remove() }
+        fireworks.clear()
     }
 }
