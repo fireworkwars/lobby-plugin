@@ -30,7 +30,10 @@ class LobbyScoreboardManager(private val plugin: FireworkWarsLobbyPlugin) {
     }
 
     fun refreshAllScoreboards() {
-        scoreboards.keys.forEach { this.updateScoreboard(plugin.server.getPlayer(it)!!) }
+        scoreboards.keys.forEach {
+            val player = plugin.server.getPlayer(it) ?: return@forEach
+            this.updateScoreboard(player)
+        }
     }
 
     private fun updateScoreboard(player: Player) {
