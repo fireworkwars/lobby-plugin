@@ -22,7 +22,7 @@ class FireworkShowRunnable(private val plugin: FireworkWarsLobbyPlugin) : Bukkit
 
     override fun run() {
         if (waiting) {
-            if (ticksUntilStart-- <= 0) {
+            if (plugin.configManager.lobbyConfig.getWorld().players.size != 0 && ticksUntilStart-- <= 0) {
                 waiting = false
                 ticksUntilEnd = fireworkShowConfig.duration
             }
