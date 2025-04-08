@@ -86,6 +86,8 @@
 - Fix players being able to put out lit candles
 # Release v1.7.1
 - Fix extreme FPS lag due to some fireworks not getting removed
+# Release v1.7.3
+- Pause the firework show timer when no one is in the lobby
 
 ## Future Ideas
 - None
