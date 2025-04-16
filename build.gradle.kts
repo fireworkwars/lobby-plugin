@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 import xyz.jpenilla.resourcefactory.bukkit.bukkitPluginYaml
 import xyz.jpenilla.resourcefactory.paper.PaperPluginYaml
-import xyz.jpenilla.resourcefactory.paper.paperPluginYaml
 
 plugins {
     kotlin("jvm") version "2.1.0"
