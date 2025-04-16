@@ -22,7 +22,7 @@ version = "1.7.3"
 description = "Lobby features for a Firework Wars server."
 
 val paperApiVersion = "1.21.4"
-val corePluginDependencyVersion = "1.18.0"
+val corePluginDependencyVersion = "1.22.0"
 val targetJavaVersion = 21
 
 val mainClassPath = "$group.lobby.FireworkWarsLobbyPlugin"
@@ -84,6 +84,7 @@ tasks.withType(xyz.jpenilla.runtask.task.AbstractRun::class) {
 
     jvmArgs("-XX:+AllowEnhancedClassRedefinition")
 }
+
 tasks {
     shadowJar {
         minimize {
