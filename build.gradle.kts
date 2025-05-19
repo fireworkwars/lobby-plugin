@@ -8,7 +8,7 @@ plugins {
     id("com.gradleup.shadow") version "8.3.5"
     id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
     id("xyz.jpenilla.run-paper") version "2.3.1"
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
 }
 
 // build output location configuration
