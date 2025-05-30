@@ -24,7 +24,7 @@ class LeaderboardDisplay(
     private val owner: Player
 ) {
     private val lineWidth = 200
-    private val interactionHeight = 2.0F
+    private val interactionHeight = 2.75F
 
     private val playerDataManager = plugin.playerDataManager
     private val mm = MiniMessage.builder().strict(true).build()
