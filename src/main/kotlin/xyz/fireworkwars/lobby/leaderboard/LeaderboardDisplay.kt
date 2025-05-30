@@ -114,10 +114,8 @@ class LeaderboardDisplay(
         val bukkit = body.bukkitEntity as org.bukkit.entity.TextDisplay
         var text: Component = Component.newline()
 
-        entries.clear()
-        entries.addAll(playerDataManager.getAllProfiles())
-
-        entries.sortedByDescending(this::getProfileValue).take(10).forEachIndexed { index, profile ->
+        val newEntries = playerDataManager.getAllProfiles().sortedByDescending(this::getProfileValue).take(10)
+        newEntries.forEachIndexed { index, profile ->
             val place = index + 1
             val name = profile.formattedName()
             val value = this.getProfileValue(profile)
@@ -126,6 +124,9 @@ class LeaderboardDisplay(
                 .append(owner.getMessage(Message.LEADERBOARD_ENTRY, place, name, value))
                 .appendNewline()
         }
+
+        entries.clear()
+        entries.addAll(newEntries)
 
         bukkit.text(text)
     }
