@@ -88,6 +88,9 @@
 - Fix extreme FPS lag due to some fireworks not getting removed
 # Release v1.7.3
 - Pause the firework show timer when no one is in the lobby
+# Release v1.9.1
+- Fixed the title of leaderboards being too high up
+- Increased height of the leaderboard interaction entity
 
 ## Future Ideas
 - None
