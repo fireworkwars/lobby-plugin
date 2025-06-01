@@ -16,6 +16,6 @@ class ServerListPingListener(private val plugin: FireworkWarsLobbyPlugin) : Even
 
     @EventHandler
     fun onServerListPing(event: PaperServerListPingEvent) {
-        event.numPlayers = 8 + sin(0.005 * server.currentTick).roundToInt() + server.onlinePlayers.size
+        event.numPlayers = 8 + sin(0.001 * server.currentTick).roundToInt() + server.onlinePlayers.size
     }
 }
