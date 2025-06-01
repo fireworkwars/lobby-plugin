@@ -8,12 +8,14 @@ import kotlin.math.roundToInt
 import kotlin.math.sin
 
 class ServerListPingListener(private val plugin: FireworkWarsLobbyPlugin) : Event {
+    private val server = plugin.server
+
     override fun register() {
         plugin.registerEvent(this)
     }
 
     @EventHandler
     fun onServerListPing(event: PaperServerListPingEvent) {
-        event.numPlayers = 8 + sin(0.005 * plugin.server.currentTick).roundToInt() + plugin.server.onlinePlayers.size
+        event.numPlayers = 8 + sin(0.005 * server.currentTick).roundToInt() + server.onlinePlayers.size
     }
 }
