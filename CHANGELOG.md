@@ -91,6 +91,13 @@
 # Release v1.9.1
 - Fixed the title of leaderboards being too high up
 - Increased height of the leaderboard interaction entity
+# Release v1.10.0
+- Added fake player count in the server list
+# Release v1.10.1
+- Fixed fake player count changing too quickly
+# Release v1.11.0
+- Made fake player count configurable
+- Added server MOTD (configurable)
 
 ## Future Ideas
 - None
