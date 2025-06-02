@@ -60,5 +60,7 @@
             "type": "KILLS",
             "titleMessage": "LEADERBOARD_TITLE_KILLS"
         }
-    ]
+    ],
+    "fakePlayers": 8,
+    "motdMessages": ["MOTD_1", "MOTD_2", "MOTD_3"]
 }
