@@ -12,7 +12,7 @@ class ConfigManager(private val plugin: FireworkWarsLobbyPlugin) {
     lateinit var lobbyConfig: LobbyData
 
     fun loadLobbyFromConfig() {
-        plugin.saveResource(configFile, true)
+        plugin.saveResource(configFile, false)
 
         val arenasFilePath = plugin.dataFolder.path + File.separator + configFile
         val file = File(arenasFilePath)
