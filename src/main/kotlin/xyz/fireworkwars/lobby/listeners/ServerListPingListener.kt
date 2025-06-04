@@ -18,7 +18,7 @@ class ServerListPingListener(private val plugin: FireworkWarsLobbyPlugin) : Even
 
     @EventHandler
     fun onServerListPing(event: PaperServerListPingEvent) {
-        event.numPlayers = config.fakePlayers + sin(0.001 * server.currentTick).roundToInt() + server.onlinePlayers.size
+        event.numPlayers = config.fakePlayers + sin(0.001 * server.currentTick).roundToInt().coerceAtLeast(0) + server.onlinePlayers.size
         event.motd(plugin.languageManager.getDefaultMessage(Message.valueOf(config.motdMessages.random())))
     }
 }
